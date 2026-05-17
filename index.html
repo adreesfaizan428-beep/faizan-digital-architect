@@ -366,6 +366,40 @@
           );
         };
 
+        // ─── NATIVE BANNER AD HOLDER (ADDED FOR 29372715) ──────────────────────────────
+        const NativeAdHolder = () => {
+          const adRef = useRef(null);
+
+          useEffect(() => {
+            if (adRef.current && !adRef.current.innerHTML.trim()) {
+              const script = document.createElement("script");
+              script.type = "text/javascript";
+              script.src = "//www.highperformanceformat.com/29372715/invoke.js";
+              
+              const configScript = document.createElement("script");
+              configScript.type = "text/javascript";
+              configScript.text = `
+                atOptions = {
+                  'key' : '29372715',
+                  'format' : 'iframe',
+                  'height' : 90,
+                  'width' : 728,
+                  'params' : {}
+                };
+              `;
+
+              adRef.current.appendChild(configScript);
+              adRef.current.appendChild(script);
+            }
+          }, []);
+
+          return (
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "20px 5%", background: "transparent", position: "relative", zIndex: 1 }}>
+              <div ref={adRef} style={{ maxWidth: "100%", overflow: "hidden", borderRadius: 8, border: `1px solid \${T.border}`, background: T.surface }} id="atContainer-29372715"></div>
+            </div>
+          );
+        };
+
         // ─── CONTACT ──────────────────────────────────────────────────────────────────
         const Contact = () => {
           const [sent, setSent] = useState(false);
@@ -410,6 +444,7 @@
                 <Expertise />
                 <Experience />
                 <Work />
+                <NativeAdHolder />
                 <Contact />
               </main>
               <footer style={{ padding: "32px 5%", borderTop: `1px solid \${T.border}`, textAlign: "center", fontSize: 11, color: T.muted }} className="mono">
@@ -422,5 +457,7 @@
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
-</body>
+
+    <script type='text/javascript' src='//www.highperformanceformat.com/29372714/invoke.js'></script>
+    </body>
 </html>
