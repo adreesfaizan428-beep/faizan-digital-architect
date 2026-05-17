@@ -8,23 +8,8 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/javascript">
-        atOptions = {
-            'key' : '29372715',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-        };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/29372715/invoke.js"></script>
 </head>
 <body>
-
-    <div id="adsterra-native-banner-container" style="display:none; width:100%; justify-content:center; padding:20px 5%; background:transparent; position:relative; z-index:100;">
-        <div id="atContainer-29372715" style="max-width:100%; overflow:hidden; border-radius:8px; border:1px solid rgba(255,255,255,0.07); background:#0d0d12;"></div>
-    </div>
 
     <div id="root"></div>
 
@@ -74,7 +59,7 @@
             }
 
             @keyframes float {
-              0%, 100 { transform: translateY(0px); }
+              0%, 100% { transform: translateY(0px); }
               50% { transform: translateY(-8px); }
             }
             @keyframes pulse-glow {
@@ -178,7 +163,7 @@
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0,255,135,\ Reds{(1 - d/CONNECTION_DIST) * 0.08})`;
+                    ctx.strokeStyle = `rgba(0,255,135,\${(1 - d/CONNECTION_DIST) * 0.08})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                   }
@@ -358,7 +343,7 @@
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
                   {projects.map((p, i) => (
-                    <div key={i} className="glass card-hover" style={{ padding: 32, borderRadius: 8, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 220 }}>
+                    <div key={i} className="glass card-hover" style={{ padding: 32, borderRadius: 8, display: "flex", flexDirection: "column", justifycontent: "space-between", minHeight: 220 }}>
                       <div>
                         <div className="mono" style={{ fontSize: 10, color: T.emerald, marginBottom: 12 }}>{p.category}</div>
                         <h3 className="syne" style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>{p.title}</h3>
@@ -375,17 +360,49 @@
           );
         };
 
-        // ─── AD BRIDGE COMPONENT ──────────────────────────────────────────────────────
-        const AdBridge = () => {
+        // ─── NATIVE BANNER INJECTOR (SAFE ADSTERRA CONTEXT) ───────────────────────────
+        const NativeAdSlot = () => {
+          const containerRef = useRef(null);
+
           useEffect(() => {
-            const adDiv = document.getElementById("adsterra-native-banner-container");
-            const targetSection = document.getElementById("injections-ad-slot");
-            if (adDiv && targetSection) {
-              targetSection.appendChild(adDiv);
-              adDiv.style.display = "flex";
+            if (containerRef.current) {
+              const scriptConfig = document.createElement("script");
+              scriptConfig.type = "text/javascript";
+              scriptConfig.text = `
+                atOptions = {
+                  'key' : '29372715',
+                  'format' : 'iframe',
+                  'height' : 90,
+                  'width' : 728,
+                  'params' : {}
+                };
+              `;
+
+              const scriptInvoke = document.createElement("script");
+              scriptInvoke.type = "text/javascript";
+              scriptInvoke.src = "//www.highperformanceformat.com/29372715/invoke.js";
+
+              containerRef.current.appendChild(scriptConfig);
+              containerRef.current.appendChild(scriptInvoke);
             }
           }, []);
-          return <div id="injections-ad-slot" style={{ width: "100%" }} />;
+
+          return (
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "20px 5%", background: "transparent" }}>
+              <div ref={containerRef} style={{ maxWidth: "100%", overflow: "hidden", borderRadius: 8, border: `1px solid \${T.border}`, background: T.surface }} />
+            </div>
+          );
+        };
+
+        // ─── SOCIAL BAR INJECTOR (SAFE CONTEXT) ───────────────────────────────────────
+        const SocialAdSlot = () => {
+          useEffect(() => {
+            const scriptSocial = document.createElement("script");
+            scriptSocial.type = "text/javascript";
+            scriptSocial.src = "//www.highperformanceformat.com/29372714/invoke.js";
+            document.body.appendChild(scriptSocial);
+          }, []);
+          return null;
         };
 
         // ─── CONTACT ──────────────────────────────────────────────────────────────────
@@ -432,9 +449,10 @@
                 <Expertise />
                 <Experience />
                 <Work />
-                <AdBridge />
+                <NativeAdSlot />
                 <Contact />
               </main>
+              <SocialAdSlot />
               <footer style={{ padding: "32px 5%", borderTop: `1px solid \${T.border}`, textAlign: "center", fontSize: 11, color: T.muted }} className="mono">
                 © 2026 FAIZAN · ALL SYSTEMS OPERATIONAL
               </footer>
@@ -445,7 +463,5 @@
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
-
-    <script type='text/javascript' src='//www.highperformanceformat.com/29372714/invoke.js'></script>
 </body>
 </html>
