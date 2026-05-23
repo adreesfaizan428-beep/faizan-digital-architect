@@ -32,7 +32,7 @@
         // ─── GLOBAL STYLES ────────────────────────────────────────────────────────────
         const GlobalStyles = () => (
           <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Syne:wght=400;500;600;700;800&family=DM+Sans:wght=300;400;500&family=JetBrains+Mono:wght=300;400&display=swap');
 
             *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
             html { scroll-behavior: smooth; }
@@ -343,7 +343,7 @@
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
                   {projects.map((p, i) => (
-                    <div key={i} className="glass card-hover" style={{ padding: 32, borderRadius: 8, display: "flex", flexDirection: "column", justifycontent: "space-between", minHeight: 220 }}>
+                    <div key={i} className="glass card-hover" style={{ padding: 32, borderRadius: 8, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 220 }}>
                       <div>
                         <div className="mono" style={{ fontSize: 10, color: T.emerald, marginBottom: 12 }}>{p.category}</div>
                         <h3 className="syne" style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>{p.title}</h3>
@@ -360,7 +360,7 @@
           );
         };
 
-        // ─── NATIVE BANNER INJECTOR (SAFE ADSTERRA CONTEXT) ───────────────────────────
+        // ─── NATIVE BANNER INJECTOR (ZONE: 2942392) ───────────────────────────────────
         const NativeAdSlot = () => {
           const containerRef = useRef(null);
 
@@ -370,7 +370,7 @@
               scriptConfig.type = "text/javascript";
               scriptConfig.text = `
                 atOptions = {
-                  'key' : '29372715',
+                  'key' : '2942392',
                   'format' : 'iframe',
                   'height' : 90,
                   'width' : 728,
@@ -380,7 +380,7 @@
 
               const scriptInvoke = document.createElement("script");
               scriptInvoke.type = "text/javascript";
-              scriptInvoke.src = "//www.highperformanceformat.com/29372715/invoke.js";
+              scriptInvoke.src = "//www.highperformanceformat.com/2942392/invoke.js";
 
               containerRef.current.appendChild(scriptConfig);
               containerRef.current.appendChild(scriptInvoke);
@@ -394,13 +394,26 @@
           );
         };
 
-        // ─── SOCIAL BAR INJECTOR (SAFE CONTEXT) ───────────────────────────────────────
-        const SocialAdSlot = () => {
+        // ─── BACKGROUND AD INJECTORS (SOCIAL, POPUNDER, VIGNETTE) ─────────────────────
+        const BackgroundAds = () => {
           useEffect(() => {
+            // 1. Social Bar Code (Zone: 2942394)
             const scriptSocial = document.createElement("script");
             scriptSocial.type = "text/javascript";
-            scriptSocial.src = "//www.highperformanceformat.com/29372714/invoke.js";
+            scriptSocial.src = "//www.highperformanceformat.com/2942394/invoke.js";
             document.body.appendChild(scriptSocial);
+
+            // 2. Popunder Code (Zone: 2942390)
+            const scriptPop = document.createElement("script");
+            scriptPop.type = "text/javascript";
+            scriptPop.src = "//www.highperformanceformat.com/2942390/invoke.js";
+            document.body.appendChild(scriptPop);
+
+            // 3. Vignette Ad Code (Zone: 2942393)
+            const scriptVignette = document.createElement("script");
+            scriptVignette.type = "text/javascript";
+            scriptVignette.src = "//www.highperformanceformat.com/2942393/invoke.js";
+            document.body.appendChild(scriptVignette);
           }, []);
           return null;
         };
@@ -452,7 +465,7 @@
                 <NativeAdSlot />
                 <Contact />
               </main>
-              <SocialAdSlot />
+              <BackgroundAds />
               <footer style={{ padding: "32px 5%", borderTop: `1px solid \${T.border}`, textAlign: "center", fontSize: 11, color: T.muted }} className="mono">
                 © 2026 FAIZAN · ALL SYSTEMS OPERATIONAL
               </footer>
