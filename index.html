@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="monetag" content="ebf625dbc41167de7ab85769c9477471">
     <title>Faizan | AI Solutions Architect & Full-Stack Dev</title>
     
-    <meta name="monetag" content="ebf625dbc41167de7ab85769c9477471">
-
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -37,37 +36,37 @@
             @import url('https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Space+Grotesk:wght=400;500;600&family=JetBrains+Mono:wght=400;700&display=swap');
 
             *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-            html { scroll-behavior: smooth; background: \${T.bg}; }
+            html { scroll-behavior: smooth; background: ${T.bg}; }
             body {
-              background: \${T.bg};
-              color: \${T.text};
+              background: ${T.bg};
+              color: ${T.text};
               font-family: 'Space Grotesk', sans-serif;
               overflow-x: hidden;
             }
 
             ::-webkit-scrollbar { width: 5px; }
-            ::-webkit-scrollbar-track { background: \${T.bg}; }
-            ::-webkit-scrollbar-thumb { background: #0b0b1e; border-radius: 3px; border: 1px solid \${T.cyan}; }
+            ::-webkit-scrollbar-track { background: ${T.bg}; }
+            ::-webkit-scrollbar-thumb { background: #0b0b1e; border-radius: 3px; border: 1px solid ${T.cyan}; }
 
             .syne { font-family: 'Syne', sans-serif; }
             .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; }
 
             .glass-panel {
-              background: \${T.glass};
+              background: ${T.glass};
               backdrop-filter: blur(24px);
               -webkit-backdrop-filter: blur(24px);
-              border: 1px solid \${T.border};
+              border: 1px solid ${T.border};
               box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.9);
             }
 
             .text-gradient-cyan-emerald {
-              background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%);
+              background: linear-gradient(135deg, ${T.cyan} 0%, ${T.emerald} 100%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
             }
 
             .text-gradient-purple-cyan {
-              background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%);
+              background: linear-gradient(135deg, ${T.purple} 0%, ${T.cyan} 100%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
             }
@@ -81,25 +80,25 @@
             .card-premium { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
             .card-premium:hover {
               transform: translateY(-6px);
-              border-color: \${T.borderHover} !important;
+              border-color: ${T.borderHover} !important;
               box-shadow: 0 15px 45px rgba(0, 240, 255, 0.06);
             }
 
             .btn-premium {
               position: relative; transition: all 0.4s ease; cursor: pointer;
-              background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%);
+              background: linear-gradient(135deg, ${T.cyan} 0%, ${T.emerald} 100%);
               color: #020205; border: none; font-weight: 700;
             }
             .btn-premium:hover {
-              background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%);
+              background: linear-gradient(135deg, ${T.purple} 0%, ${T.cyan} 100%);
               box-shadow: 0 0 35px rgba(189, 0, 255, 0.4);
               transform: translateY(-3px); color: #fff;
             }
 
-            .nav-link-premium { position: relative; transition: all 0.3s ease; background: none; border: none; cursor: pointer; font-weight: 500; color: \${T.text}; }
-            .nav-link-premium::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: \${T.cyan}; transition: width 0.3s ease; }
+            .nav-link-premium { position: relative; transition: all 0.3s ease; background: none; border: none; cursor: pointer; font-weight: 500; color: ${T.text}; }
+            .nav-link-premium::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: ${T.cyan}; transition: width 0.3s ease; }
             .nav-link-premium:hover::after { width: 100%; }
-            .nav-link-premium:hover { color: \${T.cyan}; }
+            .nav-link-premium:hover { color: ${T.cyan}; }
 
             .ambient-glow-1 { position: fixed; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,240,255,0.02) 0%, transparent 70%); top: -300px; left: -200px; pointer-events: none; }
             .ambient-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(189,0,255,0.015) 0%, transparent 70%); bottom: -200px; right: -100px; pointer-events: none; }
@@ -133,7 +132,7 @@
         };
 
         const Nav = () => (
-          <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)" }}>
+          <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid ${T.border}`, backdropFilter: "blur(20px)" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76, maxWidth: 1300, margin: "0 auto" }}>
               <div className="syne" style={{ fontSize: 18, fontWeight: 800 }}>
                 <span className="text-gradient-cyan-emerald">FAIZAN</span>
@@ -151,9 +150,9 @@
         const Hero = () => (
           <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "130px 6% 80px", position: "relative", zIndex: 1 }}>
             <div style={{ maxWidth: 1200, width: "100%", margin: "0 auto" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(0,240,255,0.03)", border: `1px solid \${T.cyan}`, padding: "6px 16px", borderRadius: 4 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(0,240,255,0.03)", border: `1px solid ${T.cyan}`, padding: "6px 16px", borderRadius: 4 }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.cyan }} />
-                <span className="mono" style={{ fontSize: 10, color: T.cyan }}>7 NETWORKS VERIFIED & OPERATIONAL</span>
+                <span className="mono" style={{ fontSize: 10, color: T.cyan }}>SYSTEM OPERATIONAL VECTOR</span>
               </div>
               <h1 className="syne" style={{ fontSize: "clamp(44px, 7.5vw, 92px)", fontWeight: 800, lineHeight: 0.95, marginBottom: 32 }}>
                 <span className="text-gradient-muted-steel">AUTOMATED</span><br />
@@ -162,7 +161,7 @@
               <p style={{ fontSize: "clamp(16px, 1.5vw, 19px)", color: T.text, maxWidth: 660, lineHeight: 1.7, marginBottom: 48 }}>
                 Deploying tactical full-stack web applications, sophisticated programmatic growth matrices, and custom multi-agent machine automation. Pure core digital transformation.
               </p>
-              <div style={{ display: "flex", gap: 64, marginTop: 90, paddingTop: 44, borderTop: `1px solid \${T.border}`, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: 64, marginTop: 90, paddingTop: 44, borderTop: `1px solid ${T.border}`, flexWrap: "wrap" }}>
                 {[["04+", "YEARS SECURED", T.cyan], ["50+", "ENGINES DEPLOYED", T.emerald], ["100%", "RETENTION VECTOR", T.purple]].map(([num, label, color]) => (
                   <div key={label}>
                     <div className="syne" style={{ fontSize: 32, fontWeight: 800, color: color }}>{num}</div>
@@ -194,7 +193,7 @@
                       <div className="syne" style={{ fontSize: 15, fontWeight: 800, color: T.cyan, marginBottom: 14 }}>{p.title}</div>
                       <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 24 }}>{p.desc}</p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \--border`, padding: "4px 10px", color: T.purple, background: "rgba(189,0,255,0.02)" }}>{s}</span>)}
+                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: "1px solid rgba(0,255,135,0.08)", padding: "4px 10px", color: T.purple, background: "rgba(189,0,255,0.02)" }}>{s}</span>)}
                       </div>
                     </div>
                   ))}
@@ -247,9 +246,9 @@
                     </div>
                   ) : (
                     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                      <input placeholder="Client Metric Label (Name)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
-                      <input placeholder="Return Gateway Protocol (Email)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
-                      <textarea placeholder="Specify operational blueprints..." style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, minHeight: 120, resize: "none", outline: "none" }} />
+                      <input placeholder="Client Metric Label (Name)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid ${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
+                      <input placeholder="Return Gateway Protocol (Email)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid ${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
+                      <textarea placeholder="Specify operational blueprints..." style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid ${T.border}`, padding: 16, color: T.cyan, minHeight: 120, resize: "none", outline: "none" }} />
                       <button onClick={() => setSent(true)} className="btn-premium syne" style={{ padding: 20, fontSize: 11, borderRadius: 4 }}>BROADCAST PAYLOAD PACKET →</button>
                     </div>
                   )}
@@ -259,23 +258,45 @@
           );
         };
 
-        function App() {
-          // ─── CRITICAL FIX: INJECT MONETAG 7 ZONES VIA DOM EFFECT AFTER RENDER ───
-          useEffect(() => {
-            const zones = [
-              "11046394", "11046395", "11046396", "11046397", 
-              "11046404", "11046405", "11046407"
-            ];
+        // ─── MONETAG ZONE IDS ────────────────────────────────────────────────────────
+        const MONETAG_ZONE_IDS = [
+          11046394,
+          11046395,
+          11046396,
+          11046397,
+          11046404,
+          11046405,
+          11046407,
+        ];
 
-            zones.forEach(id => {
+        function App() {
+
+          // ─── MONETAG SCRIPT INJECTION ──────────────────────────────────────────────
+          useEffect(() => {
+            MONETAG_ZONE_IDS.forEach((zoneId) => {
+              // Avoid duplicate injection if the script already exists (e.g. React StrictMode double-invoke)
+              const existingScript = document.querySelector(
+                `script[data-monetag-zone="${zoneId}"]`
+              );
+              if (existingScript) return;
+
               const script = document.createElement("script");
-              script.src = "https://quge5.com/88/tag.min.js";
-              script.dataset.zone = id;
+              script.src = `https://quge5.com/88/tag.min.js`;
               script.async = true;
               script.setAttribute("data-cfasync", "false");
+              script.setAttribute("data-monetag-zone", zoneId); // sentinel for dedup
+              // Monetag tag scripts read their zone from a global before loading,
+              // or via a companion inline script — inject the zone config first
+              const inlineConfig = document.createElement("script");
+              inlineConfig.setAttribute("data-cfasync", "false");
+              inlineConfig.setAttribute("data-monetag-zone-config", zoneId);
+              inlineConfig.textContent = `(window.__monetagZones = window.__monetagZones || []).push(${zoneId});`;
+
+              document.body.appendChild(inlineConfig);
               document.body.appendChild(script);
             });
-          }, []);
+          }, []); // Empty deps → runs once after first render, never on re-renders
+          // ──────────────────────────────────────────────────────────────────────────
 
           return (
             <>
@@ -290,7 +311,7 @@
                 <Experience />
                 <Contact />
               </main>
-              <footer style={{ padding: "40px 6%", borderTop: `1px solid \${T.border}`, textAlign: "center", color: T.muted }} className="mono">
+              <footer style={{ padding: "40px 6%", borderTop: `1px solid ${T.border}`, textAlign: "center", color: T.muted }} className="mono">
                 © 2026 FAIZAN · ALL CORES INTEGRATED
               </footer>
             </>
