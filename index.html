@@ -16,119 +16,126 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // ─── PREMIUM LUXURY DESIGN TOKENS ─────────────────────────────────────────────
+        // ─── ULTRA-PREMIUM MIX-GRADIENT DESIGN TOKENS ─────────────────────────────────
         const T = {
-          bg: "#030303",          // Ultra Deep Onyx
-          surface: "#09090b",     // Obsidian Surface
-          glass: "rgba(9,9,11,0.6)", 
-          border: "rgba(255,255,255,0.04)",
-          borderHover: "rgba(0,255,135,0.25)",
-          emerald: "#00ff87",     // Neon Emerald Hyper Glow
-          silver: "#f4f4f5",      // Crisp Platinum
-          muted: "#71717a",       // Muted Steel Grey
-          text: "#e4e4e7",        // Clean Slate Text
+          bg: "#020205",          // Deep Cosmic Midnight
+          surface: "#05050e",     // Rich Tech Obsidian
+          glass: "rgba(5,5,14,0.7)", 
+          border: "rgba(0,255,135,0.08)",
+          borderHover: "rgba(0,195,255,0.4)",
+          emerald: "#00ff87",     // Radioactive Neon Mint
+          cyan: "#00f0ff",        // Liquid Electric Cyan
+          purple: "#bd00ff",      // Hyper Titanium Purple
+          text: "#8fa0c0",        // Sleek Steel Blue-Grey (Zero Stark White)
+          muted: "#47526e",       // Dimmed Matrix Grey
         };
 
-        // ─── GLOBAL STYLES (LUXURY REDESIGN) ──────────────────────────────────────────
+        // ─── GLOBAL STYLES (THE CYBER LUXURY REMIX) ───────────────────────────────────
         const GlobalStyles = () => (
           <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@300;400&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap');
 
             *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
             html { scroll-behavior: smooth; background: \${T.bg}; }
             body {
               background: \${T.bg};
               color: \${T.text};
-              font-family: 'Plus Jakarta Sans', sans-serif;
+              font-family: 'Space Grotesk', sans-serif;
               overflow-x: hidden;
-              letter-spacing: -0.01em;
             }
 
             ::-webkit-scrollbar { width: 5px; }
             ::-webkit-scrollbar-track { background: \${T.bg}; }
-            ::-webkit-scrollbar-thumb { background: #18181b; border-radius: 3px; }
+            ::-webkit-scrollbar-thumb { background: #0b0b1e; border-radius: 3px; border: 1px solid \${T.cyan}; }
 
-            .cabinet { font-family: 'Cabinet Grotesk', sans-serif; }
-            .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; }
+            .syne { font-family: 'Syne', sans-serif; }
+            .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; }
 
             .glass-panel {
               background: \${T.glass};
-              backdrop-filter: blur(20px);
-              -webkit-backdrop-filter: blur(20px);
+              backdrop-filter: blur(24px);
+              -webkit-backdrop-filter: blur(24px);
               border: 1px solid \${T.border};
-              box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+              box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255,255,255,0.02);
             }
 
-            @keyframes subtle-float {
-              0%, 100% { transform: translateY(0px); }
-              50% { transform: translateY(-6px); }
-            }
-            .animate-float { animation: subtle-float 8s ease-in-out infinite; }
-
-            .text-luxury-gradient {
-              background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            /* ZERO WHITE - MIX GRADIENTS FOR TEXT */
+            .text-gradient-cyan-emerald {
+              background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               background-clip: text;
             }
 
-            .text-emerald-glow {
-              color: \${T.emerald};
-              text-shadow: 0 0 20px rgba(0, 255, 135, 0.4);
+            .text-gradient-purple-cyan {
+              background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            }
+
+            .text-gradient-muted-steel {
+              background: linear-gradient(180deg, #a4b3cf 0%, #5d6b88 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
             }
 
             .card-premium {
-              transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+              transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
             .card-premium:hover {
-              transform: translateY(-4px) scale(1.01);
+              transform: translateY(-6px);
               border-color: \${T.borderHover} !important;
-              box-shadow: 0 12px 40px rgba(0, 255, 135, 0.03);
+              box-shadow: 0 15px 45px rgba(0, 240, 255, 0.06);
             }
 
             .btn-premium {
               position: relative;
-              transition: all 0.3s ease;
+              transition: all 0.4s ease;
               cursor: pointer;
-              background: #fff;
-              color: #000;
+              background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%);
+              color: #020205;
               border: none;
-              font-weight: 600;
+              font-weight: 700;
+              box-shadow: 0 0 20px rgba(0, 255, 135, 0.2);
             }
             .btn-premium:hover {
-              background: \${T.emerald};
-              box-shadow: 0 0 30px rgba(0, 255, 135, 0.3);
-              transform: translateY(-2px);
+              background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%);
+              box-shadow: 0 0 35px rgba(189, 0, 255, 0.4);
+              transform: translateY(-3px);
+              color: #fff;
             }
 
             .nav-link-premium {
               position: relative;
-              transition: color 0.3s ease;
+              transition: all 0.3s ease;
               background: none;
               border: none;
               cursor: pointer;
               font-weight: 500;
+              color: \address{T.text};
             }
             .nav-link-premium::after {
-              content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: \${T.emerald}; transition: width 0.3s ease;
+              content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: \${T.cyan}; transition: width 0.3s ease;
             }
             .nav-link-premium:hover::after { width: 100%; }
-            .nav-link-premium:hover { color: #fff; }
+            .nav-link-premium:hover { color: \${T.cyan}; text-shadow: 0 0 10px rgba(0,240,255,0.5); }
 
-            .ambient-glow {
-              position: fixed; width: 600px; height: 600px;
-              background: radial-gradient(circle, rgba(0,255,135,0.015) 0%, transparent 70%);
-              top: -200px; left: -200px; pointer-events: none; z-index: 0;
+            .ambient-glow-1 {
+              position: fixed; width: 700px; height: 700px;
+              background: radial-gradient(circle, rgba(0,240,255,0.02) 0%, transparent 70%);
+              top: -300px; left: -200px; pointer-events: none; z-index: 0;
             }
             .ambient-glow-2 {
-              position: fixed; width: 500px; height: 500px;
-              background: radial-gradient(circle, rgba(0,165,233,0.01) 0%, transparent 70%);
-              bottom: -100px; right: -100px; pointer-events: none; z-index: 0;
+              position: fixed; width: 600px; height: 600px;
+              background: radial-gradient(circle, rgba(189,0,255,0.015) 0%, transparent 70%);
+              bottom: -200px; right: -100px; pointer-events: none; z-index: 0;
             }
           `}</style>
         );
 
-        // ─── HIGH PERFORMANCE CANVAS ─────────────────────────────────────────────────
+        // ─── HIGH PERFORMANCE DYNAMIC LOGIC MESH ─────────────────────────────────────
         const ParticleCanvas = () => {
           const canvasRef = useRef(null);
 
@@ -139,15 +146,15 @@
             let H = canvas.height = window.innerHeight;
 
             const isMobile = W < 768;
-            const PARTICLE_COUNT = isMobile ? 15 : 35; 
+            const PARTICLE_COUNT = isMobile ? 20 : 45; 
 
             const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
               x: Math.random() * W,
               y: Math.random() * H,
-              vx: (Math.random() - 0.5) * 0.15,
-              vy: (Math.random() - 0.5) * 0.15,
-              r: Math.random() * 1.0 + 0.5,
-              color: Math.random() > 0.85 ? T.emerald : "rgba(113,113,122,0.15)",
+              vx: (Math.random() - 0.5) * 0.2,
+              vy: (Math.random() - 0.5) * 0.2,
+              r: Math.random() * 1.5 + 0.5,
+              color: Math.random() > 0.5 ? T.cyan : T.purple,
             }));
 
             let id;
@@ -161,7 +168,10 @@
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 ctx.fillStyle = p.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
                 ctx.fill();
+                ctx.shadowBlur = 0; // reset
               });
               id = requestAnimationFrame(draw);
             };
@@ -172,7 +182,7 @@
             return () => { cancelAnimationFrame(id); window.removeEventListener("resize", resize); };
           }, []);
 
-          return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} />;
+          return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0, opacity: 0.6 }} />;
         };
 
         // ─── NAVIGATION ───────────────────────────────────────────────────────────────
@@ -184,23 +194,24 @@
           };
 
           return (
-            <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(3,3,3,0.75)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)", webkitBackdropFilter: "blur(20px)" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72, maxWidth: 1300, margin: "0 auto" }}>
-                <div className="cabinet" style={{ fontSize: 16, fontWeight: 800, letterSpacing: "0.05em", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                  FAIZAN <span className="mono" style={{ color: T.emerald, marginLeft: 6 }}>SYSTEMS v4</span>
+            <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)", webkitBackdropFilter: "blur(20px)" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76, maxWidth: 1300, margin: "0 auto" }}>
+                <div className="syne" style={{ fontSize: 18, fontWeight: 800, letterSpacing: "0.02em", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                  <span className="text-gradient-cyan-emerald">FAIZAN</span>
+                  <span className="mono" style={{ color: T.purple, marginLeft: 8, fontSize: 10 }}>[CORE_MESH]</span>
                 </div>
 
-                <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="desktop-nav">
+                <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="desktop-nav">
                   {["About", "Expertise", "Experience", "Work", "Contact"].map(l => (
-                    <button key={l} className="nav-link-premium mono" onClick={() => scrollTo(l)} style={{ color: T.muted, fontSize: 11 }}>
+                    <button key={l} className="nav-link-premium mono" onClick={() => scrollTo(l)}>
                       {l.toUpperCase()}
                     </button>
                   ))}
                 </div>
 
                 <button onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", flexDirection: "column", gap: 6, display: "none" }} className="hamburger">
-                  <span style={{ display: "block", width: 22, height: 1, background: "#fff" }} />
-                  <span style={{ display: "block", width: 22, height: 1, background: "#fff" }} />
+                  <span style={{ display: "block", width: 24, height: 2, background: T.cyan }} />
+                  <span style={{ display: "block", width: 24, height: 2, background: T.emerald }} />
                 </button>
               </div>
 
@@ -221,33 +232,33 @@
 
         // ─── HERO ─────────────────────────────────────────────────────────────────────
         const Hero = () => (
-          <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "120px 6% 80px", position: "relative", zIndex: 1 }}>
+          <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "130px 6% 80px", position: "relative", zIndex: 1 }}>
             <div style={{ maxWidth: 1200, width: "100%", margin: "0 auto" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(255,255,255,0.02)", border: `1px solid \${T.border}`, padding: "6px 14px", borderRadius: 100 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.emerald, boxShadow: `0 0 10px \${T.emerald}` }} />
-                <span className="mono" style={{ fontSize: 10, color: "#fff", letterSpacing: "0.08em" }}>AVAILABLE FOR ELITE CONTRACTS</span>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(0,240,255,0.03)", border: `1px solid \${T.cyan}`, padding: "6px 16px", borderRadius: 4 }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.cyan, boxShadow: `0 0 12px \${T.cyan}` }} />
+                <span className="mono" style={{ fontSize: 10, color: T.cyan }}>NEURAL LINK CONFIGURATION SECURED</span>
               </div>
 
-              <h1 className="cabinet" style={{ fontSize: "clamp(46px, 7.5vw, 96px)", fontWeight: 900, lineHeight: 0.9, marginBottom: 28, letterSpacing: "-0.04em" }}>
-                <span className="text-luxury-gradient">AUTONOMOUS</span><br />
-                <span className="text-emerald-glow">AI ARCHITECTURE</span>
+              <h1 className="syne" style={{ fontSize: "clamp(44px, 7.5vw, 92px)", fontWeight: 800, lineHeight: 0.95, marginBottom: 32, letterSpacing: "-0.03em" }}>
+                <span className="text-gradient-muted-steel">AUTOMATED</span><br />
+                <span className="text-gradient-cyan-emerald">AI INFRASTRUCTURE</span>
               </h1>
 
-              <p style={{ fontSize: "clamp(16px, 1.6vw, 19px)", color: T.text, maxWidth: 640, lineHeight: 1.7, marginBottom: 44, fontWeight: 300 }}>
-                Engineering uncompromised digital infrastructure. I architect high-performance full-stack web products, robust SEO engines, and bespoke AI automated workflows designed for maximum scalability.
+              <p style={{ fontSize: "clamp(16px, 1.5vw, 19px)", color: T.text, maxWidth: 660, lineHeight: 1.7, marginBottom: 48, fontWeight: 400 }}>
+                Deploying tactical full-stack web applications, sophisticated programmatic growth matrices, and custom multi-agent machine automation. Zero legacy styling. Pure core digital transformation.
               </p>
 
               <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-                <button className="btn-premium cabinet" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  style={{ padding: "16px 36px", borderRadius: 0, fontSize: 12, letterSpacing: "0.05em" }}>
-                  INITIATE BRIEF
+                <button className="btn-premium syne" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  style={{ padding: "18px 40px", fontSize: 12, letterSpacing: "0.08em" }}>
+                  INITIALIZE SYSTEM BRIEF
                 </button>
               </div>
 
-              <div style={{ display: "flex", gap: 56, marginTop: 80, paddingTop: 40, borderTop: `1px solid \${T.border}`, flexWrap: "wrap" }}>
-                {[["04+", "YEARS ACTIVE"], ["50+", "DEPLOYED SYSTEMS"], ["100%", "RETENTION RATE"]].map(([num, label]) => (
+              <div style={{ display: "flex", gap: 64, marginTop: 90, paddingTop: 44, borderTop: `1px solid \${T.border}`, flexWrap: "wrap" }}>
+                {[["04+", "YEARS SECURED", T.cyan], ["50+", "ENGINES DEPLOYED", T.emerald], ["100%", "RETENTION VECTOR", T.purple]].map(([num, label, color]) => (
                   <div key={label}>
-                    <div className="cabinet" style={{ fontSize: 28, fontWeight: 800, color: "#fff" }}>{num}</div>
+                    <div className="syne" style={{ fontSize: 32, fontWeight: 800, color: color }}>{num}</div>
                     <div className="mono" style={{ color: T.muted, marginTop: 6, fontSize: 9 }}>{label}</div>
                   </div>
                 ))}
@@ -259,27 +270,29 @@
         // ─── EXPERTISE ────────────────────────────────────────────────────────────────
         const Expertise = () => {
           const pillars = [
-            { icon: "⚡", label: "AI SYSTEMS ENGINEERING", desc: "Autonomous data pipelines, advanced LLM prompt alignment, and enterprise automation infrastructure.", skills: ["Agents", "Prompt Tuning", "RAG Map", "Vector DB"] },
-            { icon: "⚲", label: "ADVANCED ARCHITECTURES", desc: "Blazing fast headless applications, robust full-stack engines, and optimized high-end Shopify solutions.", skills: ["React Enterprise", "NextJS", "API Mesh", "Node Engine"] },
-            { icon: "📈", label: "ALGORITHMIC GROWTH", desc: "Deep technical infrastructure visibility engineering, complex rich schema structure, and programmatic visibility maps.", skills: ["Technical SEO", "Semantic Web", "Vitals Opt", "Analytics"] },
-            { icon: "◈", label: "HIGH-END REFINEMENT", desc: "Premium interface dynamics, cinematic interaction models, and ultra-fluid custom product layout designs.", skills: ["UI Motion", "Figma Elite", "After Effects", "Blender Framework"] }
+            { icon: "⚡", label: "AUTONOMOUS MACHINE ENGINE", desc: "Complex LLM system pipelines, custom structural alignment mechanics, and production-level system automation mappings.", skills: ["Core Agents", "Prompt Alignment", "Vector Mesh"] },
+            { icon: "⚲", label: "DECOUPLED APPLICATION ARCHITECTURE", desc: "Bespoke high-speed enterprise full-stack layers, microservices frameworks, and performance-tuned Shopify setups.", skills: ["React Engine", "NextJS System", "API Injections"] },
+            { icon: "📈", label: "ALGORITHMIC ENGINE AUDITING", desc: "Deep technical graph optimization maps, automated payload generation vectors, and rich validation tracking layers.", skills: ["Data Mapping", "Semantic Frameworks", "Vitals Opt"] },
+            { icon: "◈", label: "MOTION REFRACTION SCHEMES", desc: "Premium dynamic canvas interactions, interactive layout variables, and ultra-fluid interface fluid dynamics.", skills: ["UI Fluidics", "Figma Elite", "After Effects Matrix"] }
           ];
 
           return (
-            <section id="expertise" style={{ padding: "100px 6%", position: "relative", zIndex: 1 }}>
+            <section id="expertise" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
               <div style={{ maxWidth: 1300, margin: "0 auto" }}>
-                <div style={{ marginBottom: 64 }}>
-                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>01 / SYSTEM CAPABILITIES</div>
-                  <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, letterSpacing: "-0.03em" }}>CORE SPECIALIZATIONS</h2>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.purple, marginBottom: 12 }}>// MODULAR MATRIX PILLARS</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+                    <span className="text-gradient-cyan-emerald">SYSTEM VECTOR EXPERTISE</span>
+                  </h2>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
                   {pillars.map(p => (
-                    <div key={p.label} className="glass-panel card-premium" style={{ padding: 36, borderRadius: 0 }}>
-                      <div style={{ fontSize: 24, color: T.emerald, marginBottom: 20 }}>{p.icon}</div>
-                      <div className="cabinet" style={{ fontSize: 15, fontWeight: 800, color: "#fff", marginBottom: 12, letterSpacing: "0.02em" }}>{p.label}</div>
-                      <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 28, fontWeight: 300 }}>{p.desc}</p>
+                    <div key={p.label} className="glass-panel card-premium" style={{ padding: 36 }}>
+                      <div style={{ fontSize: 24, marginBottom: 20, color: T.cyan }}>{p.icon}</div>
+                      <div className="syne" style={{ fontSize: 15, fontWeight: 800, color: T.cyan, marginBottom: 14 }}>{p.label}</div>
+                      <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 28 }}>{p.desc}</p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \${T.border}`, padding: "4px 10px", color: T.muted, background: "rgba(255,255,255,0.01)" }}>{s}</span>)}
+                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \${T.border}`, padding: "4px 10px", color: T.purple, background: "rgba(189,0,255,0.02)" }}>{s}</span>)}
                       </div>
                     </div>
                   ))}
@@ -292,25 +305,27 @@
         // ─── EXPERIENCE ───────────────────────────────────────────────────────────────
         const Experience = () => {
           const timeline = [
-            { role: "Senior Freelance Digital Consultant", company: "Global Operations (Upwork / Fiverr)", period: "2023 - PRESENT", detail: "Developing high-tier full-stack structures, deploying customized business intelligence layouts, custom automated pipelines, and managing advanced luxury enterprise infrastructure implementations." },
-            { role: "Full-Stack & Visibility Engineer", company: "Premium Digital Agency", period: "2022 - 2023", detail: "Engineered responsive scalable client portals. Managed rich deep programmatic schema integration layouts, elevating global organic reach vectors by up to 60%." }
+            { role: "Senior Freelance System Architect", company: "Global Core Channels (Upwork / Fiverr)", period: "2023 - OPERATIONAL", detail: "Structuring enterprise data networks, optimizing machine logic, building robust headless digital ecommerce channels, and generating highly complex system pipelines." },
+            { role: "Full-Stack Development Specialist", company: "Digital Agency Network", period: "2022 - 2023", detail: "Programmed modular customer interfaces with sub-second core load frequencies. Maintained automated structured metadata layers increasing organic site traffic parameters." }
           ];
 
           return (
-            <section id="experience" style={{ padding: "100px 6%", position: "relative", zIndex: 1 }}>
+            <section id="experience" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
               <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-                <div style={{ marginBottom: 64 }}>
-                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>02 / PROVEN TRACK RECORD</div>
-                  <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, letterSpacing: "-0.03em" }}>OPERATIONAL TIMELINE</h2>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// TRACK VECTOR HISTORY</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+                    <span className="text-gradient-purple-cyan">OPERATIONAL HISTORY</span>
+                  </h2>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                   {timeline.map((t, idx) => (
-                    <div key={idx} className="glass-panel card-premium" style={{ padding: 40, borderRadius: 0, display: "flex", gap: 32, flexWrap: "wrap" }}>
-                      <div className="mono" style={{ color: T.emerald, minWidth: 120 }}>{t.period}</div>
+                    <div key={idx} className="glass-panel card-premium" style={{ padding: 40, display: "flex", gap: 32, flexWrap: "wrap" }}>
+                      <div className="mono" style={{ color: T.cyan, minWidth: 140 }}>{t.period}</div>
                       <div style={{ flex: 1 }}>
-                        <h3 className="cabinet" style={{ fontSize: 20, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{t.role}</h3>
-                        <div className="mono" style={{ color: T.muted, marginBottom: 16 }}>{t.company}</div>
-                        <p style={{ fontSize: 14, color: T.text, lineHeight: 1.6, fontWeight: 300 }}>{t.detail}</p>
+                        <h3 className="syne" style={{ fontSize: 20, fontWeight: 800, color: T.text, marginBottom: 8 }}>{t.role}</h3>
+                        <div className="mono" style={{ color: T.muted, marginBottom: 18 }}>{t.company}</div>
+                        <p style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{t.detail}</p>
                       </div>
                     </div>
                   ))}
@@ -323,28 +338,30 @@
         // ─── WORK / CASE STUDIES ──────────────────────────────────────────────────────
         const Work = () => {
           const projects = [
-            { title: "Autonomous Intelligence Unit", category: "AI FRAMEWORKS", desc: "Orchestrated multi-threaded LLM configurations performing real-time structural asset vectorization and matrix mapping.", tech: ["LangChain", "GPT-4 Engine", "Node.js"] },
-            { title: "Decoupled Luxury E-Commerce", category: "FULL-STACK OPERATIONS", desc: "Designed architectural blueprint map for modular headless commerce pipelines with isolated lightning fast inventory matrices.", tech: ["Shopify Core API", "React.JS", "Tailwind Spec"] },
-            { title: "Programmatic Indexing Engine", category: "ALGORITHMIC AUDITING", desc: "Automated macro structural layout deployment mechanics engineered for absolute real-time metadata validation indexing.", tech: ["Python Systems", "Automation Maps", "API Mesh"] }
+            { title: "Autonomous Knowledge Base Matrix", category: "AI OPERATIONS", desc: "Constructed deep LLM agent loops performing secure real-time target resource analysis and processing metrics.", tech: ["LangChain Core", "GPT-4 Vector", "Node.js Engine"] },
+            { title: "Decoupled E-Commerce Grid", category: "FULL-STACK NETWORKS", desc: "Designed asynchronous decoupled server models utilizing high-capacity inventory framework vectors.", tech: ["Shopify Core API", "React Node Mesh", "Tailwind Spec"] },
+            { title: "Programmatic Traffic Processor", category: "ALGORITHMIC DISCOVERY", desc: "Deployed autonomous script routines mapping high-tier index metrics for zero metadata latency anomalies.", tech: ["Python Systems", "Automation Routines", "API Gateways"] }
           ];
 
           return (
-            <section id="work" style={{ padding: "100px 6%", position: "relative", zIndex: 1 }}>
+            <section id="work" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
               <div style={{ maxWidth: 1300, margin: "0 auto" }}>
-                <div style={{ marginBottom: 64 }}>
-                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>03 / ARCHITECTURAL ARTIFACTS</div>
-                  <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, letterSpacing: "-0.03em" }}>CASE ANALYSIS</h2>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.cyan, marginBottom: 12 }}>// LOGIC SYSTEM ARTIFACTS</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+                    <span className="text-gradient-cyan-emerald">TACTICAL CASE HISTORIES</span>
+                  </h2>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
                   {projects.map((p, i) => (
-                    <div key={i} className="glass-panel card-premium" style={{ padding: 40, borderRadius: 0, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 260 }}>
+                    <div key={i} className="glass-panel card-premium" style={{ padding: 40, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 280 }}>
                       <div>
-                        <div className="mono" style={{ color: T.emerald, marginBottom: 16 }}>{p.category}</div>
-                        <h3 className="cabinet" style={{ fontSize: 22, fontWeight: 800, color: "#fff", marginBottom: 14 }}>{p.title}</h3>
-                        <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, fontWeight: 300 }}>{p.desc}</p>
+                        <div className="mono" style={{ color: T.purple, marginBottom: 18 }}>{p.category}</div>
+                        <h3 className="syne" style={{ fontSize: 22, fontWeight: 800, color: T.text, marginBottom: 14 }}>{p.title}</h3>
+                        <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6 }}>{p.desc}</p>
                       </div>
-                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 32 }}>
-                        {p.tech.map(t => <span key={t} className="mono" style={{ fontSize: 9, background: "rgba(255,255,255,0.02)", padding: "4px 10px", color: T.muted, border: `1px solid \${T.border}` }}>{t}</span>)}
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 36 }}>
+                        {p.tech.map(t => <span key={t} className="mono" style={{ fontSize: 9, background: "rgba(0,240,255,0.01)", padding: "4px 10px", color: T.cyan, border: `1px solid \${T.border}` }}>{t}</span>)}
                       </div>
                     </div>
                   ))}
@@ -383,7 +400,7 @@
 
           return (
             <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "40px 6%", background: "transparent", position: "relative", zIndex: 1 }}>
-              <div ref={containerRef} style={{ maxWidth: "100%", overflow: "hidden", border: `1px solid \${T.border}`, background: T.surface, boxShadow: "0 4px 30px rgba(0,0,0,0.5)" }} />
+              <div ref={containerRef} style={{ maxWidth: "100%", overflow: "hidden", border: `1px solid \${T.purple}`, background: T.surface, boxShadow: "0 10px 40px rgba(189,0,255,0.05)" }} />
             </div>
           );
         };
@@ -418,22 +435,24 @@
           return (
             <section id="contact" style={{ padding: "100px 6% 140px", position: "relative", zIndex: 1 }}>
               <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-                <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>04 / INQUIRY INTENTION</div>
-                <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, marginBottom: 32, letterSpacing: "-0.03em" }}>ENGAGE FRAMEWORK</h2>
+                <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// SECURE VECTOR COMMS</div>
+                <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, marginBottom: 36, letterSpacing: "-0.02em" }}>
+                  <span className="text-gradient-cyan-emerald">DISPATCH DATA PORTAL</span>
+                </h2>
                 
                 <div className="glass-panel" style={{ padding: 48, borderRadius: 0, textAlign: "left" }}>
                   {sent ? (
                     <div style={{ textAlign: "center", padding: "30px 0" }}>
-                      <div className="cabinet" style={{ color: T.emerald, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>TRANSMISSION SECURED</div>
-                      <p style={{ color: T.text, fontSize: 14, fontWeight: 300 }}>Response protocols mapped within 24 operational hours.</p>
+                      <div className="syne" style={{ color: T.cyan, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>TRANSMISSION ENCRYPTED</div>
+                      <p style={{ color: T.text, fontSize: 14 }}>Core target response matrices generated instantly.</p>
                     </div>
                   ) : (
                     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                      <input placeholder="Client Identification (Name)" style={{ width: "100%", background: "rgba(255,255,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: "#fff", fontFamily: "inherit" }} />
-                      <input placeholder="Secure Return Vector (Email)" style={{ width: "100%", background: "rgba(255,255,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: "#fff", fontFamily: "inherit" }} />
-                      <textarea placeholder="Outline tactical scope or technical architectural prerequisites..." style={{ width: "100%", background: "rgba(255,255,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: "#fff", minHeight: 120, fontFamily: "inherit", resize: "none" }} />
-                      <button onClick={() => setSent(true)} className="btn-premium cabinet" style={{ padding: 18, fontSize: 11, letterSpacing: "0.1em" }}>
-                        DISPATCH SECURE TELEMETRY →
+                      <input placeholder="Client Metric Label (Name)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, fontFamily: "inherit" }} />
+                      <input placeholder="Return Gateway Protocol (Email)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, fontFamily: "inherit" }} />
+                      <textarea placeholder="Specify operational blueprints, asset constraints, or contract requirements..." style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, minHeight: 120, fontFamily: "inherit", resize: "none" }} />
+                      <button onClick={() => setSent(true)} className="btn-premium syne" style={{ padding: 20, fontSize: 11, letterSpacing: "0.12em" }}>
+                        BROADCAST PAYLOAD PACKET →
                       </button>
                     </div>
                   )}
@@ -448,7 +467,7 @@
           return (
             <>
               <GlobalStyles />
-              <div className="ambient-glow" />
+              <div className="ambient-glow-1" />
               <div className="ambient-glow-2" />
               <ParticleCanvas />
               <Nav />
@@ -462,7 +481,7 @@
               </main>
               <BackgroundAds />
               <footer style={{ padding: "40px 6%", borderTop: `1px solid \${T.border}`, textAlign: "center", color: T.muted }} className="mono">
-                © 2026 FAIZAN · METRIC VECTOR PROTOCOLS OPERATIONAL
+                © 2026 FAIZAN · ALL DATA ROUTINES LIVE & SECURED
               </footer>
             </>
           );
