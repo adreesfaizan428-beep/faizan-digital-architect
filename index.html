@@ -18,7 +18,7 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // ─── PREMIUM DESIGN TOKENS ──────────────────────────────────────────────────
+        // ─── PREMIUM MIX-GRADIENT DESIGN TOKENS ─────────────────────────────────────
         const T = {
           bg: "#020205",          
           surface: "#05050e",     
@@ -35,36 +35,125 @@
         const GlobalStyles = () => (
           <style>{`
             @import url('https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Space+Grotesk:wght=400;500;600&family=JetBrains+Mono:wght=400;700&display=swap');
+
             *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
             html { scroll-behavior: smooth; background: \${T.bg}; }
-            body { background: \${T.bg}; color: \${T.text}; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+            body {
+              background: \${T.bg};
+              color: \${T.text};
+              font-family: 'Space Grotesk', sans-serif;
+              overflow-x: hidden;
+            }
+
+            ::-webkit-scrollbar { width: 5px; }
+            ::-webkit-scrollbar-track { background: \${T.bg}; }
+            ::-webkit-scrollbar-thumb { background: #0b0b1e; border-radius: 3px; border: 1px solid \${T.cyan}; }
+
             .syne { font-family: 'Syne', sans-serif; }
             .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; }
-            .glass-panel { background: \${T.glass}; backdrop-filter: blur(24px); border: 1px solid \${T.border}; }
-            .text-gradient-cyan-emerald { background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .text-gradient-muted-steel { background: linear-gradient(180deg, #a4b3cf 0%, #5d6b88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            
-            .btn-premium { position: relative; transition: all 0.4s ease; cursor: pointer; background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%); color: #020205; border: none; font-weight: 700; padding: 20px 40px; font-size: 11px; border-radius: 4px; }
-            .btn-premium:hover { background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%); box-shadow: 0 0 35px rgba(189, 0, 255, 0.4); transform: translateY(-3px); color: #fff; }
+
+            .glass-panel {
+              background: \${T.glass};
+              backdrop-filter: blur(24px);
+              -webkit-backdrop-filter: blur(24px);
+              border: 1px solid \${T.border};
+              box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.9);
+            }
+
+            .text-gradient-cyan-emerald {
+              background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+
+            .text-gradient-purple-cyan {
+              background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+
+            .text-gradient-muted-steel {
+              background: linear-gradient(180deg, #a4b3cf 0%, #5d6b88 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+
+            .card-premium { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+            .card-premium:hover {
+              transform: translateY(-6px);
+              border-color: \${T.borderHover} !important;
+              box-shadow: 0 15px 45px rgba(0, 240, 255, 0.06);
+            }
+
+            .btn-premium {
+              position: relative; transition: all 0.4s ease; cursor: pointer;
+              background: linear-gradient(135deg, \${T.cyan} 0%, \${T.emerald} 100%);
+              color: #020205; border: none; font-weight: 700;
+            }
+            .btn-premium:hover {
+              background: linear-gradient(135deg, \${T.purple} 0%, \${T.cyan} 100%);
+              box-shadow: 0 0 35px rgba(189, 0, 255, 0.4);
+              transform: translateY(-3px); color: #fff;
+            }
+
+            .nav-link-premium { position: relative; transition: all 0.3s ease; background: none; border: none; cursor: pointer; font-weight: 500; color: \${T.text}; }
+            .nav-link-premium::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: \${T.cyan}; transition: width 0.3s ease; }
+            .nav-link-premium:hover::after { width: 100%; }
+            .nav-link-premium:hover { color: \${T.cyan}; }
+
+            .ambient-glow-1 { position: fixed; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,240,255,0.02) 0%, transparent 70%); top: -300px; left: -200px; pointer-events: none; }
+            .ambient-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(189,0,255,0.015) 0%, transparent 70%); bottom: -200px; right: -100px; pointer-events: none; }
           `}</style>
         );
 
+        const ParticleCanvas = () => {
+          const canvasRef = useRef(null);
+          useEffect(() => {
+            const canvas = canvasRef.current; const ctx = canvas.getContext("2d");
+            let W = canvas.width = window.innerWidth; let H = canvas.height = window.innerHeight;
+            const particles = Array.from({ length: 35 }, () => ({
+              x: Math.random() * W, y: Math.random() * H,
+              vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
+              r: Math.random() * 1.5 + 0.5, color: Math.random() > 0.5 ? T.cyan : T.purple,
+            }));
+            let id;
+            const draw = () => {
+              ctx.clearRect(0, 0, W, H);
+              particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
+              });
+              id = requestAnimationFrame(draw);
+            };
+            draw();
+            return () => cancelAnimationFrame(id);
+          }, []);
+          return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0, opacity: 0.6 }} />;
+        };
+
         const Nav = () => (
-          <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid \${T.border}` }}>
+          <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76, maxWidth: 1300, margin: "0 auto" }}>
               <div className="syne" style={{ fontSize: 18, fontWeight: 800 }}>
                 <span className="text-gradient-cyan-emerald">FAIZAN</span>
+                <span className="mono" style={{ color: T.purple, marginLeft: 8, fontSize: 10 }}>[CORE_MESH]</span>
+              </div>
+              <div style={{ display: "flex", gap: 36, alignItems: "center" }}>
+                {["About", "Expertise", "Experience", "Contact"].map(l => (
+                  <button key={l} className="nav-link-premium mono" onClick={() => document.getElementById(l.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}>{l.toUpperCase()}</button>
+                ))}
               </div>
             </div>
           </nav>
         );
 
         const Hero = () => (
-          <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "130px 6% 80px" }}>
+          <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "130px 6% 80px", position: "relative", zIndex: 1 }}>
             <div style={{ maxWidth: 1200, width: "100%", margin: "0 auto" }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(0,240,255,0.03)", border: `1px solid \${T.cyan}`, padding: "6px 16px", borderRadius: 4 }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.cyan }} />
-                <span className="mono" style={{ fontSize: 10, color: T.cyan }}>REACT MATRIX AUTO-INJECTION ACTIVE</span>
+                <span className="mono" style={{ fontSize: 10, color: T.cyan }}>7 NETWORKS VERIFIED & OPERATIONAL</span>
               </div>
               <h1 className="syne" style={{ fontSize: "clamp(44px, 7.5vw, 92px)", fontWeight: 800, lineHeight: 0.95, marginBottom: 32 }}>
                 <span className="text-gradient-muted-steel">AUTOMATED</span><br />
@@ -73,28 +162,115 @@
               <p style={{ fontSize: "clamp(16px, 1.5vw, 19px)", color: T.text, maxWidth: 660, lineHeight: 1.7, marginBottom: 48 }}>
                 Deploying tactical full-stack web applications, sophisticated programmatic growth matrices, and custom multi-agent machine automation. Pure core digital transformation.
               </p>
-              <button className="btn-premium syne">INITIALIZE SERVER GRAPH →</button>
+              <div style={{ display: "flex", gap: 64, marginTop: 90, paddingTop: 44, borderTop: `1px solid \${T.border}`, flexWrap: "wrap" }}>
+                {[["04+", "YEARS SECURED", T.cyan], ["50+", "ENGINES DEPLOYED", T.emerald], ["100%", "RETENTION VECTOR", T.purple]].map(([num, label, color]) => (
+                  <div key={label}>
+                    <div className="syne" style={{ fontSize: 32, fontWeight: 800, color: color }}>{num}</div>
+                    <div className="mono" style={{ color: T.muted, marginTop: 6, fontSize: 9 }}>{label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         );
 
+        const Expertise = () => {
+          const pillars = [
+            { title: "AUTONOMOUS MACHINE ENGINE", desc: "Complex LLM system pipelines, custom structural alignment mechanics, and production-level system automation mappings.", skills: ["Core Agents", "Prompt Alignment", "Vector Mesh"] },
+            { title: "DECOUPLED APPLICATION ARCHITECTURE", desc: "Bespoke high-speed enterprise full-stack layers, microservices frameworks, and performance-tuned Shopify setups.", skills: ["React Engine", "NextJS System", "API Injections"] },
+            { title: "ALGORITHMIC ENGINE AUDITING", desc: "Deep technical graph optimization maps, automated payload generation vectors, and rich validation tracking layers.", skills: ["Data Mapping", "Semantic Frameworks", "Vitals Opt"] },
+            { title: "MOTION REFRACTION SCHEMES", desc: "Premium dynamic canvas interactions, interactive layout variables, and ultra-fluid interface fluid dynamics.", skills: ["UI Fluidics", "Figma Elite", "After Effects Matrix"] }
+          ];
+          return (
+            <section id="expertise" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 1300, margin: "0 auto" }}>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.purple, marginBottom: 12 }}>// MODULAR MATRIX PILLARS</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-cyan-emerald">SYSTEM VECTOR EXPERTISE</span></h2>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+                  {pillars.map(p => (
+                    <div key={p.title} className="glass-panel card-premium" style={{ padding: 36, borderRadius: 4 }}>
+                      <div className="syne" style={{ fontSize: 15, fontWeight: 800, color: T.cyan, marginBottom: 14 }}>{p.title}</div>
+                      <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 24 }}>{p.desc}</p>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \--border`, padding: "4px 10px", color: T.purple, background: "rgba(189,0,255,0.02)" }}>{s}</span>)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        const Experience = () => {
+          const timeline = [
+            { role: "Senior Freelance System Architect", company: "Global Core Channels (Upwork / Fiverr)", period: "2023 - OPERATIONAL", detail: "Structuring enterprise data networks, optimizing machine logic, building robust headless digital ecommerce channels, and generating highly complex system pipelines." },
+            { role: "Full-Stack Development Specialist", company: "Digital Agency Network", period: "2022 - 2023", detail: "Programmed modular customer interfaces with sub-second core load frequencies. Maintained automated structured metadata layers increasing organic site traffic parameters." }
+          ];
+          return (
+            <section id="experience" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// TRACK VECTOR HISTORY</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-purple-cyan">OPERATIONAL HISTORY</span></h2>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                  {timeline.map((t, idx) => (
+                    <div key={idx} className="glass-panel card-premium" style={{ padding: 40, display: "flex", gap: 32, flexWrap: "wrap", borderRadius: 4 }}>
+                      <div className="mono" style={{ color: T.cyan, minWidth: 140 }}>{t.period}</div>
+                      <div style={{ flex: 1 }}>
+                        <h3 className="syne" style={{ fontSize: 20, fontWeight: 800, color: T.text, marginBottom: 8 }}>{t.role}</h3>
+                        <div className="mono" style={{ color: T.muted, marginBottom: 18 }}>{t.company}</div>
+                        <p style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{t.detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        const Contact = () => {
+          const [sent, setSent] = useState(false);
+          return (
+            <section id="contact" style={{ padding: "100px 6% 140px", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
+                <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// SECURE VECTOR COMMS</div>
+                <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, marginBottom: 36 }}><span className="text-gradient-cyan-emerald">DISPATCH DATA PORTAL</span></h2>
+                <div className="glass-panel" style={{ padding: 48, textAlign: "left", borderRadius: 4 }}>
+                  {sent ? (
+                    <div style={{ textAlign: "center", padding: "30px 0" }}>
+                      <div className="syne" style={{ color: T.cyan, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>TRANSMISSION ENCRYPTED</div>
+                    </div>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                      <input placeholder="Client Metric Label (Name)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
+                      <input placeholder="Return Gateway Protocol (Email)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
+                      <textarea placeholder="Specify operational blueprints..." style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, minHeight: 120, resize: "none", outline: "none" }} />
+                      <button onClick={() => setSent(true)} className="btn-premium syne" style={{ padding: 20, fontSize: 11, borderRadius: 4 }}>BROADCAST PAYLOAD PACKET →</button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          );
+        };
+
         function App() {
-          // ─── SARE 7 MONETAG CODES CORE INJECTION ──────────────────────────────────
+          // ─── CRITICAL FIX: INJECT MONETAG 7 ZONES VIA DOM EFFECT AFTER RENDER ───
           useEffect(() => {
             const zones = [
-              "11046394", // OnClick Lovey-dovey
-              "11046395", // In-Page Push Lovey-dovey
-              "11046396", // Vignette Lovey-dovey
-              "11046397", // Push Notifications Lovey-dovey
-              "11046404", // OnClick Light
-              "11046405", // In-Page Push Fair
-              "11046407"  // Direct Link Golden
+              "11046394", "11046395", "11046396", "11046397", 
+              "11046404", "11046405", "11046407"
             ];
 
-            zones.forEach(zoneId => {
+            zones.forEach(id => {
               const script = document.createElement("script");
               script.src = "https://quge5.com/88/tag.min.js";
-              script.dataset.zone = zoneId;
+              script.dataset.zone = id;
               script.async = true;
               script.setAttribute("data-cfasync", "false");
               document.body.appendChild(script);
@@ -104,12 +280,18 @@
           return (
             <>
               <GlobalStyles />
+              <div className="ambient-glow-1" />
+              <div className="ambient-glow-2" />
+              <ParticleCanvas />
               <Nav />
-              <main style={{ maxWidth: 1400, margin: "0 auto" }}>
+              <main style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
                 <Hero />
+                <Expertise />
+                <Experience />
+                <Contact />
               </main>
-              <footer style={{ padding: "40px 6%", textAlign: "center", color: T.muted }} className="mono">
-                © 2026 FAIZAN · ALL CORES SECURITY SYSTEM LIVE
+              <footer style={{ padding: "40px 6%", borderTop: `1px solid \${T.border}`, textAlign: "center", color: T.muted }} className="mono">
+                © 2026 FAIZAN · ALL CORES INTEGRATED
               </footer>
             </>
           );
