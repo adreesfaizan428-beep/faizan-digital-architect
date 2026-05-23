@@ -16,98 +16,115 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
+        // ─── PREMIUM LUXURY DESIGN TOKENS ─────────────────────────────────────────────
         const T = {
-          bg: "#070709",
-          surface: "#0d0d12",
-          glass: "rgba(255,255,255,0.03)",
-          border: "rgba(255,255,255,0.07)",
-          emerald: "#00ff87",
-          blue: "#0ea5e9",
-          silver: "#c0c8d8",
-          muted: "#4a5165",
-          text: "#e8eaf2",
+          bg: "#030303",          // Ultra Deep Onyx
+          surface: "#09090b",     // Obsidian Surface
+          glass: "rgba(9,9,11,0.6)", 
+          border: "rgba(255,255,255,0.04)",
+          borderHover: "rgba(0,255,135,0.25)",
+          emerald: "#00ff87",     // Neon Emerald Hyper Glow
+          silver: "#f4f4f5",      // Crisp Platinum
+          muted: "#71717a",       // Muted Steel Grey
+          text: "#e4e4e7",        // Clean Slate Text
         };
 
-        // ─── GLOBAL STYLES ────────────────────────────────────────────────────────────
+        // ─── GLOBAL STYLES (LUXURY REDESIGN) ──────────────────────────────────────────
         const GlobalStyles = () => (
           <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Syne:wght=400;500;600;700;800&family=DM+Sans:wght=300;400;500&family=JetBrains+Mono:wght=300;400&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@300;400&display=swap');
 
             *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-            html { scroll-behavior: smooth; }
+            html { scroll-behavior: smooth; background: \${T.bg}; }
             body {
               background: \${T.bg};
               color: \${T.text};
-              font-family: 'DM Sans', sans-serif;
+              font-family: 'Plus Jakarta Sans', sans-serif;
               overflow-x: hidden;
+              letter-spacing: -0.01em;
             }
 
-            ::-webkit-scrollbar { width: 4px; }
+            ::-webkit-scrollbar { width: 5px; }
             ::-webkit-scrollbar-track { background: \${T.bg}; }
-            ::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 2px; }
+            ::-webkit-scrollbar-thumb { background: #18181b; border-radius: 3px; }
 
-            .syne { font-family: 'Syne', sans-serif; }
-            .mono { font-family: 'JetBrains Mono', monospace; }
+            .cabinet { font-family: 'Cabinet Grotesk', sans-serif; }
+            .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; }
 
-            .glass {
-              background: rgba(13, 13, 18, 0.7);
-              backdrop-filter: blur(12px);
-              -webkit-backdrop-filter: blur(12px);
+            .glass-panel {
+              background: \${T.glass};
+              backdrop-filter: blur(20px);
+              -webkit-backdrop-filter: blur(20px);
               border: 1px solid \${T.border};
-              will-change: transform;
+              box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
             }
 
-            @keyframes float {
+            @keyframes subtle-float {
               0%, 100% { transform: translateY(0px); }
-              50% { transform: translateY(-8px); }
+              50% { transform: translateY(-6px); }
             }
-            @keyframes pulse-glow {
-              0%, 100% { box-shadow: 0 0 15px rgba(0,255,135,0.1); }
-              50% { box-shadow: 0 0 30px rgba(0,255,135,0.2); }
-            }
-            .animate-float { animation: float 6s ease-in-out infinite; }
-            .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+            .animate-float { animation: subtle-float 8s ease-in-out infinite; }
 
-            .text-gradient-emerald {
-              background: linear-gradient(135deg, \${T.emerald} 0%, #00d4ff 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-            }
-            .text-gradient-silver {
-              background: linear-gradient(135deg, #c0c8d8 0%, #ffffff 100%);
+            .text-luxury-gradient {
+              background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               background-clip: text;
             }
 
-            .card-hover { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease; }
-            .card-hover:hover {
-              transform: translateY(-4px);
-              border-color: rgba(0,255,135,0.3) !important;
+            .text-emerald-glow {
+              color: \${T.emerald};
+              text-shadow: 0 0 20px rgba(0, 255, 135, 0.4);
             }
 
-            .btn-primary { transition: all 0.3s ease; cursor: pointer; }
-            .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,255,135,0.15); }
-
-            .nav-link { position: relative; transition: color 0.3s ease; background: none; border: none; cursor: pointer; }
-            .nav-link::after {
-              content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: \${T.emerald}; transition: width 0.3s ease;
+            .card-premium {
+              transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             }
-            .nav-link:hover::after { width: 100%; }
-            .nav-link:hover { color: \${T.emerald}; }
-
-            .grain-overlay {
-              position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.015;
-              background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            .card-premium:hover {
+              transform: translateY(-4px) scale(1.01);
+              border-color: \${T.borderHover} !important;
+              box-shadow: 0 12px 40px rgba(0, 255, 135, 0.03);
             }
 
-            .skill-tag { transition: all 0.2s ease; cursor: default; }
-            .skill-tag:hover { background: rgba(0,255,135,0.08); color: \${T.emerald}; border-color: rgba(0,255,135,0.3); }
+            .btn-premium {
+              position: relative;
+              transition: all 0.3s ease;
+              cursor: pointer;
+              background: #fff;
+              color: #000;
+              border: none;
+              font-weight: 600;
+            }
+            .btn-premium:hover {
+              background: \${T.emerald};
+              box-shadow: 0 0 30px rgba(0, 255, 135, 0.3);
+              transform: translateY(-2px);
+            }
 
-            input, textarea, select { transition: border-color 0.3s ease; }
-            input:focus, textarea:focus, select:focus { outline: none; border-color: \${T.emerald} !important; }
+            .nav-link-premium {
+              position: relative;
+              transition: color 0.3s ease;
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-weight: 500;
+            }
+            .nav-link-premium::after {
+              content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: \${T.emerald}; transition: width 0.3s ease;
+            }
+            .nav-link-premium:hover::after { width: 100%; }
+            .nav-link-premium:hover { color: #fff; }
+
+            .ambient-glow {
+              position: fixed; width: 600px; height: 600px;
+              background: radial-gradient(circle, rgba(0,255,135,0.015) 0%, transparent 70%);
+              top: -200px; left: -200px; pointer-events: none; z-index: 0;
+            }
+            .ambient-glow-2 {
+              position: fixed; width: 500px; height: 500px;
+              background: radial-gradient(circle, rgba(0,165,233,0.01) 0%, transparent 70%);
+              bottom: -100px; right: -100px; pointer-events: none; z-index: 0;
+            }
           `}</style>
         );
 
@@ -122,27 +139,20 @@
             let H = canvas.height = window.innerHeight;
 
             const isMobile = W < 768;
-            const PARTICLE_COUNT = isMobile ? 25 : 50; 
-            const CONNECTION_DIST = 100;
+            const PARTICLE_COUNT = isMobile ? 15 : 35; 
 
             const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
               x: Math.random() * W,
               y: Math.random() * H,
-              vx: (Math.random() - 0.5) * 0.2,
-              vy: (Math.random() - 0.5) * 0.2,
-              r: Math.random() * 1.2 + 0.5,
-              color: Math.random() > 0.6 ? T.emerald : "rgba(255,255,255,0.3)",
+              vx: (Math.random() - 0.5) * 0.15,
+              vy: (Math.random() - 0.5) * 0.15,
+              r: Math.random() * 1.0 + 0.5,
+              color: Math.random() > 0.85 ? T.emerald : "rgba(113,113,122,0.15)",
             }));
 
             let id;
             const draw = () => {
               ctx.clearRect(0, 0, W, H);
-              const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W > H ? W/2 : H/2);
-              grad.addColorStop(0, "rgba(0,255,135,0.02)");
-              grad.addColorStop(1, "transparent");
-              ctx.fillStyle = grad;
-              ctx.fillRect(0, 0, W, H);
-
               particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
                 if (p.x < 0 || p.x > W) p.vx *= -1;
@@ -153,22 +163,6 @@
                 ctx.fillStyle = p.color;
                 ctx.fill();
               });
-
-              for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                  const dx = particles[i].x - particles[j].x;
-                  const dy = particles[i].y - particles[j].y;
-                  const d = Math.sqrt(dx * dx + dy * dy);
-                  if (d < CONNECTION_DIST) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0,255,135,\${(1 - d/CONNECTION_DIST) * 0.08})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                  }
-                }
-              }
               id = requestAnimationFrame(draw);
             };
 
@@ -190,30 +184,30 @@
           };
 
           return (
-            <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 5%", background: "rgba(7,7,9,0.8)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(10px)" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 64, maxWidth: 1400, margin: "0 auto" }}>
-                <div className="syne" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                  <span className="text-gradient-emerald">F</span>AIZAN <span style={{ color: T.muted, fontSize: 10, fontWeight: 400 }}>AI × DEV</span>
+            <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(3,3,3,0.75)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)", webkitBackdropFilter: "blur(20px)" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72, maxWidth: 1300, margin: "0 auto" }}>
+                <div className="cabinet" style={{ fontSize: 16, fontWeight: 800, letterSpacing: "0.05em", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                  FAIZAN <span className="mono" style={{ color: T.emerald, marginLeft: 6 }}>SYSTEMS v4</span>
                 </div>
 
-                <div style={{ display: "flex", gap: 24, alignItems: "center" }} className="desktop-nav">
+                <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="desktop-nav">
                   {["About", "Expertise", "Experience", "Work", "Contact"].map(l => (
-                    <button key={l} className="nav-link" onClick={() => scrollTo(l)} style={{ color: T.silver, fontSize: 12, fontFamily: "inherit" }}>
+                    <button key={l} className="nav-link-premium mono" onClick={() => scrollTo(l)} style={{ color: T.muted, fontSize: 11 }}>
                       {l.toUpperCase()}
                     </button>
                   ))}
                 </div>
 
-                <button onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", flexDirection: "column", gap: 5 }} className="hamburger">
-                  <span style={{ display: "block", width: 20, height: 1, background: T.text }} />
-                  <span style={{ display: "block", width: 20, height: 1, background: T.text }} />
+                <button onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", flexDirection: "column", gap: 6, display: "none" }} className="hamburger">
+                  <span style={{ display: "block", width: 22, height: 1, background: "#fff" }} />
+                  <span style={{ display: "block", width: 22, height: 1, background: "#fff" }} />
                 </button>
               </div>
 
               {menuOpen && (
-                <div style={{ background: T.surface, padding: 20, display: "flex", flexDirection: "column", gap: 16, borderBottom: `1px solid \${T.border}` }}>
+                <div style={{ background: T.surface, padding: "24px 6%", display: "flex", flexDirection: "column", gap: 20, borderBottom: `1px solid \${T.border}` }}>
                   {["About", "Expertise", "Experience", "Work", "Contact"].map(l => (
-                    <button key={l} onClick={() => scrollTo(l)} style={{ background: "none", border: "none", color: T.text, textAlign: "left", fontSize: 16, fontWeight: 500 }}>{l}</button>
+                    <button key={l} onClick={() => scrollTo(l)} className="mono" style={{ background: "none", border: "none", color: T.text, textAlign: "left", fontSize: 13 }}>{l.toUpperCase()}</button>
                   ))}
                 </div>
               )}
@@ -227,34 +221,34 @@
 
         // ─── HERO ─────────────────────────────────────────────────────────────────────
         const Hero = () => (
-          <section id="about" style={{ minHeight: "90vh", display: "flex", alignItems: "center", padding: "100px 5% 60px", position: "relative", zIndex: 1 }}>
+          <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "120px 6% 80px", position: "relative", zIndex: 1 }}>
             <div style={{ maxWidth: 1200, width: "100%", margin: "0 auto" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.emerald }} />
-                <span className="mono" style={{ fontSize: 11, color: T.emerald, letterSpacing: "0.1em" }}>EXPERT SOLUTION ARCHITECT</span>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(255,255,255,0.02)", border: `1px solid \${T.border}`, padding: "6px 14px", borderRadius: 100 }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.emerald, boxShadow: `0 0 10px \${T.emerald}` }} />
+                <span className="mono" style={{ fontSize: 10, color: "#fff", letterSpacing: "0.08em" }}>AVAILABLE FOR ELITE CONTRACTS</span>
               </div>
 
-              <h1 className="syne" style={{ fontSize: "clamp(44px, 7vw, 90px)", fontWeight: 800, lineHeight: 0.95, marginBottom: 20 }}>
-                <span className="text-gradient-silver">FAIZAN</span><br />
-                <span className="text-gradient-emerald">AI ARCHITECT</span>
+              <h1 className="cabinet" style={{ fontSize: "clamp(46px, 7.5vw, 96px)", fontWeight: 900, lineHeight: 0.9, marginBottom: 28, letterSpacing: "-0.04em" }}>
+                <span className="text-luxury-gradient">AUTONOMOUS</span><br />
+                <span className="text-emerald-glow">AI ARCHITECTURE</span>
               </h1>
 
-              <p style={{ fontSize: "clamp(15px, 1.5vw, 18px)", color: T.silver, maxWidth: 600, lineHeight: 1.6, marginBottom: 36 }}>
-                Crafting elite digital products. I combine autonomous AI frameworks, scalable web infrastructure, and data-driven SEO growth to transform technical ideas into high-performing assets.
+              <p style={{ fontSize: "clamp(16px, 1.6vw, 19px)", color: T.text, maxWidth: 640, lineHeight: 1.7, marginBottom: 44, fontWeight: 300 }}>
+                Engineering uncompromised digital infrastructure. I architect high-performance full-stack web products, robust SEO engines, and bespoke AI automated workflows designed for maximum scalability.
               </p>
 
-              <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-                <button className="btn-primary" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  style={{ background: T.emerald, color: "#000", border: "none", padding: "14px 28px", borderRadius: 4, fontWeight: 700, fontFamily: "'Syne', sans-serif", fontSize: 13 }}>
-                  GET IN TOUCH
+              <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+                <button className="btn-premium cabinet" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  style={{ padding: "16px 36px", borderRadius: 0, fontSize: 12, letterSpacing: "0.05em" }}>
+                  INITIATE BRIEF
                 </button>
               </div>
 
-              <div style={{ display: "flex", gap: 40, marginTop: 64, paddingTop: 32, borderTop: `1px solid \${T.border}`, flexWrap: "wrap" }}>
-                {[["4+ Years", "Proven Track Record"], ["50+", "Successful Projects"], ["100%", "Client Retention"]].map(([num, label]) => (
+              <div style={{ display: "flex", gap: 56, marginTop: 80, paddingTop: 40, borderTop: `1px solid \${T.border}`, flexWrap: "wrap" }}>
+                {[["04+", "YEARS ACTIVE"], ["50+", "DEPLOYED SYSTEMS"], ["100%", "RETENTION RATE"]].map(([num, label]) => (
                   <div key={label}>
-                    <div className="syne" style={{ fontSize: 24, fontWeight: 800, color: T.emerald }}>{num}</div>
-                    <div style={{ fontSize: 11, color: T.muted, marginTop: 4, letterSpacing: "0.05em" }}>{label.toUpperCase()}</div>
+                    <div className="cabinet" style={{ fontSize: 28, fontWeight: 800, color: "#fff" }}>{num}</div>
+                    <div className="mono" style={{ color: T.muted, marginTop: 6, fontSize: 9 }}>{label}</div>
                   </div>
                 ))}
               </div>
@@ -265,27 +259,27 @@
         // ─── EXPERTISE ────────────────────────────────────────────────────────────────
         const Expertise = () => {
           const pillars = [
-            { icon: "◈", label: "AI ENGINEERING", desc: "Custom AI workflows, state-of-the-art prompt optimization, and seamless LLM deployment for automation.", skills: ["Custom Agents", "Prompts", "OpenAI", "RAG Systems"] },
-            { icon: "⬡", label: "FULL-STACK DEV", desc: "Building highly fast React architectures, robust web apps, and bespoke high-converting Shopify stores.", skills: ["React", "Next.js", "Shopify", "Node.js"] },
-            { icon: "◐", label: "SEO & GROWTH", desc: "Deep technical infrastructure SEO audits, rich snippets markup, and data structures built to scale naturally.", skills: ["Technical SEO", "Schema", "Core Web Vitals", "Analytics"] },
-            { icon: "◎", label: "MOTION GRAPHICS", desc: "Bespoke 2D/3D interface animations, dynamic identity systems, and elite custom digital mockups.", skills: ["UI Motion", "Figma", "After Effects", "Blender"] }
+            { icon: "⚡", label: "AI SYSTEMS ENGINEERING", desc: "Autonomous data pipelines, advanced LLM prompt alignment, and enterprise automation infrastructure.", skills: ["Agents", "Prompt Tuning", "RAG Map", "Vector DB"] },
+            { icon: "⚲", label: "ADVANCED ARCHITECTURES", desc: "Blazing fast headless applications, robust full-stack engines, and optimized high-end Shopify solutions.", skills: ["React Enterprise", "NextJS", "API Mesh", "Node Engine"] },
+            { icon: "📈", label: "ALGORITHMIC GROWTH", desc: "Deep technical infrastructure visibility engineering, complex rich schema structure, and programmatic visibility maps.", skills: ["Technical SEO", "Semantic Web", "Vitals Opt", "Analytics"] },
+            { icon: "◈", label: "HIGH-END REFINEMENT", desc: "Premium interface dynamics, cinematic interaction models, and ultra-fluid custom product layout designs.", skills: ["UI Motion", "Figma Elite", "After Effects", "Blender Framework"] }
           ];
 
           return (
-            <section id="expertise" style={{ padding: "80px 5%", position: "relative", zIndex: 1 }}>
-              <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-                <div style={{ marginBottom: 48 }}>
-                  <div className="mono" style={{ fontSize: 11, color: T.emerald, marginBottom: 8 }}>02 / PILLARS</div>
-                  <h2 className="syne" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800 }}>CORE EXPERTISE</h2>
+            <section id="expertise" style={{ padding: "100px 6%", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 1300, margin: "0 auto" }}>
+                <div style={{ marginBottom: 64 }}>
+                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>01 / SYSTEM CAPABILITIES</div>
+                  <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, letterSpacing: "-0.03em" }}>CORE SPECIALIZATIONS</h2>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 16 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
                   {pillars.map(p => (
-                    <div key={p.label} className="glass card-hover" style={{ padding: 28, borderRadius: 8 }}>
-                      <div style={{ fontSize: 28, color: T.emerald, marginBottom: 12 }}>{p.icon}</div>
-                      <div className="mono" style={{ fontSize: 10, color: T.emerald, marginBottom: 8 }}>{p.label}</div>
-                      <p style={{ fontSize: 13, color: T.silver, lineHeight: 1.6, marginBottom: 20 }}>{p.desc}</p>
+                    <div key={p.label} className="glass-panel card-premium" style={{ padding: 36, borderRadius: 0 }}>
+                      <div style={{ fontSize: 24, color: T.emerald, marginBottom: 20 }}>{p.icon}</div>
+                      <div className="cabinet" style={{ fontSize: 15, fontWeight: 800, color: "#fff", marginBottom: 12, letterSpacing: "0.02em" }}>{p.label}</div>
+                      <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 28, fontWeight: 300 }}>{p.desc}</p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                        {p.skills.map(s => <span key={s} className="mono skill-tag" style={{ fontSize: 9, border: `1px solid \${T.border}`, padding: "3px 8px", borderRadius: 3, color: T.muted }}>{s}</span>)}
+                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \${T.border}`, padding: "4px 10px", color: T.muted, background: "rgba(255,255,255,0.01)" }}>{s}</span>)}
                       </div>
                     </div>
                   ))}
@@ -298,25 +292,25 @@
         // ─── EXPERIENCE ───────────────────────────────────────────────────────────────
         const Experience = () => {
           const timeline = [
-            { role: "Senior Freelance Digital Consultant", company: "Global Clients (Upwork / Fiverr)", period: "2023 - Present", detail: "Architecting standalone business solutions, executing high-converting Shopify build-outs, full-stack product development, and running automation infrastructure powered by custom AI agents." },
-            { role: "Full-Stack & SEO Engineer", company: "Digital Agency", period: "2022 - 2023", detail: "Developed multi-page client experiences with blazing fast loading speeds. Programmed full schema injections increasing search traffic visibility by over 60% organically." }
+            { role: "Senior Freelance Digital Consultant", company: "Global Operations (Upwork / Fiverr)", period: "2023 - PRESENT", detail: "Developing high-tier full-stack structures, deploying customized business intelligence layouts, custom automated pipelines, and managing advanced luxury enterprise infrastructure implementations." },
+            { role: "Full-Stack & Visibility Engineer", company: "Premium Digital Agency", period: "2022 - 2023", detail: "Engineered responsive scalable client portals. Managed rich deep programmatic schema integration layouts, elevating global organic reach vectors by up to 60%." }
           ];
 
           return (
-            <section id="experience" style={{ padding: "80px 5%", position: "relative", zIndex: 1 }}>
+            <section id="experience" style={{ padding: "100px 6%", position: "relative", zIndex: 1 }}>
               <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-                <div style={{ marginBottom: 48 }}>
-                  <div className="mono" style={{ fontSize: 11, color: T.emerald, marginBottom: 8 }}>03 / JOURNEY</div>
-                  <h2 className="syne" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800 }}>PROFESSIONAL EXPERIENCE</h2>
+                <div style={{ marginBottom: 64 }}>
+                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>02 / PROVEN TRACK RECORD</div>
+                  <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, letterSpacing: "-0.03em" }}>OPERATIONAL TIMELINE</h2>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                   {timeline.map((t, idx) => (
-                    <div key={idx} className="glass" style={{ padding: 28, borderRadius: 8, display: "flex", gap: 20, flexWrap: "wrap" }}>
-                      <div className="mono" style={{ color: T.emerald, fontSize: 13, minWidth: 100 }}>{t.period}</div>
+                    <div key={idx} className="glass-panel card-premium" style={{ padding: 40, borderRadius: 0, display: "flex", gap: 32, flexWrap: "wrap" }}>
+                      <div className="mono" style={{ color: T.emerald, minWidth: 120 }}>{t.period}</div>
                       <div style={{ flex: 1 }}>
-                        <h3 className="syne" style={{ fontSize: 18, fontWeight: 700, color: T.text }}>{t.role}</h3>
-                        <div className="mono" style={{ fontSize: 12, color: T.muted, marginBottom: 12 }}>{t.company}</div>
-                        <p style={{ fontSize: 13, color: T.silver, lineHeight: 1.6 }}>{t.detail}</p>
+                        <h3 className="cabinet" style={{ fontSize: 20, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{t.role}</h3>
+                        <div className="mono" style={{ color: T.muted, marginBottom: 16 }}>{t.company}</div>
+                        <p style={{ fontSize: 14, color: T.text, lineHeight: 1.6, fontWeight: 300 }}>{t.detail}</p>
                       </div>
                     </div>
                   ))}
@@ -329,28 +323,28 @@
         // ─── WORK / CASE STUDIES ──────────────────────────────────────────────────────
         const Work = () => {
           const projects = [
-            { title: "Autonomous Research System", category: "AI ENGINEERING", desc: "Orchestrated multiple LLM agents performing continuous web scraping and structured analysis.", tech: ["LangChain", "GPT-4", "Node.js"] },
-            { title: "Headless E-Commerce Store", category: "FULL-STACK WEB", desc: "Designed a lightweight, dynamic commerce system with a modular product catalog architecture.", tech: ["Shopify API", "React", "Tailwind"] },
-            { title: "Programmatic SEO Engine", category: "SEO & GROWTH", desc: "Built system maps capable of auto-generating hyper-targeted data landing pages with absolute markup verification.", tech: ["Python", "Automation", "APIs"] }
+            { title: "Autonomous Intelligence Unit", category: "AI FRAMEWORKS", desc: "Orchestrated multi-threaded LLM configurations performing real-time structural asset vectorization and matrix mapping.", tech: ["LangChain", "GPT-4 Engine", "Node.js"] },
+            { title: "Decoupled Luxury E-Commerce", category: "FULL-STACK OPERATIONS", desc: "Designed architectural blueprint map for modular headless commerce pipelines with isolated lightning fast inventory matrices.", tech: ["Shopify Core API", "React.JS", "Tailwind Spec"] },
+            { title: "Programmatic Indexing Engine", category: "ALGORITHMIC AUDITING", desc: "Automated macro structural layout deployment mechanics engineered for absolute real-time metadata validation indexing.", tech: ["Python Systems", "Automation Maps", "API Mesh"] }
           ];
 
           return (
-            <section id="work" style={{ padding: "80px 5%", position: "relative", zIndex: 1 }}>
-              <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-                <div style={{ marginBottom: 48 }}>
-                  <div className="mono" style={{ fontSize: 11, color: T.emerald, marginBottom: 8 }}>04 / SELECTED CASES</div>
-                  <h2 className="syne" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800 }}>CASE STUDIES</h2>
+            <section id="work" style={{ padding: "100px 6%", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 1300, margin: "0 auto" }}>
+                <div style={{ marginBottom: 64 }}>
+                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>03 / ARCHITECTURAL ARTIFACTS</div>
+                  <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, letterSpacing: "-0.03em" }}>CASE ANALYSIS</h2>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
                   {projects.map((p, i) => (
-                    <div key={i} className="glass card-hover" style={{ padding: 32, borderRadius: 8, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 220 }}>
+                    <div key={i} className="glass-panel card-premium" style={{ padding: 40, borderRadius: 0, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 260 }}>
                       <div>
-                        <div className="mono" style={{ fontSize: 10, color: T.emerald, marginBottom: 12 }}>{p.category}</div>
-                        <h3 className="syne" style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>{p.title}</h3>
-                        <p style={{ fontSize: 13, color: T.silver, lineHeight: 1.5 }}>{p.desc}</p>
+                        <div className="mono" style={{ color: T.emerald, marginBottom: 16 }}>{p.category}</div>
+                        <h3 className="cabinet" style={{ fontSize: 22, fontWeight: 800, color: "#fff", marginBottom: 14 }}>{p.title}</h3>
+                        <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, fontWeight: 300 }}>{p.desc}</p>
                       </div>
-                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 24 }}>
-                        {p.tech.map(t => <span key={t} className="mono" style={{ fontSize: 9, background: "rgba(255,255,255,0.02)", padding: "3px 8px", borderRadius: 3, color: T.muted }}>{t}</span>)}
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 32 }}>
+                        {p.tech.map(t => <span key={t} className="mono" style={{ fontSize: 9, background: "rgba(255,255,255,0.02)", padding: "4px 10px", color: T.muted, border: `1px solid \${T.border}` }}>{t}</span>)}
                       </div>
                     </div>
                   ))}
@@ -388,8 +382,8 @@
           }, []);
 
           return (
-            <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "20px 5%", background: "transparent" }}>
-              <div ref={containerRef} style={{ maxWidth: "100%", overflow: "hidden", borderRadius: 8, border: `1px solid \${T.border}`, background: T.surface }} />
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "40px 6%", background: "transparent", position: "relative", zIndex: 1 }}>
+              <div ref={containerRef} style={{ maxWidth: "100%", overflow: "hidden", border: `1px solid \${T.border}`, background: T.surface, boxShadow: "0 4px 30px rgba(0,0,0,0.5)" }} />
             </div>
           );
         };
@@ -422,24 +416,24 @@
         const Contact = () => {
           const [sent, setSent] = useState(false);
           return (
-            <section id="contact" style={{ padding: "80px 5% 120px", position: "relative", zIndex: 1 }}>
-              <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
-                <div className="mono" style={{ fontSize: 11, color: T.emerald, marginBottom: 8 }}>05 / INQUIRIES</div>
-                <h2 className="syne" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, marginBottom: 24 }}>START A PROJECT</h2>
+            <section id="contact" style={{ padding: "100px 6% 140px", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
+                <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>04 / INQUIRY INTENTION</div>
+                <h2 className="cabinet" style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, marginBottom: 32, letterSpacing: "-0.03em" }}>ENGAGE FRAMEWORK</h2>
                 
-                <div className="glass" style={{ padding: 36, borderRadius: 12, textAlign: "left" }}>
+                <div className="glass-panel" style={{ padding: 48, borderRadius: 0, textAlign: "left" }}>
                   {sent ? (
-                    <div style={{ textAlign: "center", padding: "20px 0" }}>
-                      <div style={{ color: T.emerald, fontSize: 18, fontWeight: 700, marginBottom: 8 }}>MESSAGE TRANSMITTED</div>
-                      <p style={{ color: T.silver, fontSize: 13 }}>I will get back to you within 24 hours.</p>
+                    <div style={{ textAlign: "center", padding: "30px 0" }}>
+                      <div className="cabinet" style={{ color: T.emerald, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>TRANSMISSION SECURED</div>
+                      <p style={{ color: T.text, fontSize: 14, fontWeight: 300 }}>Response protocols mapped within 24 operational hours.</p>
                     </div>
                   ) : (
-                    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                      <input placeholder="Your Name" style={{ width: "100%", background: "rgba(255,255,255,0.02)", border: `1px solid \${T.border}`, padding: 14, borderRadius: 4, color: "#fff" }} />
-                      <input placeholder="Your Email" style={{ width: "100%", background: "rgba(255,255,255,0.02)", border: `1px solid \${T.border}`, padding: 14, borderRadius: 4, color: "#fff" }} />
-                      <textarea placeholder="Describe the system framework or project requirements..." style={{ width: "100%", background: "rgba(255,255,255,0.02)", border: `1px solid \${T.border}`, padding: 14, borderRadius: 4, color: "#fff", minHeight: 100 }} />
-                      <button onClick={() => setSent(true)} className="btn-primary" style={{ background: T.emerald, color: "#000", border: "none", padding: 14, borderRadius: 4, fontWeight: 700, fontSize: 13 }}>
-                        SEND INQUIRY →
+                    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                      <input placeholder="Client Identification (Name)" style={{ width: "100%", background: "rgba(255,255,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: "#fff", fontFamily: "inherit" }} />
+                      <input placeholder="Secure Return Vector (Email)" style={{ width: "100%", background: "rgba(255,255,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: "#fff", fontFamily: "inherit" }} />
+                      <textarea placeholder="Outline tactical scope or technical architectural prerequisites..." style={{ width: "100%", background: "rgba(255,255,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: "#fff", minHeight: 120, fontFamily: "inherit", resize: "none" }} />
+                      <button onClick={() => setSent(true)} className="btn-premium cabinet" style={{ padding: 18, fontSize: 11, letterSpacing: "0.1em" }}>
+                        DISPATCH SECURE TELEMETRY →
                       </button>
                     </div>
                   )}
@@ -454,10 +448,11 @@
           return (
             <>
               <GlobalStyles />
-              <div className="grain-overlay" />
+              <div className="ambient-glow" />
+              <div className="ambient-glow-2" />
               <ParticleCanvas />
               <Nav />
-              <main style={{ maxWidth: 1400, margin: "0 auto" }}>
+              <main style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
                 <Hero />
                 <Expertise />
                 <Experience />
@@ -466,8 +461,8 @@
                 <Contact />
               </main>
               <BackgroundAds />
-              <footer style={{ padding: "32px 5%", borderTop: `1px solid \${T.border}`, textAlign: "center", fontSize: 11, color: T.muted }} className="mono">
-                © 2026 FAIZAN · ALL SYSTEMS OPERATIONAL
+              <footer style={{ padding: "40px 6%", borderTop: `1px solid \${T.border}`, textAlign: "center", color: T.muted }} className="mono">
+                © 2026 FAIZAN · METRIC VECTOR PROTOCOLS OPERATIONAL
               </footer>
             </>
           );
