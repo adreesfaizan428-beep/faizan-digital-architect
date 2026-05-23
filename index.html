@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faizan | AI Solutions Architect & Full-Stack Dev</title>
     
+    <meta name="monetag" content="ebf625dbc41167de7ab85769c9477471">
+
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/javascript" src="//www.highperformanceformat.com/2942394/invoke.js" async></script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/2942390/invoke.js" async></script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/2942393/invoke.js" async></script>
 </head>
 <body>
 
@@ -102,7 +100,7 @@
               transform: translateY(-3px); color: #fff;
             }
 
-            .nav-link-premium { position: relative; transition: all 0.3s ease; background: none; border: none; cursor: pointer; font-weight: 500; color: \address{T.text}; }
+            .nav-link-premium { position: relative; transition: all 0.3s ease; background: none; border: none; cursor: pointer; font-weight: 500; color: \${T.text}; }
             .nav-link-premium::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: \${T.cyan}; transition: width 0.3s ease; }
             .nav-link-premium:hover::after { width: 100%; }
             .nav-link-premium:hover { color: \${T.cyan}; text-shadow: 0 0 10px rgba(0,240,255,0.5); }
@@ -142,24 +140,21 @@
           return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0, opacity: 0.6 }} />;
         };
 
-        const Nav = () => {
-          const [menuOpen, setMenuOpen] = useState(false);
-          return (
-            <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)", webkitBackdropFilter: "blur(20px)" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76, maxWidth: 1300, margin: "0 auto" }}>
-                <div className="syne" style={{ fontSize: 18, fontWeight: 800, cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                  <span className="text-gradient-cyan-emerald">FAIZAN</span>
-                  <span className="mono" style={{ color: T.purple, marginLeft: 8, fontSize: 10 }}>[CORE_MESH]</span>
-                </div>
-                <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="desktop-nav">
-                  {["About", "Expertise", "Experience", "Work", "Contact"].map(l => (
-                    <button key={l} className="nav-link-premium mono" onClick={() => document.getElementById(l.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}>{l.toUpperCase()}</button>
-                  ))}
-                </div>
+        const Nav = () => (
+          <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid \${T.border}`, backdropFilter: "blur(20px)", webkitBackdropFilter: "blur(20px)" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76, maxWidth: 1300, margin: "0 auto" }}>
+              <div className="syne" style={{ fontSize: 18, fontWeight: 800, cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                <span className="text-gradient-cyan-emerald">FAIZAN</span>
+                <span className="mono" style={{ color: T.purple, marginLeft: 8, fontSize: 10 }}>[CORE_MESH]</span>
               </div>
-            </nav>
-          );
-        };
+              <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="desktop-nav">
+                {["About", "Expertise", "Experience", "Work", "Contact"].map(l => (
+                  <button key={l} className="nav-link-premium mono" onClick={() => document.getElementById(l.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}>{l.toUpperCase()}</button>
+                ))}
+              </div>
+            </div>
+          </nav>
+        );
 
         const Hero = () => (
           <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "130px 6% 80px", position: "relative", zIndex: 1 }}>
@@ -187,52 +182,91 @@
           </section>
         );
 
-        const Expertise = () => (
-          <section id="expertise" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
-            <div style={{ maxWidth: 1300, margin: "0 auto" }}>
-              <div style={{ marginBottom: 68 }}>
-                <div className="mono" style={{ color: T.purple, marginBottom: 12 }}>// MODULAR MATRIX PILLARS</div>
-                <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-cyan-emerald">SYSTEM VECTOR EXPERTISE</span></h2>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
-                {[
-                  { icon: "⚡", label: "AUTONOMOUS MACHINE ENGINE", desc: "Complex LLM system pipelines, custom structural alignment mechanics, and production-level system automation mappings.", skills: ["Core Agents", "Prompt Alignment", "Vector Mesh"] },
-                  { icon: "⚲", label: "DECOUPLED APPLICATION ARCHITECTURE", desc: "Bespoke high-speed enterprise full-stack layers, microservices frameworks, and performance-tuned Shopify setups.", skills: ["React Engine", "NextJS System", "API Injections"] }
-                ].map(p => (
-                  <div key={p.label} className="glass-panel card-premium" style={{ padding: 36 }}>
-                    <div style={{ fontSize: 24, marginBottom: 20, color: T.cyan }}>{p.icon}</div>
-                    <div className="syne" style={{ fontSize: 15, fontWeight: 800, color: T.cyan, marginBottom: 14 }}>{p.label}</div>
-                    <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 28 }}>{p.desc}</p>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                      {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \${T.border}`, padding: "4px 10px", color: T.purple }}>{s}</span>)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-
-        // ─── DOM INJECTION AD ZONE FOR ADSTERRA BANNER ───────────────────────────────
-        const NativeAdSlot = () => {
-          useEffect(() => {
-            const container = document.getElementById("adsterra-native-slot");
-            if (container && !container.innerHTML) {
-              const conf = document.createElement("script");
-              conf.type = "text/javascript";
-              conf.text = "atOptions = { 'key' : '2942392', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };";
-              const inv = document.createElement("script");
-              inv.type = "text/javascript";
-              inv.src = "//www.highperformanceformat.com/2942392/invoke.js";
-              container.appendChild(conf);
-              container.appendChild(inv);
-            }
-          }, []);
+        const Expertise = () => {
+          const pillars = [
+            { icon: "⚡", label: "AUTONOMOUS MACHINE ENGINE", desc: "Complex LLM system pipelines, custom structural alignment mechanics, and production-level system automation mappings.", skills: ["Core Agents", "Prompt Alignment", "Vector Mesh"] },
+            { icon: "⚲", label: "DECOUPLED APPLICATION ARCHITECTURE", desc: "Bespoke high-speed enterprise full-stack layers, microservices frameworks, and performance-tuned Shopify setups.", skills: ["React Engine", "NextJS System", "API Injections"] },
+            { icon: "📈", label: "ALGORITHMIC ENGINE AUDITING", desc: "Deep technical graph optimization maps, automated payload generation vectors, and rich validation tracking layers.", skills: ["Data Mapping", "Semantic Frameworks", "Vitals Opt"] },
+            { icon: "◈", label: "MOTION REFRACTION SCHEMES", desc: "Premium dynamic canvas interactions, interactive layout variables, and ultra-fluid interface fluid dynamics.", skills: ["UI Fluidics", "Figma Elite", "After Effects Matrix"] }
+          ];
 
           return (
-            <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "60px 6%", position: "relative", zIndex: 5 }}>
-              <div id="adsterra-native-slot" style={{ maxWidth: "100%", minHeight: "90px", minWidth: "320px", background: T.surface, border: `1px solid \${T.borderHover}`, boxShadow: "0 0 30px rgba(0,240,255,0.1)" }} />
-            </div>
+            <section id="expertise" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 1300, margin: "0 auto" }}>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.purple, marginBottom: 12 }}>// MODULAR MATRIX PILLARS</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-cyan-emerald">SYSTEM VECTOR EXPERTISE</span></h2>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+                  {pillars.map(p => (
+                    <div key={p.label} className="glass-panel card-premium" style={{ padding: 36 }}>
+                      <div style={{ fontSize: 24, marginBottom: 20, color: T.cyan }}>{p.icon}</div>
+                      <div className="syne" style={{ fontSize: 15, fontWeight: 800, color: T.cyan, marginBottom: 14 }}>{p.label}</div>
+                      <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 28 }}>{p.desc}</p>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: `1px solid \${T.border}`, padding: "4px 10px", color: T.purple }}>{s}</span>)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        const Experience = () => {
+          const timeline = [
+            { role: "Senior Freelance System Architect", company: "Global Core Channels (Upwork / Fiverr)", period: "2023 - OPERATIONAL", detail: "Structuring enterprise data networks, optimizing machine logic, building robust headless digital ecommerce channels, and generating highly complex system pipelines." },
+            { role: "Full-Stack Development Specialist", company: "Digital Agency Network", period: "2022 - 2023", detail: "Programmed modular customer interfaces with sub-second core load frequencies. Maintained automated structured metadata layers increasing organic site traffic parameters." }
+          ];
+
+          return (
+            <section id="experience" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+                <div style={{ marginBottom: 68 }}>
+                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// TRACK VECTOR HISTORY</div>
+                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-purple-cyan">OPERATIONAL HISTORY</span></h2>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                  {timeline.map((t, idx) => (
+                    <div key={idx} className="glass-panel card-premium" style={{ padding: 40, display: "flex", gap: 32, flexWrap: "wrap" }}>
+                      <div className="mono" style={{ color: T.cyan, minWidth: 140 }}>{t.period}</div>
+                      <div style={{ flex: 1 }}>
+                        <h3 className="syne" style={{ fontSize: 20, fontWeight: 800, color: T.text, marginBottom: 8 }}>{t.role}</h3>
+                        <div className="mono" style={{ color: T.muted, marginBottom: 18 }}>{t.company}</div>
+                        <p style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{t.detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        const Contact = () => {
+          const [sent, setSent] = useState(false);
+          return (
+            <section id="contact" style={{ padding: "100px 6% 140px", position: "relative", zIndex: 1 }}>
+              <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
+                <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// SECURE VECTOR COMMS</div>
+                <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, marginBottom: 36 }}><span className="text-gradient-cyan-emerald">DISPATCH DATA PORTAL</span></h2>
+                <div className="glass-panel" style={{ padding: 48, textAlign: "left" }}>
+                  {sent ? (
+                    <div style={{ textAlign: "center", padding: "30px 0" }}>
+                      <div className="syne" style={{ color: T.cyan, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>TRANSMISSION ENCRYPTED</div>
+                    </div>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                      <input placeholder="Client Metric Label (Name)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan }} />
+                      <input placeholder="Return Gateway Protocol (Email)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan }} />
+                      <textarea placeholder="Specify operational blueprints..." style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid \${T.border}`, padding: 16, color: T.cyan, minHeight: 120, resize: "none" }} />
+                      <button onClick={() => setSent(true)} className="btn-premium syne" style={{ padding: 20, fontSize: 11 }}>BROADCAST PAYLOAD PACKET →</button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
           );
         };
 
@@ -247,10 +281,11 @@
               <main style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
                 <Hero />
                 <Expertise />
-                <NativeAdSlot />
+                <Experience />
+                <Contact />
               </main>
               <footer style={{ padding: "40px 6%", borderTop: `1px solid \${T.border}`, textAlign: "center", color: T.muted }} className="mono">
-                © 2026 FAIZAN · DATA MATRIX CORES ONLINE
+                © 2026 FAIZAN · ALL CORES INTEGRATED
               </footer>
             </>
           );
