@@ -74,16 +74,24 @@
     transform-origin:center center;
   }
   .page{
-    width:50%; height:100%; padding:38px 34px 50px;
-    position:relative; overflow:hidden;
+    width:50%; height:100%;
+    position:relative; display:flex; flex-direction:column;
   }
   .page.left{ border-right:1px solid var(--line); }
+  .page-scroll{
+    flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden;
+    padding:32px 28px 14px;
+    scrollbar-width:thin; scrollbar-color:#D8D6D0 transparent;
+  }
+  .page-scroll::-webkit-scrollbar{ width:5px; }
+  .page-scroll::-webkit-scrollbar-thumb{ background:#D8D6D0; border-radius:3px; }
   .page-num{
-    position:absolute; bottom:16px; left:0; right:0; text-align:center;
+    flex:0 0 auto; padding:8px 28px 16px;
+    text-align:center;
     font-family:'JetBrains Mono',monospace; font-size:11px; color:#B7B4AC;
   }
-  .page.left .page-num{ text-align:left; left:34px; right:auto; }
-  .page.right .page-num{ text-align:right; right:34px; left:auto; }
+  .page.left .page-num{ text-align:left; }
+  .page.right .page-num{ text-align:right; }
 
   h2.page-title{
     font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600;
@@ -189,8 +197,28 @@
   .dot.active{ background:linear-gradient(100deg,var(--violet),var(--cyan)); width:20px; border-radius:4px; }
 
   @media (max-width:640px){
-    .page{ padding:24px 18px 44px; }
     .svc-grid{ grid-template-columns:1fr; }
+  }
+
+  @media (max-width:760px){
+    .stage{ perspective:none; }
+    .book{
+      width:94vw; height:min(78vh, 680px);
+    }
+    .cover{ overflow-y:auto; }
+    .spread{
+      flex-direction:column;
+      overflow-y:auto; overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+    }
+    .page{
+      width:100%; height:auto; flex:none;
+    }
+    .page.left{ border-right:none; border-bottom:1px solid var(--line); }
+    .page-scroll{
+      flex:none; overflow:visible; padding:22px 20px 6px;
+    }
+    .page-num{ padding:4px 20px 16px; }
   }
 </style>
 </head>
@@ -425,8 +453,8 @@ function buildCover(){
 function buildSpread(p){
   return `
     <div class="spread" id="spreadEl">
-      <div class="page left">${templates[p.left]}<div class="page-num">${(current)*2-1 > 0 ? (current)*2-1 : ''}</div></div>
-      <div class="page right">${templates[p.right]}<div class="page-num">${(current)*2}</div></div>
+      <div class="page left"><div class="page-scroll">${templates[p.left]}</div><div class="page-num">${(current)*2-1 > 0 ? (current)*2-1 : ''}</div></div>
+      <div class="page right"><div class="page-scroll">${templates[p.right]}</div><div class="page-num">${(current)*2}</div></div>
     </div>
   `;
 }
