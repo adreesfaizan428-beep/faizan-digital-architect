@@ -1,326 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="monetag" content="ebf625dbc41167de7ab85769c9477471">
-    <title>Faizan | AI Solutions Architect & Full-Stack Dev</title>
-    
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Faizan — AI Solutions Architect & Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D13; --violet:#0E8FD6; --cyan:#3FB6EC; --amber:#F4A94A;
+    --ink:#1B1E27; --muted:#6B7180; --line:#E7E6E2; --paper:#FBFAF8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(139,124,255,0.12), transparent 60%),
+      var(--bg);
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:'Inter',sans-serif; color:var(--ink);
+    padding:40px 16px;
+    overflow-x:hidden;
+  }
+  .brand{
+    font-family:'JetBrains Mono',monospace; color:var(--cyan); font-size:12px;
+    letter-spacing:3px; margin-bottom:6px; text-transform:uppercase; opacity:0.8;
+  }
+  .stage-title{
+    font-family:'Space Grotesk',sans-serif; color:#fff; font-size:clamp(20px,3vw,28px);
+    font-weight:600; margin-bottom:34px; text-align:center;
+  }
+
+  .stage{ perspective:2400px; }
+  .book{
+    position:relative;
+    width:min(880px, 92vw);
+    height:min(560px, 78vw);
+    display:flex;
+  }
+
+  /* COVER */
+  .cover{
+    width:100%; height:100%; border-radius:10px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(139,124,255,0.35), transparent 55%),
+      linear-gradient(150deg, #12141c, #0A0B10 70%);
+    border:1px solid #23283a;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:40px;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,0.7);
+  }
+  .cover .eyebrow{
+    font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:12px;
+    letter-spacing:3px; margin-bottom:18px;
+  }
+  .cover h1{
+    font-family:'Space Grotesk',sans-serif; color:#fff; font-size:clamp(30px,5vw,46px);
+    font-weight:700; margin-bottom:10px;
+  }
+  .cover .role{ color:#AEB4C4; font-size:16px; margin-bottom:20px; }
+  .cover .tag{ color:#8890A2; font-size:14px; max-width:420px; line-height:1.7; margin-bottom:32px; }
+  .cover .cbtns{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+
+  /* SPREAD */
+  .spread{
+    width:100%; height:100%;
+    border-radius:10px; overflow:hidden;
+    background:var(--paper);
+    display:flex;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,0.7);
+    transform-style:preserve-3d;
+    transform-origin:center center;
+  }
+  .page{
+    width:50%; height:100%; padding:38px 34px 50px;
+    position:relative; overflow:hidden;
+  }
+  .page.left{ border-right:1px solid var(--line); }
+  .page-num{
+    position:absolute; bottom:16px; left:0; right:0; text-align:center;
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:#B7B4AC;
+  }
+  .page.left .page-num{ text-align:left; left:34px; right:auto; }
+  .page.right .page-num{ text-align:right; right:34px; left:auto; }
+
+  h2.page-title{
+    font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600;
+    margin-bottom:20px; color:var(--ink);
+  }
+
+  /* profile page */
+  .avatar{
+    width:84px; height:84px; border-radius:50%; margin:0 auto 14px;
+    background:linear-gradient(135deg, var(--violet), var(--cyan));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:26px;
+    overflow:hidden;
+    box-shadow:0 0 0 3px #fff, 0 4px 16px rgba(14,143,214,0.35);
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; }
+  .cover-avatar{
+    width:100px; height:100px; border-radius:50%; margin:0 auto 18px;
+    overflow:hidden; box-shadow:0 0 0 3px rgba(255,255,255,0.15), 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .cover-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* resume page */
+  .resume-block{ margin-bottom:14px; }
+  .resume-h{ font-family:'JetBrains Mono'; font-size:10.5px; color:var(--violet); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .resume-p{ font-size:11.5px; color:var(--muted); line-height:1.6; }
+  .resume-li{ font-size:11.2px; color:var(--muted); line-height:1.6; margin-bottom:3px; padding-left:12px; position:relative; }
+  .resume-li::before{ content:'—'; position:absolute; left:0; color:var(--violet); }
+  .profile-name{ text-align:center; font-family:'Space Grotesk'; font-size:19px; font-weight:700; }
+  .profile-role{ text-align:center; color:var(--violet); font-size:12.5px; font-weight:600; margin-top:2px; margin-bottom:14px; }
+  .socials{ display:flex; justify-content:center; gap:10px; margin-bottom:16px; }
+  .social{
+    width:32px; height:32px; border-radius:50%; background:var(--ink); color:#fff;
+    display:flex; align-items:center; justify-content:center; text-decoration:none;
+    font-size:13px; font-family:'JetBrains Mono';
+  }
+  .profile-bio{ font-size:12.5px; color:var(--muted); text-align:center; line-height:1.7; margin-bottom:18px; }
+  .profile-loc{ text-align:center; font-size:11.5px; color:#9a9690; margin-bottom:18px; font-family:'JetBrains Mono'; }
+  .pbtns{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:500;
+    padding:10px 18px; border-radius:6px; text-decoration:none; border:1px solid transparent;
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+  }
+  .btn-solid{ background:var(--ink); color:#fff; }
+  .btn-outline{ border-color:var(--ink); color:var(--ink); background:transparent; }
+  .cover .btn-solid{ background:linear-gradient(100deg,var(--violet),var(--cyan)); color:#0A0B10; font-weight:700; border:none; }
+  .cover .btn-outline{ border-color:#3A4054; color:#fff; }
+
+  /* timeline */
+  .tl-item{ display:flex; gap:12px; margin-bottom:18px; }
+  .tl-dot{
+    width:30px; height:30px; border-radius:8px; background:#EEF0FE; color:var(--violet);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:13px;
+  }
+  .tl-year{ font-family:'JetBrains Mono'; font-size:10.5px; color:var(--violet); font-weight:600; letter-spacing:0.5px; }
+  .tl-role{ font-size:13.5px; font-weight:700; margin:2px 0 4px; }
+  .tl-desc{ font-size:11.8px; color:var(--muted); line-height:1.6; }
+
+  /* services / skills grid */
+  .svc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .svc-card{ border:1px solid var(--line); border-radius:8px; padding:14px; }
+  .svc-icon{ width:26px; height:26px; border-radius:6px; background:#EEF0FE; color:var(--violet); display:flex; align-items:center; justify-content:center; font-size:12px; margin-bottom:8px; }
+  .svc-title{ font-size:12.5px; font-weight:700; margin-bottom:4px; }
+  .svc-desc{ font-size:10.8px; color:var(--muted); line-height:1.5; }
+
+  .skill-block{ margin-bottom:16px; }
+  .skill-cat{ font-family:'JetBrains Mono'; font-size:10.5px; color:var(--violet); letter-spacing:1px; margin-bottom:8px; text-transform:uppercase; }
+  .skill-pills{ display:flex; flex-wrap:wrap; gap:6px; }
+  .pill{ font-size:10.8px; border:1px solid var(--line); border-radius:14px; padding:4px 10px; color:var(--ink); background:#F5F4F1; }
+
+  /* project page */
+  .proj-tag{ display:inline-block; font-family:'JetBrains Mono'; font-size:10px; color:#fff; background:var(--ink); padding:4px 10px; border-radius:4px; margin-bottom:12px; }
+  .proj-title{ font-family:'Space Grotesk'; font-size:18px; font-weight:700; margin-bottom:10px; }
+  .proj-desc{ font-size:12px; color:var(--muted); line-height:1.7; margin-bottom:12px; }
+  .proj-stack{ display:flex; flex-wrap:wrap; gap:6px; }
+
+  .plist-item{ display:flex; gap:10px; align-items:flex-start; margin-bottom:16px; }
+  .plist-dot{ width:7px; height:7px; border-radius:50%; background:var(--cyan); margin-top:6px; flex-shrink:0; }
+  .plist-title{ font-size:13px; font-weight:700; }
+  .plist-desc{ font-size:11.5px; color:var(--muted); line-height:1.5; }
+
+  /* contact page */
+  .contact-field{ margin-bottom:14px; }
+  .contact-label{ font-family:'JetBrains Mono'; font-size:10px; color:var(--violet); letter-spacing:1px; text-transform:uppercase; margin-bottom:3px; }
+  .contact-value{ font-size:13px; font-weight:600; }
+  .otw-wrap{ height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .otw-star{ width:54px; height:54px; border-radius:50%; border:2px solid var(--violet); color:var(--violet); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:16px; }
+
+  /* CONTROLS */
+  .controls{
+    display:flex; align-items:center; gap:18px; margin-top:26px;
+  }
+  .nav-btn{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:#cfd2dc;
+    background:#161A24; border:1px solid #2A2F3D; padding:9px 16px; border-radius:20px;
+    cursor:pointer; display:flex; align-items:center; gap:6px;
+  }
+  .nav-btn:disabled{ opacity:0.3; cursor:default; }
+  .dots{ display:flex; gap:7px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:#3A3F4E; cursor:pointer; transition:all 0.25s; }
+  .dot.active{ background:linear-gradient(100deg,var(--violet),var(--cyan)); width:20px; border-radius:4px; }
+
+  @media (max-width:640px){
+    .page{ padding:24px 18px 44px; }
+    .svc-grid{ grid-template-columns:1fr; }
+  }
+</style>
 </head>
 <body>
 
-    <div id="root"></div>
+<div class="brand">CODE CANDY STUDIO — PORTFOLIO BOOK</div>
+<div class="stage-title" id="stageTitle">Cover</div>
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+<div class="stage">
+  <div class="book" id="book"></div>
+</div>
 
-        // ─── PREMIUM MIX-GRADIENT DESIGN TOKENS ─────────────────────────────────────
-        const T = {
-          bg: "#020205",          
-          surface: "#05050e",     
-          glass: "rgba(5,5,14,0.7)", 
-          border: "rgba(0,255,135,0.08)",
-          borderHover: "rgba(0,195,255,0.4)",
-          emerald: "#00ff87",     
-          cyan: "#00f0ff",        
-          purple: "#bd00ff",      
-          text: "#8fa0c0",        
-          muted: "#47526e",       
-        };
+<div class="controls">
+  <button class="nav-btn" id="prevBtn">‹ Previous</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn">Next ›</button>
+</div>
 
-        const GlobalStyles = () => (
-          <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Space+Grotesk:wght=400;500;600&family=JetBrains+Mono:wght=400;700&display=swap');
+<script>
+const CV_LINK = "CV_Faizan_Updated.pdf";
+const PHOTO = "data:image/jpeg;base64,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";
 
-            *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-            html { scroll-behavior: smooth; background: ${T.bg}; }
-            body {
-              background: ${T.bg};
-              color: ${T.text};
-              font-family: 'Space Grotesk', sans-serif;
-              overflow-x: hidden;
-            }
+const pages = [
+  { type:'cover' },
+  { type:'spread', title:'Profile and Work Experience', left:'profile', right:'experience' },
+  { type:'spread', title:'Education and Services', left:'education', right:'services' },
+  { type:'spread', title:'AI Agents and Skills', left:'agents', right:'skills' },
+  { type:'spread', title:'Resume', left:'resumeleft', right:'resumeright' },
+  { type:'spread', title:'Latest Project and Projects', left:'latestproject', right:'projects' },
+  { type:'spread', title:'Get In Touch and Open to Work', left:'contact', right:'open' },
+];
 
-            ::-webkit-scrollbar { width: 5px; }
-            ::-webkit-scrollbar-track { background: ${T.bg}; }
-            ::-webkit-scrollbar-thumb { background: #0b0b1e; border-radius: 3px; border: 1px solid ${T.cyan}; }
+function el(html){ return html; }
 
-            .syne { font-family: 'Syne', sans-serif; }
-            .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; }
+const templates = {
+  profile: `
+    <div class="avatar"><img src="${PHOTO}" alt="Muhammad Faizan"/></div>
+    <div class="profile-name">Muhammad Faizan</div>
+    <div class="profile-role">AI SOLUTIONS ARCHITECT & FULL-STACK DEVELOPER</div>
+    <div class="socials">
+      <a class="social" href="mailto:adreesfaizan428@gmail.com" title="Email">@</a>
+      <a class="social" href="https://wa.me/923319695250" target="_blank" title="WhatsApp">W</a>
+      <a class="social" href="https://www.linkedin.com/in/faizan-adrees-8256693a8" target="_blank" title="LinkedIn">in</a>
+    </div>
+    <div class="profile-bio">Strategic digital architect specializing in AI-powered automation, modern web development, and Shopify ecommerce. Since 2024, delivered 50+ high-performance web apps and built custom AI agents that automate workflows and drive organic growth.</div>
+    <div class="profile-loc">SHAKARGARH, PAKISTAN · REMOTE OK</div>
+    <div class="pbtns">
+      <a class="btn btn-solid" href="${CV_LINK}" target="_blank">Download CV</a>
+      <a class="btn btn-outline" href="mailto:adreesfaizan428@gmail.com">Contact Me</a>
+    </div>
+  `,
+  experience: `
+    <h2 class="page-title">Work Experience</h2>
+    <div class="tl-item">
+      <div class="tl-dot">✓</div>
+      <div>
+        <div class="tl-year">JAN 2024 — PRESENT</div>
+        <div class="tl-role">Lead AI Developer & Digital Growth Strategist</div>
+        <div class="tl-desc">Self-employed · Engineered 50+ high-speed, mobile-responsive web apps with top Core Web Vitals scores. Integrated AI-driven automation into ecommerce workflows, boosted organic visibility through technical SEO, and managed end-to-end deployment on Vercel & Netlify.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">↻</div>
+      <div>
+        <div class="tl-year">ONGOING</div>
+        <div class="tl-role">Continuous Learning</div>
+        <div class="tl-desc">Actively expanding into software engineering fundamentals, SaaS application development, AI agent systems, and web security practices.</div>
+      </div>
+    </div>
+  `,
+  education: `
+    <h2 class="page-title">Education</h2>
+    <div class="tl-item">
+      <div class="tl-dot">🎓</div>
+      <div>
+        <div class="tl-year">MATRICULATION — SCIENCE</div>
+        <div class="tl-role">Govt. Islamia High School</div>
+        <div class="tl-desc">Dudhuchak, Shakargarh</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">💻</div>
+      <div>
+        <div class="tl-year">SELF-DIRECTED</div>
+        <div class="tl-role">AI Development & Software Engineering</div>
+        <div class="tl-desc">Online, self-taught learning in AI systems, SaaS application building, and web security.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🌐</div>
+      <div>
+        <div class="tl-year">LANGUAGES</div>
+        <div class="tl-role">English · Urdu · Punjabi</div>
+        <div class="tl-desc">Professional working proficiency in English; native Urdu & Punjabi.</div>
+      </div>
+    </div>
+  `,
+  services: `
+    <h2 class="page-title">My Services</h2>
+    <div class="svc-grid">
+      <div class="svc-card"><div class="svc-icon">◆</div><div class="svc-title">AI Agents & Bots</div><div class="svc-desc">Custom AI agents, call bots & workflow automations.</div></div>
+      <div class="svc-card"><div class="svc-icon">◇</div><div class="svc-title">Web & SaaS Dev</div><div class="svc-desc">Next.js, React, Shopify & SaaS tools.</div></div>
+      <div class="svc-card"><div class="svc-icon">△</div><div class="svc-title">Technical SEO</div><div class="svc-desc">Audits, keyword research & CRO.</div></div>
+      <div class="svc-card"><div class="svc-icon">○</div><div class="svc-title">Brand & Motion</div><div class="svc-desc">2D/3D graphics, UI/UX & identity design.</div></div>
+    </div>
+  `,
+  agents: `
+    <h2 class="page-title">AI Agents & Automation</h2>
+    <div class="profile-bio" style="text-align:left; margin-bottom:16px;">I design and deploy AI agents and call/workflow bots that plug directly into business operations — from lead qualification calls to internal task automation.</div>
+    <div class="tl-item"><div class="tl-dot">🤖</div><div><div class="tl-role">Custom AI Agents</div><div class="tl-desc">End-to-end agent design & implementation for specific business tasks.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📞</div><div><div class="tl-role">AI Call & Voice Bots</div><div class="tl-desc">Automated calling/voice agents that handle client conversations and lead follow-up.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">⚙</div><div><div class="tl-role">Workflow Automation</div><div class="tl-desc">LLM-powered pipelines that remove repetitive manual work.</div></div></div>
+  `,
+  skills: `
+    <h2 class="page-title">Core Skills</h2>
+    <div class="skill-block">
+      <div class="skill-cat">Development</div>
+      <div class="skill-pills"><span class="pill">Next.js</span><span class="pill">React</span><span class="pill">Shopify Liquid</span><span class="pill">HTML5/CSS3</span><span class="pill">Vercel/Netlify</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">AI & Automation</div>
+      <div class="skill-pills"><span class="pill">Prompt Engineering</span><span class="pill">AI Agents</span><span class="pill">LLM Integration</span><span class="pill">AI Call Bots</span><span class="pill">Workflow Automation</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Marketing & Security</div>
+      <div class="skill-pills"><span class="pill">Technical SEO</span><span class="pill">CRO</span><span class="pill">Web Security Awareness</span></div>
+    </div>
+  `,
+  resumeleft: `
+    <h2 class="page-title">Résumé — Summary</h2>
+    <div class="resume-block">
+      <div class="resume-h">Professional Summary</div>
+      <div class="resume-p">Strategic Digital Architect specializing in AI-powered automation, modern web development (Next.js/React), and Shopify ecommerce. Since 2024, delivered 50+ high-performance web applications integrated with technical SEO and 2D/3D visual storytelling, and built custom AI agents that automate business workflows and drive organic growth. Actively expanding into software engineering fundamentals, SaaS application development, and web security practices.</div>
+    </div>
+    <div class="resume-block">
+      <div class="resume-h">Contact</div>
+      <div class="resume-li">adreesfaizan428@gmail.com</div>
+      <div class="resume-li">+92 331 9695250</div>
+      <div class="resume-li">Shakargarh, Pakistan</div>
+    </div>
+    <div class="pbtns" style="margin-top:18px;">
+      <a class="btn btn-solid" href="${CV_LINK}" target="_blank">Open Full CV (PDF)</a>
+    </div>
+  `,
+  resumeright: `
+    <h2 class="page-title">Résumé — Details</h2>
+    <div class="resume-block">
+      <div class="resume-h">Core Skills</div>
+      <div class="resume-li">Next.js, React, Shopify Liquid, HTML5/CSS3, Responsive Design</div>
+      <div class="resume-li">AI Prompt Engineering, Custom AI Agents, LLM Integration (OpenAI API)</div>
+      <div class="resume-li">AI Call / Voice Bots, Workflow Automation</div>
+      <div class="resume-li">Technical SEO Audits, Keyword Research, CRO</div>
+      <div class="resume-li">2D/3D Motion Graphics, UI/UX Design, Brand Identity</div>
+    </div>
+    <div class="resume-block">
+      <div class="resume-h">Experience</div>
+      <div class="resume-li">Lead AI Developer & Digital Growth Strategist — Self-Employed (Jan 2024 – Present)</div>
+    </div>
+    <div class="resume-block">
+      <div class="resume-h">Education</div>
+      <div class="resume-li">Matriculation (Science) — Govt. Islamia High School, Dudhuchak, Shakargarh</div>
+      <div class="resume-li">Self-directed learning — AI development, software engineering, SaaS</div>
+    </div>
+    <div class="resume-block">
+      <div class="resume-h">Languages</div>
+      <div class="resume-li">English (Professional), Urdu & Punjabi (Native)</div>
+    </div>
+  `,
+  latestproject: `
+    <div class="proj-tag">LATEST PROJECT</div>
+    <div class="proj-title">AI-Driven E-commerce Ecosystem</div>
+    <div class="proj-desc">A central hub merging high-end Shopify development, AI content workflows, and 3D visuals to build fully automated sales funnels for clients.</div>
+    <div class="proj-stack">
+      <span class="pill">Shopify</span><span class="pill">OpenAI API</span><span class="pill">Automation</span><span class="pill">3D Motion</span>
+    </div>
+  `,
+  projects: `
+    <h2 class="page-title">My Projects</h2>
+    <div class="plist-item"><div class="plist-dot"></div><div><div class="plist-title">AI-Driven E-commerce Ecosystem</div><div class="plist-desc">Shopify + AI content workflows + automated sales funnels.</div></div></div>
+    <div class="plist-item"><div class="plist-dot"></div><div><div class="plist-title">Professional Portfolio Hub</div><div class="plist-desc">100% responsive hub showcasing technical projects & brand identity work.</div></div></div>
+    <div class="plist-item"><div class="plist-dot"></div><div><div class="plist-title">AI Workflow & Call Agents</div><div class="plist-desc">Custom bots automating client workflows and lead handling.</div></div></div>
+  `,
+  contact: `
+    <h2 class="page-title">Get In Touch</h2>
+    <div class="avatar"><img src="${PHOTO}" alt="Muhammad Faizan"/></div>
+    <div class="contact-field" style="text-align:center; margin-top:14px;">
+      <div class="contact-label">Email</div>
+      <div class="contact-value"><a href="mailto:adreesfaizan428@gmail.com" style="color:inherit;">adreesfaizan428@gmail.com</a></div>
+    </div>
+    <div class="socials" style="margin-top:10px;">
+      <a class="social" href="mailto:adreesfaizan428@gmail.com">@</a>
+      <a class="social" href="https://wa.me/923319695250" target="_blank">W</a>
+      <a class="social" href="https://www.linkedin.com/in/faizan-adrees-8256693a8" target="_blank">in</a>
+    </div>
+    <div class="contact-field" style="margin-top:20px;"><div class="contact-label">Location</div><div class="contact-value">Shakargarh, Pakistan — Remote OK</div></div>
+    <div class="contact-field"><div class="contact-label">Response Time</div><div class="contact-value">Within 24 hours</div></div>
+    <div class="contact-field"><div class="contact-label">Focus</div><div class="contact-value">AI Agents · Next.js · Automation</div></div>
+  `,
+  open: `
+    <div class="otw-wrap">
+      <div class="otw-star">★</div>
+      <div class="proj-title">Open to Work</div>
+      <div class="proj-desc" style="max-width:260px;">Looking for AI agent development, automation, or full-stack builds? Let's build something intelligent together.</div>
+      <a class="btn btn-solid" href="mailto:adreesfaizan428@gmail.com">Say Hello</a>
+    </div>
+  `
+};
 
-            .glass-panel {
-              background: ${T.glass};
-              backdrop-filter: blur(24px);
-              -webkit-backdrop-filter: blur(24px);
-              border: 1px solid ${T.border};
-              box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.9);
-            }
+let current = 0;
+const book = document.getElementById('book');
+const dotsEl = document.getElementById('dots');
+const stageTitle = document.getElementById('stageTitle');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
-            .text-gradient-cyan-emerald {
-              background: linear-gradient(135deg, ${T.cyan} 0%, ${T.emerald} 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
+function buildCover(){
+  return `
+    <div class="cover">
+      <div class="cover-avatar"><img src="${PHOTO}" alt="Muhammad Faizan"/></div>
+      <div class="eyebrow">PORTFOLIO 2026</div>
+      <h1>Muhammad Faizan</h1>
+      <div class="role">AI Solutions Architect & Full-Stack Developer</div>
+      <div class="tag">Turning complex ideas — and AI agents — into sharp, reliable software that ships and scales.</div>
+      <div class="cbtns">
+        <button class="btn btn-solid" onclick="goTo(4)">View Projects</button>
+        <button class="btn btn-outline" onclick="goTo(5)">Contact Me</button>
+      </div>
+    </div>
+  `;
+}
 
-            .text-gradient-purple-cyan {
-              background: linear-gradient(135deg, ${T.purple} 0%, ${T.cyan} 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
+function buildSpread(p){
+  return `
+    <div class="spread" id="spreadEl">
+      <div class="page left">${templates[p.left]}<div class="page-num">${(current)*2-1 > 0 ? (current)*2-1 : ''}</div></div>
+      <div class="page right">${templates[p.right]}<div class="page-num">${(current)*2}</div></div>
+    </div>
+  `;
+}
 
-            .text-gradient-muted-steel {
-              background: linear-gradient(180deg, #a4b3cf 0%, #5d6b88 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
+function render(){
+  const p = pages[current];
+  book.innerHTML = p.type === 'cover' ? buildCover() : buildSpread(p);
+  stageTitle.textContent = p.type === 'cover' ? 'Cover' : p.title;
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === pages.length - 1;
+  dotsEl.innerHTML = pages.map((_,i)=>`<div class="dot ${i===current?'active':''}" onclick="goTo(${i})"></div>`).join('');
+}
 
-            .card-premium { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-            .card-premium:hover {
-              transform: translateY(-6px);
-              border-color: ${T.borderHover} !important;
-              box-shadow: 0 15px 45px rgba(0, 240, 255, 0.06);
-            }
+function flipTo(newIndex){
+  if(newIndex < 0 || newIndex >= pages.length || newIndex === current) return;
+  const dir = newIndex > current ? 1 : -1;
+  book.style.transition = 'transform 0.32s ease-in, opacity 0.32s ease-in';
+  book.style.transform = `rotateY(${dir*-14}deg) scale(0.94)`;
+  book.style.opacity = '0.4';
+  setTimeout(()=>{
+    current = newIndex;
+    render();
+    book.style.transition = 'none';
+    book.style.transform = `rotateY(${dir*14}deg) scale(0.94)`;
+    book.style.opacity = '0.4';
+    void book.offsetWidth;
+    book.style.transition = 'transform 0.32s ease-out, opacity 0.32s ease-out';
+    book.style.transform = 'rotateY(0deg) scale(1)';
+    book.style.opacity = '1';
+  }, 320);
+}
 
-            .btn-premium {
-              position: relative; transition: all 0.4s ease; cursor: pointer;
-              background: linear-gradient(135deg, ${T.cyan} 0%, ${T.emerald} 100%);
-              color: #020205; border: none; font-weight: 700;
-            }
-            .btn-premium:hover {
-              background: linear-gradient(135deg, ${T.purple} 0%, ${T.cyan} 100%);
-              box-shadow: 0 0 35px rgba(189, 0, 255, 0.4);
-              transform: translateY(-3px); color: #fff;
-            }
+function goTo(i){ flipTo(i); }
+prevBtn.addEventListener('click', ()=>flipTo(current-1));
+nextBtn.addEventListener('click', ()=>flipTo(current+1));
 
-            .nav-link-premium { position: relative; transition: all 0.3s ease; background: none; border: none; cursor: pointer; font-weight: 500; color: ${T.text}; }
-            .nav-link-premium::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: ${T.cyan}; transition: width 0.3s ease; }
-            .nav-link-premium:hover::after { width: 100%; }
-            .nav-link-premium:hover { color: ${T.cyan}; }
-
-            .ambient-glow-1 { position: fixed; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,240,255,0.02) 0%, transparent 70%); top: -300px; left: -200px; pointer-events: none; }
-            .ambient-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(189,0,255,0.015) 0%, transparent 70%); bottom: -200px; right: -100px; pointer-events: none; }
-          `}</style>
-        );
-
-        const ParticleCanvas = () => {
-          const canvasRef = useRef(null);
-          useEffect(() => {
-            const canvas = canvasRef.current; const ctx = canvas.getContext("2d");
-            let W = canvas.width = window.innerWidth; let H = canvas.height = window.innerHeight;
-            const particles = Array.from({ length: 35 }, () => ({
-              x: Math.random() * W, y: Math.random() * H,
-              vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
-              r: Math.random() * 1.5 + 0.5, color: Math.random() > 0.5 ? T.cyan : T.purple,
-            }));
-            let id;
-            const draw = () => {
-              ctx.clearRect(0, 0, W, H);
-              particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
-              });
-              id = requestAnimationFrame(draw);
-            };
-            draw();
-            return () => cancelAnimationFrame(id);
-          }, []);
-          return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0, opacity: 0.6 }} />;
-        };
-
-        const Nav = () => (
-          <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, padding: "0 6%", background: "rgba(2,2,5,0.85)", borderBottom: `1px solid ${T.border}`, backdropFilter: "blur(20px)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 76, maxWidth: 1300, margin: "0 auto" }}>
-              <div className="syne" style={{ fontSize: 18, fontWeight: 800 }}>
-                <span className="text-gradient-cyan-emerald">FAIZAN</span>
-                <span className="mono" style={{ color: T.purple, marginLeft: 8, fontSize: 10 }}>[CORE_MESH]</span>
-              </div>
-              <div style={{ display: "flex", gap: 36, alignItems: "center" }}>
-                {["About", "Expertise", "Experience", "Contact"].map(l => (
-                  <button key={l} className="nav-link-premium mono" onClick={() => document.getElementById(l.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}>{l.toUpperCase()}</button>
-                ))}
-              </div>
-            </div>
-          </nav>
-        );
-
-        const Hero = () => (
-          <section id="about" style={{ minHeight: "95vh", display: "flex", alignItems: "center", padding: "130px 6% 80px", position: "relative", zIndex: 1 }}>
-            <div style={{ maxWidth: 1200, width: "100%", margin: "0 auto" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 28, background: "rgba(0,240,255,0.03)", border: `1px solid ${T.cyan}`, padding: "6px 16px", borderRadius: 4 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: T.cyan }} />
-                <span className="mono" style={{ fontSize: 10, color: T.cyan }}>SYSTEM OPERATIONAL VECTOR</span>
-              </div>
-              <h1 className="syne" style={{ fontSize: "clamp(44px, 7.5vw, 92px)", fontWeight: 800, lineHeight: 0.95, marginBottom: 32 }}>
-                <span className="text-gradient-muted-steel">AUTOMATED</span><br />
-                <span className="text-gradient-cyan-emerald">AI INFRASTRUCTURE</span>
-              </h1>
-              <p style={{ fontSize: "clamp(16px, 1.5vw, 19px)", color: T.text, maxWidth: 660, lineHeight: 1.7, marginBottom: 48 }}>
-                Deploying tactical full-stack web applications, sophisticated programmatic growth matrices, and custom multi-agent machine automation. Pure core digital transformation.
-              </p>
-              <div style={{ display: "flex", gap: 64, marginTop: 90, paddingTop: 44, borderTop: `1px solid ${T.border}`, flexWrap: "wrap" }}>
-                {[["04+", "YEARS SECURED", T.cyan], ["50+", "ENGINES DEPLOYED", T.emerald], ["100%", "RETENTION VECTOR", T.purple]].map(([num, label, color]) => (
-                  <div key={label}>
-                    <div className="syne" style={{ fontSize: 32, fontWeight: 800, color: color }}>{num}</div>
-                    <div className="mono" style={{ color: T.muted, marginTop: 6, fontSize: 9 }}>{label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-
-        const Expertise = () => {
-          const pillars = [
-            { title: "AUTONOMOUS MACHINE ENGINE", desc: "Complex LLM system pipelines, custom structural alignment mechanics, and production-level system automation mappings.", skills: ["Core Agents", "Prompt Alignment", "Vector Mesh"] },
-            { title: "DECOUPLED APPLICATION ARCHITECTURE", desc: "Bespoke high-speed enterprise full-stack layers, microservices frameworks, and performance-tuned Shopify setups.", skills: ["React Engine", "NextJS System", "API Injections"] },
-            { title: "ALGORITHMIC ENGINE AUDITING", desc: "Deep technical graph optimization maps, automated payload generation vectors, and rich validation tracking layers.", skills: ["Data Mapping", "Semantic Frameworks", "Vitals Opt"] },
-            { title: "MOTION REFRACTION SCHEMES", desc: "Premium dynamic canvas interactions, interactive layout variables, and ultra-fluid interface fluid dynamics.", skills: ["UI Fluidics", "Figma Elite", "After Effects Matrix"] }
-          ];
-          return (
-            <section id="expertise" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
-              <div style={{ maxWidth: 1300, margin: "0 auto" }}>
-                <div style={{ marginBottom: 68 }}>
-                  <div className="mono" style={{ color: T.purple, marginBottom: 12 }}>// MODULAR MATRIX PILLARS</div>
-                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-cyan-emerald">SYSTEM VECTOR EXPERTISE</span></h2>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
-                  {pillars.map(p => (
-                    <div key={p.title} className="glass-panel card-premium" style={{ padding: 36, borderRadius: 4 }}>
-                      <div className="syne" style={{ fontSize: 15, fontWeight: 800, color: T.cyan, marginBottom: 14 }}>{p.title}</div>
-                      <p style={{ fontSize: 13, color: T.text, lineHeight: 1.6, marginBottom: 24 }}>{p.desc}</p>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                        {p.skills.map(s => <span key={s} className="mono" style={{ fontSize: 9, border: "1px solid rgba(0,255,135,0.08)", padding: "4px 10px", color: T.purple, background: "rgba(189,0,255,0.02)" }}>{s}</span>)}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          );
-        };
-
-        const Experience = () => {
-          const timeline = [
-            { role: "Senior Freelance System Architect", company: "Global Core Channels (Upwork / Fiverr)", period: "2023 - OPERATIONAL", detail: "Structuring enterprise data networks, optimizing machine logic, building robust headless digital ecommerce channels, and generating highly complex system pipelines." },
-            { role: "Full-Stack Development Specialist", company: "Digital Agency Network", period: "2022 - 2023", detail: "Programmed modular customer interfaces with sub-second core load frequencies. Maintained automated structured metadata layers increasing organic site traffic parameters." }
-          ];
-          return (
-            <section id="experience" style={{ padding: "110px 6%", position: "relative", zIndex: 1 }}>
-              <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-                <div style={{ marginBottom: 68 }}>
-                  <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// TRACK VECTOR HISTORY</div>
-                  <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800 }}><span className="text-gradient-purple-cyan">OPERATIONAL HISTORY</span></h2>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-                  {timeline.map((t, idx) => (
-                    <div key={idx} className="glass-panel card-premium" style={{ padding: 40, display: "flex", gap: 32, flexWrap: "wrap", borderRadius: 4 }}>
-                      <div className="mono" style={{ color: T.cyan, minWidth: 140 }}>{t.period}</div>
-                      <div style={{ flex: 1 }}>
-                        <h3 className="syne" style={{ fontSize: 20, fontWeight: 800, color: T.text, marginBottom: 8 }}>{t.role}</h3>
-                        <div className="mono" style={{ color: T.muted, marginBottom: 18 }}>{t.company}</div>
-                        <p style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{t.detail}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          );
-        };
-
-        const Contact = () => {
-          const [sent, setSent] = useState(false);
-          return (
-            <section id="contact" style={{ padding: "100px 6% 140px", position: "relative", zIndex: 1 }}>
-              <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-                <div className="mono" style={{ color: T.emerald, marginBottom: 12 }}>// SECURE VECTOR COMMS</div>
-                <h2 className="syne" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 800, marginBottom: 36 }}><span className="text-gradient-cyan-emerald">DISPATCH DATA PORTAL</span></h2>
-                <div className="glass-panel" style={{ padding: 48, textAlign: "left", borderRadius: 4 }}>
-                  {sent ? (
-                    <div style={{ textAlign: "center", padding: "30px 0" }}>
-                      <div className="syne" style={{ color: T.cyan, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>TRANSMISSION ENCRYPTED</div>
-                    </div>
-                  ) : (
-                    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                      <input placeholder="Client Metric Label (Name)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid ${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
-                      <input placeholder="Return Gateway Protocol (Email)" style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid ${T.border}`, padding: 16, color: T.cyan, outline: "none" }} />
-                      <textarea placeholder="Specify operational blueprints..." style={{ width: "100%", background: "rgba(0,240,255,0.01)", border: `1px solid ${T.border}`, padding: 16, color: T.cyan, minHeight: 120, resize: "none", outline: "none" }} />
-                      <button onClick={() => setSent(true)} className="btn-premium syne" style={{ padding: 20, fontSize: 11, borderRadius: 4 }}>BROADCAST PAYLOAD PACKET →</button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </section>
-          );
-        };
-
-        // ─── MONETAG ZONE IDS ────────────────────────────────────────────────────────
-        const MONETAG_ZONE_IDS = [
-          11046394,
-          11046395,
-          11046396,
-          11046397,
-          11046404,
-          11046405,
-          11046407,
-        ];
-
-        function App() {
-
-          // ─── MONETAG SCRIPT INJECTION ──────────────────────────────────────────────
-          useEffect(() => {
-            MONETAG_ZONE_IDS.forEach((zoneId) => {
-              // Avoid duplicate injection if the script already exists (e.g. React StrictMode double-invoke)
-              const existingScript = document.querySelector(
-                `script[data-monetag-zone="${zoneId}"]`
-              );
-              if (existingScript) return;
-
-              const script = document.createElement("script");
-              script.src = `https://quge5.com/88/tag.min.js`;
-              script.async = true;
-              script.setAttribute("data-cfasync", "false");
-              script.setAttribute("data-monetag-zone", zoneId); // sentinel for dedup
-              // Monetag tag scripts read their zone from a global before loading,
-              // or via a companion inline script — inject the zone config first
-              const inlineConfig = document.createElement("script");
-              inlineConfig.setAttribute("data-cfasync", "false");
-              inlineConfig.setAttribute("data-monetag-zone-config", zoneId);
-              inlineConfig.textContent = `(window.__monetagZones = window.__monetagZones || []).push(${zoneId});`;
-
-              document.body.appendChild(inlineConfig);
-              document.body.appendChild(script);
-            });
-          }, []); // Empty deps → runs once after first render, never on re-renders
-          // ──────────────────────────────────────────────────────────────────────────
-
-          return (
-            <>
-              <GlobalStyles />
-              <div className="ambient-glow-1" />
-              <div className="ambient-glow-2" />
-              <ParticleCanvas />
-              <Nav />
-              <main style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
-                <Hero />
-                <Expertise />
-                <Experience />
-                <Contact />
-              </main>
-              <footer style={{ padding: "40px 6%", borderTop: `1px solid ${T.border}`, textAlign: "center", color: T.muted }} className="mono">
-                © 2026 FAIZAN · ALL CORES INTEGRATED
-              </footer>
-            </>
-          );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+render();
+</script>
 
 </body>
 </html>
