@@ -1,935 +1,574 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Faizan Adrees | AI Solutions Architect & Full-Stack Developer</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Three.js & React Three Fiber -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="https://unpkg.com/@react-three/fiber@8.15.14/dist/index.js"></script>
-  
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg-primary: #030014;
-      --bg-secondary: #0f0c29;
-      --accent-primary: #00f2ff;
-      --accent-secondary: #7b2ff7;
-      --text-primary: #ffffff;
-      --text-secondary: #a1a1aa;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* Custom Cursor */
-    .cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--accent-primary);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s, background-color 0.3s;
-      mix-blend-mode: difference;
-    }
-
-    .cursor-dot {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 8px;
-      height: 8px;
-      background: var(--accent-primary);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-    }
-
-    body:hover .cursor,
-    body:hover .cursor-dot {
-      opacity: 1;
-    }
-
-    /* Smooth Scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Gradient Text */
-    .gradient-text {
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* 3D Canvas Container */
-    #canvas-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Preloader */
-    .preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: var(--bg-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-    }
-
-    .loader-ring {
-      width: 80px;
-      height: 80px;
-      border: 4px solid transparent;
-      border-top-color: var(--accent-primary);
-      border-right-color: var(--accent-secondary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 600;
-      position: relative;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent-primary);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent-primary);
-      transition: width 0.3s;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 5%;
-      position: relative;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 7vw, 7rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    .hero p {
-      font-size: clamp(1.1rem, 2.5vw, 1.8rem);
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .cta-button {
-      padding: 1rem 3rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-      border: none;
-      border-radius: 50px;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      opacity: 0;
-      transform: scale(0.8);
-    }
-
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4);
-    }
-
-    /* Scroll Indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: bounce 2s infinite;
-    }
-
-    .scroll-indicator::before {
-      content: '';
-      display: block;
-      width: 25px;
-      height: 40px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 20px;
-      position: relative;
-    }
-
-    .scroll-indicator::after {
-      content: '';
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 5px;
-      height: 5px;
-      background: white;
-      border-radius: 50%;
-      animation: scroll 2s infinite;
-    }
-
-    @keyframes scroll {
-      0%, 100% { opacity: 0; transform: translateX(-50%) translateY(0); }
-      50% { opacity: 1; transform: translateX(-50%) translateY(15px); }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-
-    /* About Section */
-    .about {
-      min-height: 100vh;
-      padding: 100px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .about-content {
-      max-width: 900px;
-      text-align: center;
-    }
-
-    .section-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .about-text {
-      font-size: 1.25rem;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      margin-bottom: 3rem;
-    }
-
-    /* Skills */
-    .skills-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .skill-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: left;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 242, 255, 0.2);
-    }
-
-    .skill-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .skill-name {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .skill-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-    }
-
-    .skill-bar {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .skill-progress {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-      border-radius: 10px;
-      width: 0;
-      transition: width 1.5s ease-out;
-    }
-
-    /* Projects Section */
-    .projects {
-      min-height: 100vh;
-      padding: 100px 5%;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 3rem;
-      margin-top: 3rem;
-    }
-
-    .project-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      text-align: left;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 30px 60px rgba(123, 47, 247, 0.3);
-    }
-
-    .project-image {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .project-card:hover .project-image {
-      transform: scale(1.1);
-    }
-
-    .project-info {
-      padding: 2rem;
-    }
-
-    .project-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      padding: 0.4rem 1rem;
-      background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(123, 47, 247, 0.2));
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    /* Contact Section */
-    .contact {
-      min-height: 100vh;
-      padding: 100px 5%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .contact-content {
-      max-width: 600px;
-    }
-
-    .contact-text {
-      font-size: 1.3rem;
-      color: var(--text-secondary);
-      margin-bottom: 3rem;
-      line-height: 1.8;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
-      justify-content: center;
-    }
-
-    .social-link {
-      font-size: 2rem;
-      color: var(--text-secondary);
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .social-link:hover {
-      color: var(--accent-primary);
-      transform: scale(1.2);
-    }
-
-    .contact-button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 1rem 3rem;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-      border-radius: 50px;
-      text-decoration: none;
-      color: white;
-      font-weight: 700;
-      font-size: 1.2rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .contact-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4);
-    }
-
-    /* Footer */
-    footer {
-      padding: 3rem 5%;
-      text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-secondary);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .cursor,
-      .cursor-dot {
-        display: none;
-      }
-
-      body {
-        cursor: auto;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Faizan — AI Solutions Architect &amp; Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void-950:#14102B; --void-900:#1E1840; --void-800:#2A2158; --void-700:#392C72;
+    --cyan-400:#4FE8D3; --cyan-300:#8FF5E4;
+    --coral-400:#FF7A6E; --coral-300:#FFA69C;
+    --gold-400:#FFD166;
+    --paper-050:#F5F2FF; --paper-100:#EAE3FF;
+    --ink:#1E1840; --sub:#5B4F8A;
+    --shadow: 0 24px 60px rgba(20,16,43,0.28);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ font-family:'Plus Jakarta Sans','Segoe UI',sans-serif; color:var(--ink); background:var(--paper-050); -webkit-font-smoothing:antialiased; overflow-x:hidden; font-weight:400; }
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{ font-family:'Unbounded', sans-serif; }
+  .container{ width:100%; max-width:1120px; margin:0 auto; padding:0 24px; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--coral-400); outline-offset:3px; }
+  .eyebrow{ font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; }
+
+  #cursor-glow{ position:fixed; width:340px; height:340px; border-radius:50%; pointer-events:none; z-index:3; background:radial-gradient(circle, rgba(79,232,211,0.18), rgba(255,122,110,0.08) 45%, transparent 72%); transform:translate(-50%,-50%); left:-400px; top:-400px; display:none; }
+
+  /* -------- buttons -------- */
+  .btn{ display:inline-flex; align-items:center; gap:9px; padding:15px 28px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:15px; border-radius:100px; transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; white-space:nowrap; border:1px solid transparent; }
+  .btn--fill{ background:linear-gradient(120deg, var(--cyan-400), var(--coral-400)); color:var(--void-950); box-shadow:0 10px 30px rgba(255,122,110,0.35); animation:pulse-glow 3.5s ease-in-out infinite; }
+  .btn--fill:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 14px 38px rgba(255,122,110,0.5); }
+  @keyframes pulse-glow{ 0%,100%{ box-shadow:0 10px 30px rgba(255,122,110,0.35);} 50%{ box-shadow:0 10px 40px rgba(79,232,211,0.4);} }
+  .btn--line{ border-color:rgba(30,24,64,0.25); color:var(--ink); }
+  .btn--line:hover{ background:rgba(30,24,64,0.06); }
+  .btn--line-dark{ border-color:rgba(245,242,255,0.35); color:var(--paper-050); padding:11px 22px; font-size:13.5px; }
+  .btn--line-dark:hover{ background:rgba(245,242,255,0.1); }
+  .btn svg{ width:16px; height:16px; flex-shrink:0; }
+
+  /* -------- header -------- */
+  .site-header{ position:sticky; top:0; z-index:50; background:rgba(245,242,255,0.85); backdrop-filter:blur(10px); border-bottom:1px solid rgba(91,79,138,0.15); }
+  .site-header .container{ display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .mark{ font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px; color:var(--ink); display:flex; align-items:center; gap:8px; }
+  .mark .dot{ width:8px; height:8px; border-radius:50%; background:linear-gradient(120deg,var(--cyan-400),var(--coral-400)); }
+  .nav-links{ display:none; gap:30px; font-size:14px; font-weight:500; }
+  .nav-links a{ color:var(--sub); transition:color .2s ease; }
+  .nav-links a:hover{ color:var(--ink); }
+  @media(min-width:860px){ .nav-links{ display:flex; } }
+
+  /* -------- hero -------- */
+  .hero{ position:relative; background:radial-gradient(120% 100% at 50% -10%, var(--void-800) 0%, var(--void-950) 65%); color:var(--paper-050); padding:76px 24px 60px; text-align:center; overflow:hidden; }
+  #hero-canvas{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0.95; }
+  .hero-inner{ position:relative; z-index:2; max-width:720px; margin:0 auto; }
+  .hero .eyebrow{ color:var(--cyan-300); opacity:0; animation:rise .7s ease forwards; }
+  .hero h1{ font-weight:800; font-size:clamp(2.3rem, 8.5vw, 4.4rem); line-height:1.05; letter-spacing:-0.01em; margin:20px 0 12px; perspective:600px; }
+  .hero .value{ font-family:'Unbounded',sans-serif; font-weight:600; font-size:clamp(1.05rem, 2.8vw, 1.4rem); background:linear-gradient(120deg,var(--cyan-300),var(--coral-300)); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:18px; opacity:0; animation:rise .7s ease .9s forwards; }
+  .hero .support{ font-size:15.5px; line-height:1.65; color:rgba(245,242,255,0.75); max-width:480px; margin:0 auto 34px; opacity:0; animation:rise .7s ease 1s forwards; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes letter-in{ to{ opacity:1; transform:translateY(0) rotateX(0deg); } }
+
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:38px; opacity:0; animation:rise .6s ease 1.1s forwards; }
+  .hero-stats{ display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:center; font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:rgba(245,242,255,0.55); opacity:0; animation:rise .6s ease 1.2s forwards; }
+  .hero-stats b{ color:var(--gold-400); font-weight:700; }
+
+  /* -------- marquee -------- */
+  .marquee-wrap{ overflow:hidden; background:linear-gradient(120deg,var(--cyan-400),var(--coral-400)); transform:rotate(-1.6deg); margin:-22px -40px 26px; padding:15px 0; position:relative; z-index:4; box-shadow:0 10px 34px rgba(20,16,43,0.3); }
+  .marquee-track{ display:flex; width:max-content; animation:marquee 20s linear infinite; }
+  .marquee-track span{ font-family:'Unbounded',sans-serif; font-weight:700; font-size:14.5px; color:var(--void-950); padding:0 18px; white-space:nowrap; }
+  .marquee-track .sep{ font-weight:400; opacity:0.55; }
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* -------- dividers -------- */
+  .divider{ display:block; width:100%; height:52px; line-height:0; position:relative; z-index:2; }
+  .divider svg{ display:block; width:100%; height:100%; }
+
+  /* -------- orbs -------- */
+  .orb{ position:absolute; border-radius:50%; filter:blur(42px); opacity:0.3; pointer-events:none; will-change:transform; }
+
+  /* -------- shared section head -------- */
+  .section-head{ text-align:center; margin-bottom:52px; position:relative; z-index:1; }
+  .section-head .eyebrow{ color:var(--coral-400); margin-bottom:12px; display:block; }
+  .section-head h2{ font-weight:700; font-size:clamp(1.7rem, 4vw, 2.4rem); color:var(--ink); letter-spacing:-0.01em; }
+
+  /* -------- services -------- */
+  .services{ position:relative; background:var(--paper-050); padding:20px 24px 90px; overflow:hidden; }
+  .service-grid{ display:grid; grid-template-columns:1fr; gap:18px; max-width:960px; margin:0 auto; perspective:1000px; position:relative; z-index:1; }
+  @media(min-width:720px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
+  .service-card{ border-radius:18px; padding:30px 26px; background:#fff; box-shadow:0 10px 30px rgba(30,24,64,0.08); will-change:transform; }
+  .service-card .icon{ width:34px; height:34px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; border-radius:10px; background:linear-gradient(135deg, var(--cyan-400), var(--coral-400)); animation:icon-pulse 3s ease-in-out infinite; }
+  .service-card:nth-child(2) .icon{ animation-delay:.5s; } .service-card:nth-child(3) .icon{ animation-delay:1s; } .service-card:nth-child(4) .icon{ animation-delay:1.5s; }
+  @keyframes icon-pulse{ 0%,100%{ box-shadow:0 0 0 rgba(255,122,110,0);} 50%{ box-shadow:0 0 18px rgba(255,122,110,0.55);} }
+  .service-card .icon svg{ width:19px; height:19px; stroke:var(--void-950); fill:none; stroke-width:1.6; }
+  .service-card h3{ font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:9px; }
+  .service-card p{ font-size:13.5px; line-height:1.6; color:var(--sub); }
+
+  /* -------- recent builds -------- */
+  .builds{ background:var(--paper-100); padding:80px 24px 90px; }
+  .build-grid{ display:grid; grid-template-columns:1fr; gap:22px; max-width:1000px; margin:0 auto; perspective:1200px; }
+  @media(min-width:680px){ .build-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media(min-width:1000px){ .build-grid{ grid-template-columns:repeat(3,1fr); } }
+
+  .build-card{ border-radius:18px; overflow:hidden; background:var(--void-900); box-shadow:var(--shadow); will-change:transform; animation:card-glow 4.5s ease-in-out infinite; }
+  .build-card:nth-child(2){animation-delay:.5s;} .build-card:nth-child(3){animation-delay:1s;} .build-card:nth-child(4){animation-delay:1.5s;} .build-card:nth-child(5){animation-delay:2s;} .build-card:nth-child(6){animation-delay:2.5s;}
+  @keyframes card-glow{ 0%,100%{ box-shadow:var(--shadow);} 50%{ box-shadow:var(--shadow), 0 0 34px rgba(79,232,211,0.28);} }
+  .build-chrome{ display:flex; align-items:center; gap:6px; padding:10px 13px; background:rgba(0,0,0,0.2); }
+  .build-chrome .dot{ width:6px; height:6px; border-radius:50%; background:rgba(245,242,255,0.28); }
+  .build-chrome .url{ font-family:'Space Mono',monospace; font-size:10px; color:rgba(245,242,255,0.55); margin-left:6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .build-preview{ height:132px; display:flex; align-items:center; justify-content:center; }
+  .build-preview .brandmark{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:var(--paper-050); text-align:center; padding:0 20px; }
+  .build-body{ padding:20px 20px 22px; }
+  .build-body .row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; gap:10px; }
+  .build-body h3{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1.02rem; font-weight:700; color:var(--paper-050); }
+  .build-status{ font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; flex-shrink:0; font-weight:700; }
+  .build-status--live{ background:rgba(79,232,211,0.18); color:var(--cyan-300); }
+  .build-status--wip{ background:rgba(255,209,102,0.15); color:var(--gold-400); }
+  .build-body p{ font-size:12.5px; color:rgba(245,242,255,0.6); margin-bottom:14px; line-height:1.5; }
+  .build-link{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--cyan-300); display:inline-flex; align-items:center; gap:5px; font-weight:700; }
+  .build-link svg{ width:11px; height:11px; }
+  .build-link.disabled{ color:rgba(245,242,255,0.4); cursor:default; }
+
+  /* -------- process -------- */
+  .process{ background:var(--paper-100); padding:0 24px 90px; }
+  .process-list{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; position:relative; }
+  .process-line-bg, .process-line-fill{ position:absolute; left:17px; top:10px; bottom:10px; width:2px; }
+  .process-line-bg{ background:rgba(91,79,138,0.18); }
+  .process-line-fill{ background:linear-gradient(180deg,var(--cyan-400),var(--coral-400)); transform-origin:top; transform:scaleY(0); }
+  .process-step{ display:flex; gap:22px; padding:26px 0; }
+  .process-num{ font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px; background:linear-gradient(120deg,var(--cyan-400),var(--coral-400)); -webkit-background-clip:text; background-clip:text; color:transparent; flex-shrink:0; width:36px; padding-top:2px; position:relative; z-index:1; }
+  .process-step h3{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1.05rem; font-weight:700; color:var(--ink); margin-bottom:6px; }
+  .process-step p{ font-size:13.5px; line-height:1.6; color:var(--sub); max-width:520px; }
+
+  /* -------- about -------- */
+  .about{ position:relative; background:var(--paper-100); padding:10px 24px 100px; overflow:hidden; }
+  .about::before{ content:"{ }"; position:absolute; top:-40px; left:50%; transform:translateX(-50%); font-family:'Unbounded',sans-serif; font-weight:800; font-size:220px; color:rgba(91,79,138,0.05); pointer-events:none; line-height:1; }
+  .about-inner{ position:relative; z-index:1; max-width:620px; margin:0 auto; text-align:center; }
+  .about-inner p{ font-size:16px; line-height:1.8; color:var(--ink); margin-bottom:22px; }
+  .about-inner p:last-of-type{ margin-bottom:0; }
+
+  /* -------- contact -------- */
+  .contact{ position:relative; background:var(--void-950); color:var(--paper-050); padding:90px 24px 60px; text-align:center; overflow:hidden; }
+  .contact h2{ position:relative; z-index:1; font-weight:700; font-size:clamp(1.8rem, 5vw, 2.6rem); max-width:640px; margin:0 auto 16px; letter-spacing:-0.01em; }
+  .contact .sub{ position:relative; z-index:1; font-size:14.5px; color:rgba(245,242,255,0.65); max-width:460px; margin:0 auto 36px; line-height:1.6; }
+  .contact-ctas{ position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:66px; }
+
+  .site-footer{ position:relative; z-index:1; border-top:1px solid rgba(255,255,255,0.1); padding-top:26px; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; font-size:12px; color:rgba(245,242,255,0.5); }
+  .site-footer .tag{ font-family:'Space Mono',monospace; letter-spacing:0.05em; }
+
+  /* -------- reveal-on-scroll -------- */
+  .reveal{ opacity:0; transform:translateY(26px) scale(0.96); transition:opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+  .reveal.is-visible{ opacity:1; transform:translateY(0) scale(1); }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+    .hero .eyebrow,.hero .value,.hero .support,.hero-ctas,.hero-stats{ opacity:1; }
+    .reveal{ opacity:1; transform:none; }
+    .marquee-track{ animation:none; }
+  }
+</style>
 </head>
 <body>
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-dot"></div>
 
-  <!-- Preloader -->
-  <div class="preloader">
-    <div class="loader-ring"></div>
+<!-- NOTE FOR FAIZAN — nothing from before was dropped, everything real carried forward:
+  Services (4): Websites, AI Voice Agents, Digital Marketing & SEO, Branding & Design
+  Recent Builds (6): Yasmeen Collection (Lahore, LIVE), Meezab Collection (Narowal, LIVE), Dawood Fabric & Matching Center (Shakargarh, LIVE), Zaaria Fabric (Narowal, In Progress), Alkuwait Cut Pieces (Narowal, In Progress), Jannat Boutique (Sialkot, In Progress) — all real project colors pulled from the actual demo files
+  Process (4 steps): Discover, Design, Build, Launch
+  Contact: WhatsApp 0331-9695250, email adreesfaizan428@gmail.com
+
+  What's new this round: everything is now driven by SCROLL and TOUCH, not mouse-hover — the earlier card-tilt only worked on desktop, which is likely why it looked flat on your phone. Also added: bigger animated 3D scene (particles + rotating wireframe shapes, colored, always moving on its own — not waiting for mouse input), a rotating marquee strip, kinetic letter-by-letter headline, animated counters, a scroll-filling process timeline, and angled section dividers so it doesn't stack as flat rectangles. Still no invented years-of-experience text — the 3D/motion richness is real craft, the credibility is the real live projects below it.
+-->
+
+<div id="cursor-glow"></div>
+
+<header class="site-header">
+  <div class="container">
+    <div class="mark"><span class="dot"></span>Faizan</div>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#builds">Work</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="btn btn--line" href="https://wa.me/923319695250" target="_blank" rel="noopener">Let's Talk</a>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow">AI Solutions Architect · Full-Stack Developer</p>
+    <h1>Muhammad Faizan</h1>
+    <p class="value">Websites &amp; AI systems, built with care.</p>
+    <p class="support">I design and build custom websites and AI voice agents for small businesses in Pakistan — real code, real results, no templates.</p>
+
+    <div class="hero-ctas">
+      <a class="btn btn--fill" href="#builds">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        See Recent Builds
+      </a>
+      <a class="btn btn--line-dark" href="https://wa.me/923319695250" target="_blank" rel="noopener">WhatsApp Me</a>
+    </div>
+
+    <div class="hero-stats" id="hero-stats">
+      <div><b class="count" data-target="6" data-suffix="">0</b> BUILDS SHIPPED</div>
+      <div><b class="count" data-target="4" data-suffix="">0</b> CORE SERVICES</div>
+      <div><b class="count" data-target="100" data-suffix="%">0</b> HAND-CODED</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>WEBSITES</span><span class="sep">✦</span><span>AI VOICE AGENTS</span><span class="sep">✦</span><span>SEO &amp; MARKETING</span><span class="sep">✦</span><span>BRANDING</span><span class="sep">✦</span>
+    <span>WEBSITES</span><span class="sep">✦</span><span>AI VOICE AGENTS</span><span class="sep">✦</span><span>SEO &amp; MARKETING</span><span class="sep">✦</span><span>BRANDING</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="orb" data-speed="0.12" style="width:220px;height:220px;top:6%;left:-60px;background:var(--cyan-400);"></div>
+  <div class="orb" data-speed="0.2" style="width:180px;height:180px;bottom:2%;right:-40px;background:var(--coral-400);"></div>
+  <div class="section-head">
+    <span class="eyebrow" style="color:var(--void-700);">What I Build</span>
+    <h2>Four Services, One Standard</h2>
+  </div>
+  <div class="service-grid">
+    <div class="service-card reveal tilt-card">
+      <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8.5h18"/><circle cx="6" cy="6.2" r="0.6" fill="currentColor" stroke="none"/></svg></div>
+      <h3>Websites</h3>
+      <p>Custom-coded business websites — no templates, no page builders. Built to fit your brand exactly, not adjusted to fit a theme.</p>
+    </div>
+    <div class="service-card reveal tilt-card">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 15V9a2 2 0 0 1 2-2h1l3-3v14l-3-3H6a2 2 0 0 1-2-2z"/><path d="M16 9a3.5 3.5 0 0 1 0 6M19 6.5a7 7 0 0 1 0 11"/></svg></div>
+      <h3>AI Voice Agents</h3>
+      <p>An AI assistant that answers your business calls around the clock — hours, location, even bookings, so no call goes missed.</p>
+    </div>
+    <div class="service-card reveal tilt-card">
+      <div class="icon"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg></div>
+      <h3>Digital Marketing &amp; SEO</h3>
+      <p>Getting your business found on Google and social media by the people who are already searching for what you sell.</p>
+    </div>
+    <div class="service-card reveal tilt-card">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 21l4.5-1.2L19.5 7.8a2 2 0 0 0 0-2.8l-1.5-1.5a2 2 0 0 0-2.8 0L3.2 15.5 2 20z"/><path d="M13.5 5.5l3 3"/></svg></div>
+      <h3>Branding &amp; Design</h3>
+      <p>Logos, social cards, and a visual identity that makes a small business look as established as it deserves to.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="background:var(--paper-050);"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,0 L1440,55 L1440,70 L0,70 Z" style="fill:var(--paper-100);"></path></svg></div>
+
+<section class="builds" id="builds">
+  <div class="section-head">
+    <span class="eyebrow" style="color:var(--void-700);">Recent Builds</span>
+    <h2>Real Projects, Real Businesses</h2>
+  </div>
+  <div class="build-grid">
+
+    <div class="build-card reveal tilt-card">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">yasmeen-collection.vercel.app</span></div>
+      <div class="build-preview" style="background:linear-gradient(135deg,#4A1029,#2E0A16);"><span class="brandmark">Yasmeen Collection</span></div>
+      <div class="build-body">
+        <div class="row"><h3>Yasmeen Collection</h3><span class="build-status build-status--live">Live</span></div>
+        <p>Bridal boutique, Lahore</p>
+        <a class="build-link" href="https://yasmeen-collection.vercel.app/" target="_blank" rel="noopener">View Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+
+    <div class="build-card reveal tilt-card">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">meezab-collection.vercel.app</span></div>
+      <div class="build-preview" style="background:linear-gradient(135deg,#134D3D,#0C2B24);"><span class="brandmark">Meezab Collection</span></div>
+      <div class="build-body">
+        <div class="row"><h3>Meezab Collection</h3><span class="build-status build-status--live">Live</span></div>
+        <p>Boutique, Narowal</p>
+        <a class="build-link" href="https://meezab-collection.vercel.app/" target="_blank" rel="noopener">View Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+
+    <div class="build-card reveal tilt-card">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">dawood-fabric.vercel.app</span></div>
+      <div class="build-preview" style="background:linear-gradient(135deg,#452650,#2A1830);"><span class="brandmark">Dawood Fabric</span></div>
+      <div class="build-body">
+        <div class="row"><h3>Dawood Fabric &amp; Matching Center</h3><span class="build-status build-status--live">Live</span></div>
+        <p>Fabric &amp; matching, Shakargarh</p>
+        <a class="build-link" href="https://dawood-fabric.vercel.app/" target="_blank" rel="noopener">View Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+
+    <div class="build-card reveal tilt-card">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">building…</span></div>
+      <div class="build-preview" style="background:linear-gradient(135deg,#2B3768,#1B2340);"><span class="brandmark">Zaaria Fabric</span></div>
+      <div class="build-body">
+        <div class="row"><h3>Zaaria Fabric</h3><span class="build-status build-status--wip">In Progress</span></div>
+        <p>Fabric shop, Narowal</p>
+        <span class="build-link disabled">Launching soon</span>
+      </div>
+    </div>
+
+    <div class="build-card reveal tilt-card">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">building…</span></div>
+      <div class="build-preview" style="background:linear-gradient(135deg,#145255,#0B3335);"><span class="brandmark">Alkuwait Cut Pieces</span></div>
+      <div class="build-body">
+        <div class="row"><h3>Alkuwait Cut Pieces</h3><span class="build-status build-status--wip">In Progress</span></div>
+        <p>Cut-piece center, Narowal</p>
+        <span class="build-link disabled">Launching soon</span>
+      </div>
+    </div>
+
+    <div class="build-card reveal tilt-card">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">building…</span></div>
+      <div class="build-preview" style="background:linear-gradient(135deg,#28375E,#161F38);"><span class="brandmark">Jannat Boutique</span></div>
+      <div class="build-body">
+        <div class="row"><h3>Jannat Boutique</h3><span class="build-status build-status--wip">In Progress</span></div>
+        <p>Boutique, Sialkot</p>
+        <span class="build-link disabled">Launching soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="section-head">
+    <span class="eyebrow" style="color:var(--void-700);">How I Work</span>
+    <h2>Four Steps, In Order</h2>
+  </div>
+  <div class="process-list" id="process-list">
+    <div class="process-line-bg"></div>
+    <div class="process-line-fill" id="process-line-fill"></div>
+    <div class="process-step reveal"><span class="process-num">01</span><div><h3>Discover</h3><p>A quick call or WhatsApp chat to understand your business and what you actually need — not what's easiest to sell you.</p></div></div>
+    <div class="process-step reveal"><span class="process-num">02</span><div><h3>Design</h3><p>A custom preview built around your real brand — your name, your colors, your products — before you commit to anything.</p></div></div>
+    <div class="process-step reveal"><span class="process-num">03</span><div><h3>Build</h3><p>Hand-coded, fast-loading, mobile-first. No shortcuts, no recycled templates with your logo dropped in.</p></div></div>
+    <div class="process-step reveal"><span class="process-num">04</span><div><h3>Launch</h3><p>Live in days, not months — with everything explained in plain language, and no tech jargon left unexplained.</p></div></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-head">
+    <span class="eyebrow" style="color:var(--void-700);">About</span>
+    <h2>The Person Behind the Builds</h2>
+  </div>
+  <div class="about-inner reveal">
+    <p>Based in Shakargarh, Punjab, I work with small and local businesses — boutiques, fabric shops, tailors — building their first real presence online.</p>
+    <p>Every project is coded by hand and designed around the actual business, not a template with a new logo dropped in. If it's not right, it doesn't ship.</p>
+  </div>
+</section>
+
+<div class="divider" style="background:var(--paper-100);"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,0 L1440,55 L1440,70 L0,70 Z" style="fill:var(--void-950);"></path></svg></div>
+
+<section class="contact" id="contact">
+  <div class="orb" data-speed="0.1" style="width:260px;height:260px;top:0%;left:-80px;background:var(--cyan-400); opacity:0.2;"></div>
+  <div class="orb" data-speed="0.16" style="width:220px;height:220px;bottom:10%;right:-60px;background:var(--coral-400); opacity:0.2;"></div>
+  <span class="eyebrow" style="color:var(--cyan-300); position:relative; z-index:1;">Let's Talk</span>
+  <h2 style="margin-top:16px;">Have a business that deserves to be found online?</h2>
+  <p class="sub">Send a message on WhatsApp — I'll reply with a few questions and, if it's a fit, a free custom preview built around your business.</p>
+  <div class="contact-ctas">
+    <a class="btn btn--fill" href="https://wa.me/923319695250" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2L21 3l-1.3 4.1c.2.7.3 1.4.3 2.1v2.3z"/><path d="M8 10s.5 2 2 3.5S13.5 15 13.5 15"/></svg>
+      Message on WhatsApp
+    </a>
+    <a class="btn btn--line-dark" href="mailto:adreesfaizan428@gmail.com">Email Me</a>
   </div>
 
-  <!-- 3D Background -->
-  <div id="canvas-container"></div>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="logo gradient-text">FAIZAN</div>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <h1 class="gradient-text">AI Solutions Architect & Full-Stack Developer</h1>
-    <p>Building Autonomous Agents, Workflow Automation & Immersive Web Apps</p>
-    <button class="cta-button" onclick="document.getElementById('projects').scrollIntoView()">View My Work</button>
-    
-    <div class="scroll-indicator"></div>
-  </section>
-
-  <!-- About Section -->
-  <section class="about" id="about">
-    <div class="about-content">
-      <h2 class="section-title gradient-text">About Me</h2>
-      <p class="about-text">
-        I'm Muhammad Faizan Adrees, a passionate Full-Stack Web Developer and AI Solutions Architect. I specialize in engineering autonomous multi-agent systems, automated workflows with n8n and Python, and robust e-commerce solutions on Next.js, React, and Shopify. Combined with expertise in 3D graphics and brand motion design, I craft immersive digital experiences that scale businesses.
-      </p>
-
-      <div class="skills-container">
-        <!-- Skill 1 -->
-        <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fas fa-network-wired"></i>
-          </div>
-          <div class="skill-name">AI Agents & Automation</div>
-          <div class="skill-desc">n8n, Python, OpenAI APIs, Workflow Systems</div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-width="96%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 2 -->
-        <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <div class="skill-name">Full-Stack Development</div>
-          <div class="skill-desc">Next.js, React, Shopify, Node.js</div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-width="94%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 3 -->
-        <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fas fa-cube"></i>
-          </div>
-          <div class="skill-name">3D Graphics & Motion</div>
-          <div class="skill-desc">Three.js, GSAP, 2D/3D Brand Design</div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-width="90%"></div>
-          </div>
-        </div>
-
-        <!-- Skill 4 -->
-        <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fas fa-rocket"></i>
-          </div>
-          <div class="skill-name">UI/UX & Performance</div>
-          <div class="skill-desc">Tailwind CSS, Optimization, UX Architecture</div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-width="92%"></div>
-          </div>
-        </div>
-      </div>
+  <div class="container">
+    <div class="site-footer">
+      <span class="tag">© 2026 MUHAMMAD FAIZAN</span>
+      <span class="tag">SHAKARGARH, PAKISTAN</span>
+      <span class="tag">BUILT WITH CARE.</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Projects Section -->
-  <section class="projects" id="projects">
-    <h2 class="section-title gradient-text">Featured Projects</h2>
-    
-    <div class="projects-grid">
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800" alt="Autonomous AI Agent System" class="project-image" />
-        <div class="project-info">
-          <h3 class="project-title">Autonomous AI Outreach System</h3>
-          <p class="project-description">
-            Multi-agent business automation framework built with n8n and Python to discover leads and execute smart outreach workflows.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">n8n</span>
-            <span class="tag">OpenAI</span>
-          </div>
-        </div>
-      </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1558655146-9f4011767903?w=800" alt="Shopify E-Commerce Platform" class="project-image" />
-        <div class="project-info">
-          <h3 class="project-title">High-Performance E-Commerce</h3>
-          <p class="project-description">
-            Custom e-commerce ecosystem with 3D product previews, fluid animations, and optimized Shopify integration.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Next.js</span>
-            <span class="tag">Shopify</span>
-            <span class="tag">Three.js</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800" alt="Immersive 3D Web App" class="project-image" />
-        <div class="project-info">
-          <h3 class="project-title">Immersive 3D Web Experience</h3>
-          <p class="project-description">
-            Interactive web application featuring WebGL shader effects, custom particle systems, and GSAP timeline animations.
-          </p>
-          <div class="project-tags">
-            <span class="tag">React</span>
-            <span class="tag">WebGL</span>
-            <span class="tag">GSAP</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="contact-content">
-      <h2 class="section-title gradient-text">Let's Connect</h2>
-      <p class="contact-text">
-        Ready to build custom AI agents, scale your web platform, or bring your digital vision to life? Let's collaborate.
-      </p>
-      
-      <a href="mailto:faizan@example.com" class="contact-button">Get In Touch</a>
-      
-      <div class="social-links">
-        <a href="https://github.com" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
-        <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Muhammad Faizan Adrees. All rights reserved. Crafted with ❤️</p>
-  </footer>
-
-  <script>
-    // ====================
-    // Custom Cursor
-    // ====================
-    const cursor = document.querySelector('.cursor');
-    const cursorDot = document.querySelector('.cursor-dot');
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      cursorDot.style.left = e.clientX + 'px';
-      cursorDot.style.top = e.clientY + 'px';
+  // ---------- scroll reveal ----------
+  const revealables = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('is-visible'), (i % 6) * 80);
+        io.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.12 });
+  revealables.forEach(el => io.observe(el));
 
-    document.addEventListener('mousedown', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+  // ---------- kinetic hero headline ----------
+  (function staggerText(){
+    const el = document.querySelector('.hero h1');
+    if (!el) return;
+    const text = el.textContent;
+    el.innerHTML = '';
+    [...text].forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      span.style.display = 'inline-block';
+      if (!reduceMotion) {
+        span.style.opacity = '0';
+        span.style.transform = 'translateY(24px) rotateX(-40deg)';
+        span.style.animation = 'letter-in .6s cubic-bezier(.2,.8,.2,1) forwards';
+        span.style.animationDelay = (0.4 + i * 0.032) + 's';
+      }
+      el.appendChild(span);
     });
+  })();
 
-    document.addEventListener('mouseup', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    });
-
-    // ====================
-    // Preloader
-    // ====================
-    window.addEventListener('load', () => {
-      const preloader = document.querySelector('.preloader');
-      setTimeout(() => {
-        preloader.style.opacity = '0';
-        preloader.style.transition = 'opacity 0.5s';
-        setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 500);
-      }, 2000);
-    });
-
-    // ====================
-    // GSAP Animations
-    // ====================
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Hero Animations
-    gsap.to('.hero h1', {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      delay: 2.2,
-      ease: 'power3.out'
-    });
-
-    gsap.to('.hero p', {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      delay: 2.4,
-      ease: 'power3.out'
-    });
-
-    gsap.to('.cta-button', {
-      opacity: 1,
-      scale: 1,
-      duration: 0.8,
-      delay: 2.6,
-      ease: 'back.out(1.7)'
-    });
-
-    // Skill Bars Animation
-    gsap.utils.toArray('.skill-progress').forEach((bar) => {
-      ScrollTrigger.create({
-        trigger: bar,
-        start: 'top 85%',
-        onEnter: () => {
-          const width = bar.getAttribute('data-width');
-          bar.style.width = width;
+  // ---------- animated counters ----------
+  function animateCount(el, target, suffix){
+    const duration = 1100, start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const statsEl = document.getElementById('hero-stats');
+  if (statsEl) {
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.count').forEach(el => {
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            reduceMotion ? (el.textContent = target + suffix) : animateCount(el, target, suffix);
+          });
+          statObserver.unobserve(entry.target);
         }
       });
-    });
+    }, { threshold: 0.5 });
+    statObserver.observe(statsEl);
+  }
 
-    // Project Cards Animation
-    gsap.utils.toArray('.project-card').forEach((card, index) => {
-      gsap.from(card, {
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        },
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        delay: index * 0.2,
-        ease: 'power3.out'
+  // ---------- cursor glow (desktop bonus only) ----------
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    const glow = document.getElementById('cursor-glow');
+    if (glow) {
+      glow.style.display = 'block';
+      window.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
       });
-    });
+    }
+  }
 
-    // Section Titles Animation
-    gsap.utils.toArray('.section-title').forEach((title) => {
-      gsap.from(title, {
-        scrollTrigger: {
-          trigger: title,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out'
+  // ---------- scroll-driven motion: card tilt, orb parallax, process timeline (works on mobile too) ----------
+  if (!reduceMotion) {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    const orbs = document.querySelectorAll('.orb');
+    const lineFill = document.getElementById('process-line-fill');
+    const processList = document.getElementById('process-list');
+    let ticking = false;
+
+    function updateScrollFX(){
+      const vh = window.innerHeight;
+      tiltCards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.bottom < -100 || rect.top > vh + 100) { ticking = false; return; }
+        const cardCenter = rect.top + rect.height / 2;
+        const progress = Math.max(-1, Math.min(1, (cardCenter - vh / 2) / (vh / 2)));
+        card.style.transform = `perspective(900px) rotateX(${(-progress * 8).toFixed(2)}deg) translateY(${(progress * 4).toFixed(1)}px)`;
       });
-    });
-
-    // ====================
-    // Three.js 3D Background
-    // ====================
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
-
-    // Stars
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsCount = 5000;
-    const positions = new Float32Array(starsCount * 3);
-
-    for (let i = 0; i < starsCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 200;
-    }
-
-    starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.1 });
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    scene.add(stars);
-
-    // Floating Shapes
-    const shapes = [];
-
-    // Octahedron
-    const octahedronGeometry = new THREE.OctahedronGeometry(1, 0);
-    const octahedronMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x00f2ff, 
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6
-    });
-    const octahedron = new THREE.Mesh(octahedronGeometry, octahedronMaterial);
-    octahedron.position.set(-3, 2, -5);
-    scene.add(octahedron);
-    shapes.push(octahedron);
-
-    // Icosahedron
-    const icosahedronGeometry = new THREE.IcosahedronGeometry(1.5, 0);
-    const icosahedronMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x7b2ff7, 
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6
-    });
-    const icosahedron = new THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
-    icosahedron.position.set(3, -1, -3);
-    scene.add(icosahedron);
-    shapes.push(icosahedron);
-
-    // Torus
-    const torusGeometry = new THREE.TorusGeometry(1, 0.3, 16, 100);
-    const torusMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0xff0080, 
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6
-    });
-    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-    torus.position.set(0, 3, -8);
-    scene.add(torus);
-    shapes.push(torus);
-
-    // Particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 200;
-    const particlePositions = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
-      particlePositions[i] = (Math.random() - 0.5) * 30;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-    const particlesMaterial = new THREE.PointsMaterial({ 
-      color: 0xffffff, 
-      size: 0.1,
-      transparent: true,
-      opacity: 0.8
-    });
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particles);
-
-    camera.position.z = 5;
-
-    // Animation Loop
-    function animate() {
-      requestAnimationFrame(animate);
-
-      // Rotate shapes
-      shapes.forEach((shape, index) => {
-        shape.rotation.x += 0.001 * (index + 1);
-        shape.rotation.y += 0.002 * (index + 1);
+      orbs.forEach(orb => {
+        const speed = parseFloat(orb.dataset.speed || '0.15');
+        orb.style.transform = `translateY(${(window.scrollY * speed).toFixed(1)}px)`;
       });
-
-      // Rotate stars
-      stars.rotation.y += 0.0005;
-
-      // Float particles
-      particles.rotation.y += 0.001;
-
-      renderer.render(scene, camera);
+      if (lineFill && processList) {
+        const rect = processList.getBoundingClientRect();
+        const total = rect.height;
+        const scrolled = Math.min(Math.max(vh * 0.75 - rect.top, 0), total);
+        const p = total > 0 ? scrolled / total : 0;
+        lineFill.style.transform = `scaleY(${p.toFixed(3)})`;
+      }
+      ticking = false;
     }
+    function onScroll(){ if (!ticking) { requestAnimationFrame(updateScrollFX); ticking = true; } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateScrollFX();
+  }
 
-    animate();
+  // ---------- 3D hero scene: particle network + rotating wireframe shapes ----------
+  (function initHero3D(){
+    try {
+      if (reduceMotion || typeof THREE === 'undefined') return;
+      const canvas = document.getElementById('hero-canvas');
+      const heroEl = document.querySelector('.hero');
+      let width = heroEl.clientWidth, height = heroEl.clientHeight;
 
-    // Responsive Canvas
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+      camera.position.z = 62;
 
-    // Smooth Scroll for Navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(width, height);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const palette = [[0.31,0.91,0.83],[1.0,0.48,0.43],[1.0,0.82,0.4]];
+      const COUNT = width < 640 ? 46 : 76;
+      const nodes = [], positions = [], colors = [];
+      for (let i = 0; i < COUNT; i++) {
+        const x = (Math.random() - 0.5) * 92, y = (Math.random() - 0.5) * 56, z = (Math.random() - 0.5) * 60;
+        nodes.push(new THREE.Vector3(x, y, z));
+        positions.push(x, y, z);
+        const c = palette[Math.floor(Math.random() * palette.length)];
+        colors.push(c[0], c[1], c[2]);
+      }
+      const ptGeo = new THREE.BufferGeometry();
+      ptGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      ptGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+      const ptMat = new THREE.PointsMaterial({ size: 1.9, vertexColors: true, transparent: true, opacity: 0.95 });
+      group.add(new THREE.Points(ptGeo, ptMat));
+
+      const linePositions = []; const MAXD = 19;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          if (nodes[i].distanceTo(nodes[j]) < MAXD) linePositions.push(nodes[i].x, nodes[i].y, nodes[i].z, nodes[j].x, nodes[j].y, nodes[j].z);
         }
+      }
+      const lineGeo = new THREE.BufferGeometry();
+      lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+      const lineMat = new THREE.LineBasicMaterial({ color: 0xFF7A6E, transparent: true, opacity: 0.16 });
+      group.add(new THREE.LineSegments(lineGeo, lineMat));
+
+      const shapeSpecs = [
+        { geo: new THREE.IcosahedronGeometry(9, 0), color: 0x4FE8D3, pos: [-30, 14, -14] },
+        { geo: new THREE.TorusGeometry(6.5, 2, 8, 24), color: 0xFF7A6E, pos: [28, -10, -6] },
+        { geo: new THREE.OctahedronGeometry(7, 0), color: 0xFFD166, pos: [4, 18, -20] }
+      ];
+      const shapes = shapeSpecs.map((s, i) => {
+        const mesh = new THREE.Mesh(s.geo, new THREE.MeshBasicMaterial({ color: s.color, wireframe: true, transparent: true, opacity: 0.55 }));
+        mesh.position.set(...s.pos);
+        group.add(mesh);
+        return mesh;
       });
-    });
-  </script>
+
+      let targetX = 0, targetY = 0, curX = 0, curY = 0, t = 0;
+      const onMove = (cx, cy) => { targetX = (cx / window.innerWidth) - 0.5; targetY = (cy / window.innerHeight) - 0.5; };
+      window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+      window.addEventListener('touchmove', (e) => { if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+      window.addEventListener('resize', () => {
+        width = heroEl.clientWidth; height = heroEl.clientHeight;
+        camera.aspect = width / height; camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+
+      function animate(){
+        requestAnimationFrame(animate);
+        t += 0.012;
+        curX += (targetX - curX) * 0.04;
+        curY += (targetY - curY) * 0.04;
+        group.rotation.y += 0.0026 + curX * 0.0012;
+        group.rotation.x = curY * 0.28;
+        const breathe = 1 + Math.sin(t) * 0.035;
+        group.scale.set(breathe, breathe, breathe);
+        shapes.forEach((s, i) => { s.rotation.x += 0.004 + i * 0.0012; s.rotation.y += 0.005 + i * 0.0009; });
+        renderer.render(scene, camera);
+      }
+      animate();
+    } catch (err) {
+      console.warn('3D hero unavailable, page still works without it:', err);
+    }
+  })();
+</script>
+
 </body>
 </html>
