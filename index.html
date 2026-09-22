@@ -3,497 +3,704 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Muhammad Faizan — AI Solutions Architect &amp; Full-Stack Developer</title>
+<title>MFA Remote Office — Tech &amp; AI Solutions | Led by Faizan Adrees</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --void-950:#14102B; --void-900:#1E1840; --void-800:#2A2158; --void-700:#392C72;
-    --cyan-400:#4FE8D3; --cyan-300:#8FF5E4;
-    --coral-400:#FF7A6E; --coral-300:#FFA69C;
-    --gold-400:#FFD166;
-    --paper-050:#F5F2FF; --paper-100:#EAE3FF;
-    --ink:#1E1840; --sub:#5B4F8A;
-    --shadow: 0 24px 60px rgba(20,16,43,0.28);
+  :root {
+    /* Luxury Dark & Copper Metallic Palette inspired by MFA Remote Office Identity */
+    --void-950: #08070D;
+    --void-900: #100E1A;
+    --void-800: #1A172B;
+    --void-700: #292442;
+    
+    --copper-500: #C8835A;
+    --copper-400: #E5A982;
+    --copper-300: #F3C5A5;
+    --copper-glow: rgba(200, 131, 90, 0.35);
+    
+    --gold-400: #FFD166;
+    --cyan-400: #00F5D4;
+    --purple-400: #9D4EDD;
+    
+    --paper-050: #F6F4FE;
+    --paper-100: #EAE5F8;
+    
+    --ink-main: #F6F4FE;
+    --ink-sub: #A39BCE;
+    
+    --card-bg: rgba(26, 23, 43, 0.7);
+    --border-glow: linear-gradient(135deg, rgba(229, 169, 130, 0.4), rgba(0, 245, 212, 0.15));
+    --shadow-heavy: 0 30px 80px rgba(0, 0, 0, 0.6);
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{ font-family:'Plus Jakarta Sans','Segoe UI',sans-serif; color:var(--ink); background:var(--paper-050); -webkit-font-smoothing:antialiased; overflow-x:hidden; font-weight:400; }
-  a{color:inherit; text-decoration:none;}
-  h1,h2,h3{ font-family:'Unbounded', sans-serif; }
-  .container{ width:100%; max-width:1120px; margin:0 auto; padding:0 24px; }
-  a:focus-visible, button:focus-visible{ outline:2px solid var(--coral-400); outline-offset:3px; }
-  .eyebrow{ font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; }
 
-  #cursor-glow{ position:fixed; width:340px; height:340px; border-radius:50%; pointer-events:none; z-index:3; background:radial-gradient(circle, rgba(79,232,211,0.18), rgba(255,122,110,0.08) 45%, transparent 72%); transform:translate(-50%,-50%); left:-400px; top:-400px; display:none; }
-
-  /* -------- buttons -------- */
-  .btn{ display:inline-flex; align-items:center; gap:9px; padding:15px 28px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:15px; border-radius:100px; transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; white-space:nowrap; border:1px solid transparent; }
-  .btn--fill{ background:linear-gradient(120deg, var(--cyan-400), var(--coral-400)); color:var(--void-950); box-shadow:0 10px 30px rgba(255,122,110,0.35); animation:pulse-glow 3.5s ease-in-out infinite; }
-  .btn--fill:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 14px 38px rgba(255,122,110,0.5); }
-  @keyframes pulse-glow{ 0%,100%{ box-shadow:0 10px 30px rgba(255,122,110,0.35);} 50%{ box-shadow:0 10px 40px rgba(79,232,211,0.4);} }
-  .btn--line{ border-color:rgba(30,24,64,0.25); color:var(--ink); }
-  .btn--line:hover{ background:rgba(30,24,64,0.06); }
-  .btn--line-dark{ border-color:rgba(245,242,255,0.35); color:var(--paper-050); padding:11px 22px; font-size:13.5px; }
-  .btn--line-dark:hover{ background:rgba(245,242,255,0.1); }
-  .btn svg{ width:16px; height:16px; flex-shrink:0; }
-
-  /* -------- header -------- */
-  .site-header{ position:sticky; top:0; z-index:50; background:rgba(245,242,255,0.85); backdrop-filter:blur(10px); border-bottom:1px solid rgba(91,79,138,0.15); }
-  .site-header .container{ display:flex; align-items:center; justify-content:space-between; height:68px; }
-  .mark{ font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px; color:var(--ink); display:flex; align-items:center; gap:8px; }
-  .mark .dot{ width:8px; height:8px; border-radius:50%; background:linear-gradient(120deg,var(--cyan-400),var(--coral-400)); }
-  .nav-links{ display:none; gap:30px; font-size:14px; font-weight:500; }
-  .nav-links a{ color:var(--sub); transition:color .2s ease; }
-  .nav-links a:hover{ color:var(--ink); }
-  @media(min-width:860px){ .nav-links{ display:flex; } }
-
-  /* -------- hero -------- */
-  .hero{ position:relative; background:radial-gradient(120% 100% at 50% -10%, var(--void-800) 0%, var(--void-950) 65%); color:var(--paper-050); padding:76px 24px 60px; text-align:center; overflow:hidden; }
-  #hero-canvas{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0.95; }
-  .hero-inner{ position:relative; z-index:2; max-width:720px; margin:0 auto; }
-  .hero .eyebrow{ color:var(--cyan-300); opacity:0; animation:rise .7s ease forwards; }
-  .hero h1{ font-weight:800; font-size:clamp(2.3rem, 8.5vw, 4.4rem); line-height:1.05; letter-spacing:-0.01em; margin:20px 0 12px; perspective:600px; }
-  .hero .value{ font-family:'Unbounded',sans-serif; font-weight:600; font-size:clamp(1.05rem, 2.8vw, 1.4rem); background:linear-gradient(120deg,var(--cyan-300),var(--coral-300)); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:18px; opacity:0; animation:rise .7s ease .9s forwards; }
-  .hero .support{ font-size:15.5px; line-height:1.65; color:rgba(245,242,255,0.75); max-width:480px; margin:0 auto 34px; opacity:0; animation:rise .7s ease 1s forwards; }
-  @keyframes rise{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
-  @keyframes letter-in{ to{ opacity:1; transform:translateY(0) rotateX(0deg); } }
-
-  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:38px; opacity:0; animation:rise .6s ease 1.1s forwards; }
-  .hero-stats{ display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:center; font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:0.06em; color:rgba(245,242,255,0.55); opacity:0; animation:rise .6s ease 1.2s forwards; }
-  .hero-stats b{ color:var(--gold-400); font-weight:700; }
-
-  /* -------- marquee -------- */
-  .marquee-wrap{ overflow:hidden; background:linear-gradient(120deg,var(--cyan-400),var(--coral-400)); transform:rotate(-1.6deg); margin:-22px -40px 26px; padding:15px 0; position:relative; z-index:4; box-shadow:0 10px 34px rgba(20,16,43,0.3); }
-  .marquee-track{ display:flex; width:max-content; animation:marquee 20s linear infinite; }
-  .marquee-track span{ font-family:'Unbounded',sans-serif; font-weight:700; font-size:14.5px; color:var(--void-950); padding:0 18px; white-space:nowrap; }
-  .marquee-track .sep{ font-weight:400; opacity:0.55; }
-  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-
-  /* -------- dividers -------- */
-  .divider{ display:block; width:100%; height:52px; line-height:0; position:relative; z-index:2; }
-  .divider svg{ display:block; width:100%; height:100%; }
-
-  /* -------- orbs -------- */
-  .orb{ position:absolute; border-radius:50%; filter:blur(42px); opacity:0.3; pointer-events:none; will-change:transform; }
-
-  /* -------- shared section head -------- */
-  .section-head{ text-align:center; margin-bottom:52px; position:relative; z-index:1; }
-  .section-head .eyebrow{ color:var(--coral-400); margin-bottom:12px; display:block; }
-  .section-head h2{ font-weight:700; font-size:clamp(1.7rem, 4vw, 2.4rem); color:var(--ink); letter-spacing:-0.01em; }
-
-  /* -------- services -------- */
-  .services{ position:relative; background:var(--paper-050); padding:20px 24px 90px; overflow:hidden; }
-  .service-grid{ display:grid; grid-template-columns:1fr; gap:18px; max-width:960px; margin:0 auto; perspective:1000px; position:relative; z-index:1; }
-  @media(min-width:720px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
-  .service-card{ border-radius:18px; padding:30px 26px; background:#fff; box-shadow:0 10px 30px rgba(30,24,64,0.08); will-change:transform; }
-  .service-card .icon{ width:34px; height:34px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; border-radius:10px; background:linear-gradient(135deg, var(--cyan-400), var(--coral-400)); animation:icon-pulse 3s ease-in-out infinite; }
-  .service-card:nth-child(2) .icon{ animation-delay:.5s; } .service-card:nth-child(3) .icon{ animation-delay:1s; } .service-card:nth-child(4) .icon{ animation-delay:1.5s; }
-  @keyframes icon-pulse{ 0%,100%{ box-shadow:0 0 0 rgba(255,122,110,0);} 50%{ box-shadow:0 0 18px rgba(255,122,110,0.55);} }
-  .service-card .icon svg{ width:19px; height:19px; stroke:var(--void-950); fill:none; stroke-width:1.6; }
-  .service-card h3{ font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:9px; }
-  .service-card p{ font-size:13.5px; line-height:1.6; color:var(--sub); }
-
-  /* -------- recent builds -------- */
-  .builds{ background:var(--paper-100); padding:80px 24px 90px; }
-  .build-grid{ display:grid; grid-template-columns:1fr; gap:22px; max-width:1000px; margin:0 auto; perspective:1200px; }
-  @media(min-width:680px){ .build-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media(min-width:1000px){ .build-grid{ grid-template-columns:repeat(3,1fr); } }
-
-  .build-card{ border-radius:18px; overflow:hidden; background:var(--void-900); box-shadow:var(--shadow); will-change:transform; animation:card-glow 4.5s ease-in-out infinite; }
-  .build-card:nth-child(2){animation-delay:.5s;} .build-card:nth-child(3){animation-delay:1s;} .build-card:nth-child(4){animation-delay:1.5s;} .build-card:nth-child(5){animation-delay:2s;} .build-card:nth-child(6){animation-delay:2.5s;}
-  @keyframes card-glow{ 0%,100%{ box-shadow:var(--shadow);} 50%{ box-shadow:var(--shadow), 0 0 34px rgba(79,232,211,0.28);} }
-  .build-chrome{ display:flex; align-items:center; gap:6px; padding:10px 13px; background:rgba(0,0,0,0.2); }
-  .build-chrome .dot{ width:6px; height:6px; border-radius:50%; background:rgba(245,242,255,0.28); }
-  .build-chrome .url{ font-family:'Space Mono',monospace; font-size:10px; color:rgba(245,242,255,0.55); margin-left:6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .build-preview{ height:132px; display:flex; align-items:center; justify-content:center; }
-  .build-preview .brandmark{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:var(--paper-050); text-align:center; padding:0 20px; }
-  .build-body{ padding:20px 20px 22px; }
-  .build-body .row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; gap:10px; }
-  .build-body h3{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1.02rem; font-weight:700; color:var(--paper-050); }
-  .build-status{ font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; flex-shrink:0; font-weight:700; }
-  .build-status--live{ background:rgba(79,232,211,0.18); color:var(--cyan-300); }
-  .build-status--wip{ background:rgba(255,209,102,0.15); color:var(--gold-400); }
-  .build-body p{ font-size:12.5px; color:rgba(245,242,255,0.6); margin-bottom:14px; line-height:1.5; }
-  .build-link{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--cyan-300); display:inline-flex; align-items:center; gap:5px; font-weight:700; }
-  .build-link svg{ width:11px; height:11px; }
-  .build-link.disabled{ color:rgba(245,242,255,0.4); cursor:default; }
-
-  /* -------- process -------- */
-  .process{ background:var(--paper-100); padding:0 24px 90px; }
-  .process-list{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; position:relative; }
-  .process-line-bg, .process-line-fill{ position:absolute; left:17px; top:10px; bottom:10px; width:2px; }
-  .process-line-bg{ background:rgba(91,79,138,0.18); }
-  .process-line-fill{ background:linear-gradient(180deg,var(--cyan-400),var(--coral-400)); transform-origin:top; transform:scaleY(0); }
-  .process-step{ display:flex; gap:22px; padding:26px 0; }
-  .process-num{ font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px; background:linear-gradient(120deg,var(--cyan-400),var(--coral-400)); -webkit-background-clip:text; background-clip:text; color:transparent; flex-shrink:0; width:36px; padding-top:2px; position:relative; z-index:1; }
-  .process-step h3{ font-family:'Plus Jakarta Sans',sans-serif; font-size:1.05rem; font-weight:700; color:var(--ink); margin-bottom:6px; }
-  .process-step p{ font-size:13.5px; line-height:1.6; color:var(--sub); max-width:520px; }
-
-  /* -------- about -------- */
-  .about{ position:relative; background:var(--paper-100); padding:10px 24px 100px; overflow:hidden; }
-  .about::before{ content:"{ }"; position:absolute; top:-40px; left:50%; transform:translateX(-50%); font-family:'Unbounded',sans-serif; font-weight:800; font-size:220px; color:rgba(91,79,138,0.05); pointer-events:none; line-height:1; }
-  .about-inner{ position:relative; z-index:1; max-width:620px; margin:0 auto; text-align:center; }
-  .about-inner p{ font-size:16px; line-height:1.8; color:var(--ink); margin-bottom:22px; }
-  .about-inner p:last-of-type{ margin-bottom:0; }
-
-  /* -------- contact -------- */
-  .contact{ position:relative; background:var(--void-950); color:var(--paper-050); padding:90px 24px 60px; text-align:center; overflow:hidden; }
-  .contact h2{ position:relative; z-index:1; font-weight:700; font-size:clamp(1.8rem, 5vw, 2.6rem); max-width:640px; margin:0 auto 16px; letter-spacing:-0.01em; }
-  .contact .sub{ position:relative; z-index:1; font-size:14.5px; color:rgba(245,242,255,0.65); max-width:460px; margin:0 auto 36px; line-height:1.6; }
-  .contact-ctas{ position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:66px; }
-
-  .site-footer{ position:relative; z-index:1; border-top:1px solid rgba(255,255,255,0.1); padding-top:26px; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; font-size:12px; color:rgba(245,242,255,0.5); }
-  .site-footer .tag{ font-family:'Space Mono',monospace; letter-spacing:0.05em; }
-
-  /* -------- reveal-on-scroll -------- */
-  .reveal{ opacity:0; transform:translateY(26px) scale(0.96); transition:opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
-  .reveal.is-visible{ opacity:1; transform:translateY(0) scale(1); }
-
-  @media (prefers-reduced-motion:reduce){
-    *{ animation:none !important; transition:none !important; }
-    html{ scroll-behavior:auto; }
-    .hero .eyebrow,.hero .value,.hero .support,.hero-ctas,.hero-stats{ opacity:1; }
-    .reveal{ opacity:1; transform:none; }
-    .marquee-track{ animation:none; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--ink-main);
+    background-color: var(--void-950);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    font-weight: 400;
   }
+
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+
+  /* Interactive Spotlight Cursor */
+  #cursor-glow {
+    position: fixed; width: 450px; height: 450px; border-radius: 50%;
+    pointer-events: none; z-index: 3;
+    background: radial-gradient(circle, rgba(229, 169, 130, 0.15), rgba(0, 245, 212, 0.08) 45%, transparent 70%);
+    transform: translate(-50%, -50%); left: -500px; top: -500px; display: none;
+    transition: transform 0.05s ease-out;
+  }
+
+  /* Luxury Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px; font-weight: 700; font-size: 14.5px;
+    border-radius: 100px; transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    white-space: nowrap; border: 1px solid transparent; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .btn--copper {
+    background: linear-gradient(135deg, var(--copper-400), var(--copper-500));
+    color: var(--void-950);
+    box-shadow: 0 12px 35px var(--copper-glow);
+  }
+  .btn--copper:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 18px 45px rgba(229, 169, 130, 0.5);
+    background: linear-gradient(135deg, var(--copper-300), var(--copper-400));
+  }
+  .btn--glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(229, 169, 130, 0.3);
+    color: var(--paper-050);
+    backdrop-filter: blur(12px);
+  }
+  .btn--glass:hover {
+    background: rgba(229, 169, 130, 0.15);
+    border-color: var(--copper-400);
+    transform: translateY(-3px);
+  }
+
+  /* Site Header */
+  .site-header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8, 7, 13, 0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(229, 169, 130, 0.12);
+  }
+  .site-header .container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+  
+  .brand-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--copper-400), var(--copper-500));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px var(--copper-glow); font-family: 'Unbounded', sans-serif;
+    font-weight: 900; color: var(--void-950); font-size: 18px;
+  }
+  .brand-text-title { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 16px; color: var(--paper-050); letter-spacing: -0.02em; }
+  .brand-text-sub { font-size: 10px; font-family: 'Space Mono', monospace; color: var(--copper-400); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .nav-links { display: none; gap: 32px; font-size: 13.5px; font-weight: 600; letter-spacing: 0.04em; }
+  .nav-links a { color: var(--ink-sub); transition: color 0.25s ease; text-transform: uppercase; }
+  .nav-links a:hover { color: var(--copper-400); }
+  @media(min-width: 960px) { .nav-links { display: flex; } }
+
+  /* Hero Section */
+  .hero {
+    position: relative; padding: 110px 24px 90px; text-align: center; overflow: hidden;
+    background: radial-gradient(circle at 50% -20%, var(--void-800) 0%, var(--void-950) 70%);
+  }
+  #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+  .hero-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px;
+    background: rgba(229, 169, 130, 0.08); border: 1px solid rgba(229, 169, 130, 0.25);
+    border-radius: 50px; color: var(--copper-300); font-size: 12px; margin-bottom: 24px;
+  }
+  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan-400); box-shadow: 0 0 10px var(--cyan-400); }
+
+  .hero h1 {
+    font-weight: 900; font-size: clamp(2.4rem, 6.5vw, 4.8rem); line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+    background: linear-gradient(135deg, #FFFFFF 30%, var(--copper-300) 70%, var(--copper-500) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lead {
+    font-size: clamp(1rem, 2.2vw, 1.25rem); color: var(--ink-sub); line-height: 1.7;
+    max-width: 760px; margin: 0 auto 38px; font-weight: 400;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 60px; }
+
+  /* Stats Showcase Grid */
+  .hero-stats-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    max-width: 1100px; margin: 0 auto; padding-top: 30px;
+    border-top: 1px solid rgba(229, 169, 130, 0.15);
+  }
+  @media(min-width: 768px) { .hero-stats-grid { grid-template-columns: repeat(5, 1fr); } }
+
+  .stat-card {
+    background: rgba(26, 23, 43, 0.5); border: 1px solid rgba(229, 169, 130, 0.15);
+    border-radius: 16px; padding: 22px 14px; text-align: center; backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .stat-card:hover { transform: translateY(-5px); border-color: var(--copper-400); background: rgba(35, 30, 58, 0.7); }
+  .stat-number { font-family: 'Unbounded', sans-serif; font-size: clamp(1.4rem, 2.8vw, 2.1rem); font-weight: 800; color: var(--copper-300); margin-bottom: 6px; }
+  .stat-label { font-size: 11px; font-family: 'Space Mono', monospace; text-transform: uppercase; color: var(--ink-sub); letter-spacing: 0.08em; }
+
+  /* Double Marquee */
+  .marquee-wrap {
+    overflow: hidden; background: linear-gradient(90deg, var(--copper-500), #965633, var(--copper-400));
+    padding: 16px 0; transform: rotate(-1deg); margin: 30px -20px 60px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5); position: relative; z-index: 10;
+  }
+  .marquee-track { display: flex; width: max-content; animation: marquee 25s linear infinite; }
+  .marquee-track span {
+    font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 14px;
+    color: var(--void-950); padding: 0 24px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .marquee-track .sep { color: #FFF; font-weight: 400; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Shared Headings */
+  .section-head { text-align: center; margin-bottom: 60px; position: relative; z-index: 2; }
+  .section-head .eyebrow { color: var(--copper-400); margin-bottom: 12px; display: block; }
+  .section-head h2 { font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); color: var(--paper-050); letter-spacing: -0.01em; }
+
+  /* Services Grid Section */
+  .services-section { position: relative; padding: 40px 24px 100px; background: var(--void-950); }
+  .services-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; }
+  @media(min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 1080px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .service-card {
+    background: var(--card-bg); border: 1px solid rgba(229, 169, 130, 0.15);
+    border-radius: 20px; padding: 32px 26px; position: relative; overflow: hidden;
+    backdrop-filter: blur(12px); transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .service-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at top right, rgba(229, 169, 130, 0.12), transparent 60%);
+    opacity: 0; transition: opacity 0.4s ease;
+  }
+  .service-card:hover { transform: translateY(-8px); border-color: var(--copper-400); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .service-card:hover::before { opacity: 1; }
+  
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px; margin-bottom: 22px;
+    background: linear-gradient(135deg, rgba(229, 169, 130, 0.2), rgba(0, 245, 212, 0.1));
+    border: 1px solid rgba(229, 169, 130, 0.3);
+    display: flex; align-items: center; justify-content: center; color: var(--copper-300);
+  }
+  .service-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .service-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--paper-050); margin-bottom: 12px; }
+  .service-card p { font-size: 13.5px; line-height: 1.65; color: var(--ink-sub); }
+
+  /* Real Builds Showcase */
+  .builds-section { background: var(--void-900); padding: 90px 24px 100px; border-top: 1px solid rgba(229, 169, 130, 0.1); }
+  
+  .filter-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 45px; }
+  .tab-btn {
+    padding: 10px 20px; border-radius: 50px; font-size: 12.5px; font-family: 'Space Mono', monospace;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(229, 169, 130, 0.15); color: var(--ink-sub);
+    cursor: pointer; transition: all 0.25s ease; text-transform: uppercase;
+  }
+  .tab-btn.active, .tab-btn:hover { background: var(--copper-400); color: var(--void-950); border-color: var(--copper-400); font-weight: 700; }
+
+  .build-grid { display: grid; grid-template-columns: 1fr; gap: 28px; max-width: 1200px; margin: 0 auto; }
+  @media(min-width: 768px) { .build-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 1080px) { .build-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .build-card {
+    border-radius: 20px; overflow: hidden; background: var(--void-800);
+    border: 1px solid rgba(229, 169, 130, 0.15); box-shadow: var(--shadow-heavy);
+    transition: all 0.4s ease;
+  }
+  .build-card:hover { transform: translateY(-8px) scale(1.01); border-color: var(--copper-400); }
+  .build-chrome { display: flex; align-items: center; gap: 6px; padding: 12px 16px; background: rgba(0,0,0,0.4); }
+  .build-chrome .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .build-chrome .url { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--copper-300); margin-left: 8px; }
+  .build-preview { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .build-preview .brandmark { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem; color: #FFF; text-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+  .build-body { padding: 22px; }
+  .build-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--paper-050); margin-bottom: 6px; }
+  .build-body p { font-size: 13px; color: var(--ink-sub); margin-bottom: 16px; }
+  .build-status { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+  .build-status--live { background: rgba(0, 245, 212, 0.15); color: var(--cyan-400); }
+  .build-status--wip { background: rgba(255, 209, 102, 0.15); color: var(--gold-400); }
+  .build-link { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--copper-300); display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+
+  /* Enterprise Methodology / Process */
+  .process-section { padding: 90px 24px; background: var(--void-950); }
+  .process-timeline { max-width: 860px; margin: 0 auto; position: relative; }
+  .process-step { display: flex; gap: 28px; padding: 32px 0; border-bottom: 1px solid rgba(229, 169, 130, 0.12); }
+  .process-num { font-family: 'Unbounded', sans-serif; font-size: 2rem; font-weight: 900; color: var(--copper-400); opacity: 0.8; }
+  .process-step h3 { font-size: 1.2rem; font-weight: 700; color: var(--paper-050); margin-bottom: 8px; }
+  .process-step p { font-size: 14px; color: var(--ink-sub); line-height: 1.65; }
+
+  /* Company / Leadership Section */
+  .company-section { padding: 90px 24px; background: radial-gradient(circle at 50% 50%, var(--void-800) 0%, var(--void-950) 80%); text-align: center; }
+  .company-inner { max-width: 800px; margin: 0 auto; background: rgba(26, 23, 43, 0.6); border: 1px solid rgba(229, 169, 130, 0.2); padding: 50px 36px; border-radius: 24px; backdrop-filter: blur(16px); }
+  .company-inner p { font-size: 16.5px; line-height: 1.8; color: var(--ink-main); margin-bottom: 20px; }
+
+  /* Contact CTA */
+  .contact-section { padding: 100px 24px; background: var(--void-950); text-align: center; border-top: 1px solid rgba(229, 169, 130, 0.15); }
+  .contact-section h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 18px; color: var(--paper-050); }
+  .contact-section p { font-size: 16px; color: var(--ink-sub); max-width: 580px; margin: 0 auto 40px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 36px 0; font-size: 12px; color: var(--ink-sub); font-family: 'Space Mono', monospace; }
+  .site-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+
+  /* Reveal Animations */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- NOTE FOR FAIZAN — nothing from before was dropped, everything real carried forward:
-  Services (4): Websites, AI Voice Agents, Digital Marketing & SEO, Branding & Design
-  Recent Builds (6): Yasmeen Collection (Lahore, LIVE), Meezab Collection (Narowal, LIVE), Dawood Fabric & Matching Center (Shakargarh, LIVE), Zaaria Fabric (Narowal, In Progress), Alkuwait Cut Pieces (Narowal, In Progress), Jannat Boutique (Sialkot, In Progress) — all real project colors pulled from the actual demo files
-  Process (4 steps): Discover, Design, Build, Launch
-  Contact: WhatsApp 0331-9695250, email adreesfaizan428@gmail.com
-
-  What's new this round: everything is now driven by SCROLL and TOUCH, not mouse-hover — the earlier card-tilt only worked on desktop, which is likely why it looked flat on your phone. Also added: bigger animated 3D scene (particles + rotating wireframe shapes, colored, always moving on its own — not waiting for mouse input), a rotating marquee strip, kinetic letter-by-letter headline, animated counters, a scroll-filling process timeline, and angled section dividers so it doesn't stack as flat rectangles. Still no invented years-of-experience text — the 3D/motion richness is real craft, the credibility is the real live projects below it.
--->
-
 <div id="cursor-glow"></div>
 
+<!-- Site Header -->
 <header class="site-header">
   <div class="container">
-    <div class="mark"><span class="dot"></span>Faizan</div>
+    <a href="#" class="brand-logo">
+      <div class="brand-logo-icon">MFA</div>
+      <div>
+        <div class="brand-text-title">MFA Remote Office</div>
+        <div class="brand-text-sub">Tech &amp; AI Solutions</div>
+      </div>
+    </a>
     <nav class="nav-links">
       <a href="#services">Services</a>
-      <a href="#builds">Work</a>
+      <a href="#stats">Track Record</a>
+      <a href="#builds">Portfolio</a>
       <a href="#process">Process</a>
-      <a href="#about">About</a>
+      <a href="#company">About</a>
     </nav>
-    <a class="btn btn--line" href="https://wa.me/923319695250" target="_blank" rel="noopener">Let's Talk</a>
+    <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">Contact Office</a>
   </div>
 </header>
 
+<!-- Hero Section -->
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-inner">
-    <p class="eyebrow">AI Solutions Architect · Full-Stack Developer</p>
-    <h1>Muhammad Faizan</h1>
-    <p class="value">Websites &amp; AI systems, built with care.</p>
-    <p class="support">I design and build custom websites and AI voice agents for small businesses in Pakistan — real code, real results, no templates.</p>
+    <div class="hero-badge">
+      <span class="dot"></span> MFA REMOTE OFFICE — POWERED BY FAIZAN ADREES
+    </div>
+    <h1>Architecting Next-Gen Software, SaaS &amp; Autonomous AI Systems</h1>
+    <p class="lead">
+      We engineer high-performance web applications, SaaS tools, automated AI voice agents, and scalable e-commerce infrastructure for enterprises and growing businesses globally.
+    </p>
 
     <div class="hero-ctas">
-      <a class="btn btn--fill" href="#builds">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        See Recent Builds
+      <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">
+        Start A Project
       </a>
-      <a class="btn btn--line-dark" href="https://wa.me/923319695250" target="_blank" rel="noopener">WhatsApp Me</a>
+      <a class="btn btn--glass" href="#builds">
+        View Enterprise Builds
+      </a>
     </div>
 
-    <div class="hero-stats" id="hero-stats">
-      <div><b class="count" data-target="6" data-suffix="">0</b> BUILDS SHIPPED</div>
-      <div><b class="count" data-target="4" data-suffix="">0</b> CORE SERVICES</div>
-      <div><b class="count" data-target="100" data-suffix="%">0</b> HAND-CODED</div>
+    <!-- Verified Company Performance Stats -->
+    <div class="hero-stats-grid" id="stats">
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="600" data-suffix="+">0</div>
+        <div class="stat-label">Mobile &amp; Web Apps</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="90656" data-suffix="+">0</div>
+        <div class="stat-label">Websites Deployed</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="400" data-suffix="+">0</div>
+        <div class="stat-label">Shopify Platforms</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="670" data-suffix="+">0</div>
+        <div class="stat-label">WooCommerce Stores</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="340" data-suffix="+">0</div>
+        <div class="stat-label">SaaS &amp; Custom Software</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- Animated Marquee -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span>WEBSITES</span><span class="sep">✦</span><span>AI VOICE AGENTS</span><span class="sep">✦</span><span>SEO &amp; MARKETING</span><span class="sep">✦</span><span>BRANDING</span><span class="sep">✦</span>
-    <span>WEBSITES</span><span class="sep">✦</span><span>AI VOICE AGENTS</span><span class="sep">✦</span><span>SEO &amp; MARKETING</span><span class="sep">✦</span><span>BRANDING</span><span class="sep">✦</span>
+    <span>SOFTWARE &amp; SAAS TOOLS</span><span class="sep">✦</span>
+    <span>AI VOICE CALLING AGENTS</span><span class="sep">✦</span>
+    <span>WORKFLOW AUTOMATION (n8n)</span><span class="sep">✦</span>
+    <span>FULL-STACK DEVELOPMENT</span><span class="sep">✦</span>
+    <span>SHOPIFY &amp; WOOCOMMERCE</span><span class="sep">✦</span>
+    <span>WORDPRESS ECOSYSTEMS</span><span class="sep">✦</span>
+    <span>GROWTH SEO &amp; BRANDING</span><span class="sep">✦</span>
+    <span>SOFTWARE &amp; SAAS TOOLS</span><span class="sep">✦</span>
+    <span>AI VOICE CALLING AGENTS</span><span class="sep">✦</span>
+    <span>WORKFLOW AUTOMATION (n8n)</span><span class="sep">✦</span>
+    <span>FULL-STACK DEVELOPMENT</span><span class="sep">✦</span>
   </div>
 </div>
 
-<section class="services" id="services">
-  <div class="orb" data-speed="0.12" style="width:220px;height:220px;top:6%;left:-60px;background:var(--cyan-400);"></div>
-  <div class="orb" data-speed="0.2" style="width:180px;height:180px;bottom:2%;right:-40px;background:var(--coral-400);"></div>
+<!-- Core Capabilities / Services -->
+<section class="services-section" id="services">
   <div class="section-head">
-    <span class="eyebrow" style="color:var(--void-700);">What I Build</span>
-    <h2>Four Services, One Standard</h2>
+    <span class="eyebrow">Enterprise Capabilities</span>
+    <h2>Solutions We Engineer</h2>
   </div>
-  <div class="service-grid">
-    <div class="service-card reveal tilt-card">
-      <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8.5h18"/><circle cx="6" cy="6.2" r="0.6" fill="currentColor" stroke="none"/></svg></div>
-      <h3>Websites</h3>
-      <p>Custom-coded business websites — no templates, no page builders. Built to fit your brand exactly, not adjusted to fit a theme.</p>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+      </div>
+      <h3>Software &amp; SaaS Tools</h3>
+      <p>Custom cloud-native SaaS architectures, microservices, internal dashboards, and enterprise tools designed for high performance and seamless scale.</p>
     </div>
-    <div class="service-card reveal tilt-card">
-      <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 15V9a2 2 0 0 1 2-2h1l3-3v14l-3-3H6a2 2 0 0 1-2-2z"/><path d="M16 9a3.5 3.5 0 0 1 0 6M19 6.5a7 7 0 0 1 0 11"/></svg></div>
-      <h3>AI Voice Agents</h3>
-      <p>An AI assistant that answers your business calls around the clock — hours, location, even bookings, so no call goes missed.</p>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3>AI Voice Calling Agents</h3>
+      <p>24/7 autonomous AI voice agents for inbound support, outbound lead qualification, appointment booking, and automated phone workflows.</p>
     </div>
-    <div class="service-card reveal tilt-card">
-      <div class="icon"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg></div>
-      <h3>Digital Marketing &amp; SEO</h3>
-      <p>Getting your business found on Google and social media by the people who are already searching for what you sell.</p>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Workflow &amp; AI Automation</h3>
+      <p>Complex n8n and API integration pipelines connecting CRMs, databases, LLMs, and enterprise tools into seamless zero-touch workflows.</p>
     </div>
-    <div class="service-card reveal tilt-card">
-      <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 21l4.5-1.2L19.5 7.8a2 2 0 0 0 0-2.8l-1.5-1.5a2 2 0 0 0-2.8 0L3.2 15.5 2 20z"/><path d="M13.5 5.5l3 3"/></svg></div>
-      <h3>Branding &amp; Design</h3>
-      <p>Logos, social cards, and a visual identity that makes a small business look as established as it deserves to.</p>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Full-Stack Development</h3>
+      <p>Hand-crafted web applications built using Next.js, React, Node.js, WebGL, and custom Python backend microservices.</p>
     </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
+      <h3>Shopify &amp; E-Commerce</h3>
+      <p>High-converting, bespoke Shopify stores and custom headless commerce systems engineered for rapid speed and high conversion rates.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>WooCommerce &amp; WordPress</h3>
+      <p>Custom WordPress themes, WooCommerce stores, speed optimization, and enterprise security setups built to handle high transaction volumes.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>
+      </div>
+      <h3>Growth Marketing &amp; SEO</h3>
+      <p>Data-driven technical SEO, search engine optimization, performance marketing, and conversion rate optimization to scale revenue.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+      </div>
+      <h3>Branding &amp; UI/UX Design</h3>
+      <p>Luxury visual design systems, brand identities, high-fidelity UI/UX design, and interactive 3D web experiences.</p>
+    </div>
+
   </div>
 </section>
 
-<div class="divider" style="background:var(--paper-050);"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,0 L1440,55 L1440,70 L0,70 Z" style="fill:var(--paper-100);"></path></svg></div>
-
-<section class="builds" id="builds">
+<!-- Works / Case Studies -->
+<section class="builds-section" id="builds">
   <div class="section-head">
-    <span class="eyebrow" style="color:var(--void-700);">Recent Builds</span>
-    <h2>Real Projects, Real Businesses</h2>
+    <span class="eyebrow">Recent Deployments</span>
+    <h2>Selected Portfolio &amp; Builds</h2>
   </div>
+
+  <div class="filter-tabs">
+    <button class="tab-btn active" onclick="filterBuilds('all')">All Projects</button>
+    <button class="tab-btn" onclick="filterBuilds('ecommerce')">E-Commerce</button>
+    <button class="tab-btn" onclick="filterBuilds('ai')">AI &amp; SaaS</button>
+  </div>
+
   <div class="build-grid">
 
-    <div class="build-card reveal tilt-card">
+    <!-- Build 1 -->
+    <div class="build-card reveal" data-category="ecommerce">
       <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">yasmeen-collection.vercel.app</span></div>
-      <div class="build-preview" style="background:linear-gradient(135deg,#4A1029,#2E0A16);"><span class="brandmark">Yasmeen Collection</span></div>
+      <div class="build-preview" style="background: linear-gradient(135deg, #4A1029, #2E0A16);"><span class="brandmark">Yasmeen Collection</span></div>
       <div class="build-body">
-        <div class="row"><h3>Yasmeen Collection</h3><span class="build-status build-status--live">Live</span></div>
-        <p>Bridal boutique, Lahore</p>
-        <a class="build-link" href="https://yasmeen-collection.vercel.app/" target="_blank" rel="noopener">View Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3>Yasmeen Collection</h3>
+          <span class="build-status build-status--live">Live</span>
+        </div>
+        <p>Luxury Bridal &amp; Apparel Store — Lahore</p>
+        <a class="build-link" href="https://yasmeen-collection.vercel.app/" target="_blank" rel="noopener">Launch Store ↗</a>
       </div>
     </div>
 
-    <div class="build-card reveal tilt-card">
+    <!-- Build 2 -->
+    <div class="build-card reveal" data-category="ecommerce">
       <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">meezab-collection.vercel.app</span></div>
-      <div class="build-preview" style="background:linear-gradient(135deg,#134D3D,#0C2B24);"><span class="brandmark">Meezab Collection</span></div>
+      <div class="build-preview" style="background: linear-gradient(135deg, #134D3D, #0C2B24);"><span class="brandmark">Meezab Collection</span></div>
       <div class="build-body">
-        <div class="row"><h3>Meezab Collection</h3><span class="build-status build-status--live">Live</span></div>
-        <p>Boutique, Narowal</p>
-        <a class="build-link" href="https://meezab-collection.vercel.app/" target="_blank" rel="noopener">View Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3>Meezab Collection</h3>
+          <span class="build-status build-status--live">Live</span>
+        </div>
+        <p>Bespoke Boutique Platform — Narowal</p>
+        <a class="build-link" href="https://meezab-collection.vercel.app/" target="_blank" rel="noopener">Launch Store ↗</a>
       </div>
     </div>
 
-    <div class="build-card reveal tilt-card">
+    <!-- Build 3 -->
+    <div class="build-card reveal" data-category="ecommerce">
       <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">dawood-fabric.vercel.app</span></div>
-      <div class="build-preview" style="background:linear-gradient(135deg,#452650,#2A1830);"><span class="brandmark">Dawood Fabric</span></div>
+      <div class="build-preview" style="background: linear-gradient(135deg, #452650, #2A1830);"><span class="brandmark">Dawood Fabric</span></div>
       <div class="build-body">
-        <div class="row"><h3>Dawood Fabric &amp; Matching Center</h3><span class="build-status build-status--live">Live</span></div>
-        <p>Fabric &amp; matching, Shakargarh</p>
-        <a class="build-link" href="https://dawood-fabric.vercel.app/" target="_blank" rel="noopener">View Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3>Dawood Fabric &amp; Matching Center</h3>
+          <span class="build-status build-status--live">Live</span>
+        </div>
+        <p>Textile &amp; Retail Center — Shakargarh</p>
+        <a class="build-link" href="https://dawood-fabric.vercel.app/" target="_blank" rel="noopener">Launch Store ↗</a>
       </div>
     </div>
 
-    <div class="build-card reveal tilt-card">
-      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">building…</span></div>
-      <div class="build-preview" style="background:linear-gradient(135deg,#2B3768,#1B2340);"><span class="brandmark">Zaaria Fabric</span></div>
+    <!-- Build 4 -->
+    <div class="build-card reveal" data-category="ecommerce">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">zaaria-fabric.vercel.app</span></div>
+      <div class="build-preview" style="background: linear-gradient(135deg, #2B3768, #1B2340);"><span class="brandmark">Zaaria Fabric</span></div>
       <div class="build-body">
-        <div class="row"><h3>Zaaria Fabric</h3><span class="build-status build-status--wip">In Progress</span></div>
-        <p>Fabric shop, Narowal</p>
-        <span class="build-link disabled">Launching soon</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3>Zaaria Fabric</h3>
+          <span class="build-status build-status--wip">In Progress</span>
+        </div>
+        <p>E-Commerce Fabric Platform — Narowal</p>
+        <span class="build-link" style="opacity:0.5;">Deploying Soon</span>
       </div>
     </div>
 
-    <div class="build-card reveal tilt-card">
-      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">building…</span></div>
-      <div class="build-preview" style="background:linear-gradient(135deg,#145255,#0B3335);"><span class="brandmark">Alkuwait Cut Pieces</span></div>
+    <!-- Build 5 -->
+    <div class="build-card reveal" data-category="ai">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">mfa-ai-voice.internal</span></div>
+      <div class="build-preview" style="background: linear-gradient(135deg, #145255, #0B3335);"><span class="brandmark">Autonomous Voice AI Agent</span></div>
       <div class="build-body">
-        <div class="row"><h3>Alkuwait Cut Pieces</h3><span class="build-status build-status--wip">In Progress</span></div>
-        <p>Cut-piece center, Narowal</p>
-        <span class="build-link disabled">Launching soon</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3>MFA AI Voice Calling Agent</h3>
+          <span class="build-status build-status--live">Active</span>
+        </div>
+        <p>24/7 Conversational Call Center AI Workflow</p>
+        <a class="build-link" href="https://wa.me/923319695250" target="_blank" rel="noopener">Request AI Demo ↗</a>
       </div>
     </div>
 
-    <div class="build-card reveal tilt-card">
-      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">building…</span></div>
-      <div class="build-preview" style="background:linear-gradient(135deg,#28375E,#161F38);"><span class="brandmark">Jannat Boutique</span></div>
+    <!-- Build 6 -->
+    <div class="build-card reveal" data-category="ai">
+      <div class="build-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">mfa-saas-core.internal</span></div>
+      <div class="build-preview" style="background: linear-gradient(135deg, #28375E, #161F38);"><span class="brandmark">Enterprise SaaS Tool</span></div>
       <div class="build-body">
-        <div class="row"><h3>Jannat Boutique</h3><span class="build-status build-status--wip">In Progress</span></div>
-        <p>Boutique, Sialkot</p>
-        <span class="build-link disabled">Launching soon</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3>Custom Workflow Automation Engine</h3>
+          <span class="build-status build-status--live">Active</span>
+        </div>
+        <p>Full-Stack Web App &amp; n8n Data Pipeline Integration</p>
+        <a class="build-link" href="https://wa.me/923319695250" target="_blank" rel="noopener">Explore SaaS ↗</a>
       </div>
     </div>
 
   </div>
 </section>
 
-<section class="process" id="process">
+<!-- Delivery Methodology -->
+<section class="process-section" id="process">
   <div class="section-head">
-    <span class="eyebrow" style="color:var(--void-700);">How I Work</span>
-    <h2>Four Steps, In Order</h2>
+    <span class="eyebrow">Engineering Workflow</span>
+    <h2>How MFA Remote Office Delivers</h2>
   </div>
-  <div class="process-list" id="process-list">
-    <div class="process-line-bg"></div>
-    <div class="process-line-fill" id="process-line-fill"></div>
-    <div class="process-step reveal"><span class="process-num">01</span><div><h3>Discover</h3><p>A quick call or WhatsApp chat to understand your business and what you actually need — not what's easiest to sell you.</p></div></div>
-    <div class="process-step reveal"><span class="process-num">02</span><div><h3>Design</h3><p>A custom preview built around your real brand — your name, your colors, your products — before you commit to anything.</p></div></div>
-    <div class="process-step reveal"><span class="process-num">03</span><div><h3>Build</h3><p>Hand-coded, fast-loading, mobile-first. No shortcuts, no recycled templates with your logo dropped in.</p></div></div>
-    <div class="process-step reveal"><span class="process-num">04</span><div><h3>Launch</h3><p>Live in days, not months — with everything explained in plain language, and no tech jargon left unexplained.</p></div></div>
+  <div class="process-timeline">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <div>
+        <h3>Strategic Discovery &amp; AI Audit</h3>
+        <p>We analyze your business operations, architecture requirements, and goals to specify the ideal technology stack, SaaS tools, and AI integrations.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">02</div>
+      <div>
+        <h3>UI/UX &amp; System Architecture</h3>
+        <p>Custom interactive prototypes, brand guidelines, database schemas, and AI agent prompt flows designed specifically for your brand.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">03</div>
+      <div>
+        <h3>Full-Stack Development &amp; AI Training</h3>
+        <p>High-speed, hand-coded development using modern frameworks, trained LLMs, seamless API connections, and automated testing.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">04</div>
+      <div>
+        <h3>Deployment, Scale &amp; Continuous Support</h3>
+        <p>Seamless launch on high-speed global infrastructure (Vercel, AWS, Netlify) with continuous maintenance, performance tuning, and SLA support.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="about" id="about">
-  <div class="section-head">
-    <span class="eyebrow" style="color:var(--void-700);">About</span>
-    <h2>The Person Behind the Builds</h2>
-  </div>
-  <div class="about-inner reveal">
-    <p>Based in Shakargarh, Punjab, I work with small and local businesses — boutiques, fabric shops, tailors — building their first real presence online.</p>
-    <p>Every project is coded by hand and designed around the actual business, not a template with a new logo dropped in. If it's not right, it doesn't ship.</p>
-  </div>
-</section>
-
-<div class="divider" style="background:var(--paper-100);"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,0 L1440,55 L1440,70 L0,70 Z" style="fill:var(--void-950);"></path></svg></div>
-
-<section class="contact" id="contact">
-  <div class="orb" data-speed="0.1" style="width:260px;height:260px;top:0%;left:-80px;background:var(--cyan-400); opacity:0.2;"></div>
-  <div class="orb" data-speed="0.16" style="width:220px;height:220px;bottom:10%;right:-60px;background:var(--coral-400); opacity:0.2;"></div>
-  <span class="eyebrow" style="color:var(--cyan-300); position:relative; z-index:1;">Let's Talk</span>
-  <h2 style="margin-top:16px;">Have a business that deserves to be found online?</h2>
-  <p class="sub">Send a message on WhatsApp — I'll reply with a few questions and, if it's a fit, a free custom preview built around your business.</p>
-  <div class="contact-ctas">
-    <a class="btn btn--fill" href="https://wa.me/923319695250" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2L21 3l-1.3 4.1c.2.7.3 1.4.3 2.1v2.3z"/><path d="M8 10s.5 2 2 3.5S13.5 15 13.5 15"/></svg>
-      Message on WhatsApp
-    </a>
-    <a class="btn btn--line-dark" href="mailto:adreesfaizan428@gmail.com">Email Me</a>
-  </div>
-
+<!-- Company Leadership Statement -->
+<section class="company-section" id="company">
   <div class="container">
-    <div class="site-footer">
-      <span class="tag">© 2026 MUHAMMAD FAIZAN</span>
-      <span class="tag">SHAKARGARH, PAKISTAN</span>
-      <span class="tag">BUILT WITH CARE.</span>
+    <div class="company-inner reveal">
+      <span class="eyebrow" style="color:var(--copper-400); margin-bottom:14px; display:block;">About The Company</span>
+      <h2 style="font-size:2.2rem; margin-bottom:20px; color:#FFF;">MFA Remote Office — Tech &amp; AI Solutions</h2>
+      <p>
+        Founded and led by <strong>Faizan Adrees</strong>, MFA Remote Office operates as an elite full-stack development and AI solution architecture firm. Based out of Shakargarh, Pakistan, our team serves international clients and business owners globally.
+      </p>
+      <p>
+        With a proven track record encompassing over <strong>90,000+ web deployments</strong>, <strong>600+ web/mobile applications</strong>, <strong>1,000+ e-commerce platforms</strong>, and advanced AI Voice Automation systems, we turn complex technical challenges into scalable digital assets.
+      </p>
+      <div style="margin-top:28px;">
+        <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">Connect With Faizan Adrees</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--copper-400);">Get In Touch</span>
+    <h2>Ready to Build Your Next System?</h2>
+    <p>Message our team on WhatsApp or email us directly to discuss your custom SaaS, Web App, E-Commerce, or AI Automation project.</p>
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">
+        Message on WhatsApp
+      </a>
+      <a class="btn btn--glass" href="mailto:adreesfaizan428@gmail.com">
+        Send Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div>© 2026 MFA REMOTE OFFICE — TECH &amp; AI SOLUTIONS</div>
+    <div>FAIZAN ADREES · SHAKARGARH, PAKISTAN</div>
+    <div>ALL RIGHTS RESERVED</div>
+  </div>
+</footer>
+
+<!-- External Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <script>
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ---------- scroll reveal ----------
-  const revealables = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+  // ---------- Scroll Reveal Observer ----------
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, idx) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('is-visible'), (i % 6) * 80);
-        io.unobserve(entry.target);
+        setTimeout(() => entry.target.classList.add('is-visible'), idx * 70);
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  revealables.forEach(el => io.observe(el));
+  }, { threshold: 0.1 });
+  revealElements.forEach(el => revealObserver.observe(el));
 
-  // ---------- kinetic hero headline ----------
-  (function staggerText(){
-    const el = document.querySelector('.hero h1');
-    if (!el) return;
-    const text = el.textContent;
-    el.innerHTML = '';
-    [...text].forEach((ch, i) => {
-      const span = document.createElement('span');
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
-      span.style.display = 'inline-block';
-      if (!reduceMotion) {
-        span.style.opacity = '0';
-        span.style.transform = 'translateY(24px) rotateX(-40deg)';
-        span.style.animation = 'letter-in .6s cubic-bezier(.2,.8,.2,1) forwards';
-        span.style.animationDelay = (0.4 + i * 0.032) + 's';
-      }
-      el.appendChild(span);
-    });
-  })();
-
-  // ---------- animated counters ----------
-  function animateCount(el, target, suffix){
-    const duration = 1100, start = performance.now();
-    function tick(now){
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (p < 1) requestAnimationFrame(tick);
+  // ---------- Animated Number Counters ----------
+  function animateCounter(el, target, suffix) {
+    const duration = 1500;
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
     }
-    requestAnimationFrame(tick);
-  }
-  const statsEl = document.getElementById('hero-stats');
-  if (statsEl) {
-    const statObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.count').forEach(el => {
-            const target = parseInt(el.dataset.target, 10);
-            const suffix = el.dataset.suffix || '';
-            reduceMotion ? (el.textContent = target + suffix) : animateCount(el, target, suffix);
-          });
-          statObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    statObserver.observe(statsEl);
+    requestAnimationFrame(step);
   }
 
-  // ---------- cursor glow (desktop bonus only) ----------
-  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
-    const glow = document.getElementById('cursor-glow');
-    if (glow) {
-      glow.style.display = 'block';
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-number').forEach(el => {
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || '';
+          animateCounter(el, target, suffix);
+        });
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  const statsSection = document.getElementById('stats');
+  if (statsSection) statObserver.observe(statsSection);
+
+  // ---------- Spotlight Cursor ----------
+  if (window.matchMedia('(hover: hover)').matches) {
+    const cursorGlow = document.getElementById('cursor-glow');
+    if (cursorGlow) {
+      cursorGlow.style.display = 'block';
       window.addEventListener('mousemove', (e) => {
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
       });
     }
   }
 
-  // ---------- scroll-driven motion: card tilt, orb parallax, process timeline (works on mobile too) ----------
-  if (!reduceMotion) {
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    const orbs = document.querySelectorAll('.orb');
-    const lineFill = document.getElementById('process-line-fill');
-    const processList = document.getElementById('process-list');
-    let ticking = false;
-
-    function updateScrollFX(){
-      const vh = window.innerHeight;
-      tiltCards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        if (rect.bottom < -100 || rect.top > vh + 100) { ticking = false; return; }
-        const cardCenter = rect.top + rect.height / 2;
-        const progress = Math.max(-1, Math.min(1, (cardCenter - vh / 2) / (vh / 2)));
-        card.style.transform = `perspective(900px) rotateX(${(-progress * 8).toFixed(2)}deg) translateY(${(progress * 4).toFixed(1)}px)`;
-      });
-      orbs.forEach(orb => {
-        const speed = parseFloat(orb.dataset.speed || '0.15');
-        orb.style.transform = `translateY(${(window.scrollY * speed).toFixed(1)}px)`;
-      });
-      if (lineFill && processList) {
-        const rect = processList.getBoundingClientRect();
-        const total = rect.height;
-        const scrolled = Math.min(Math.max(vh * 0.75 - rect.top, 0), total);
-        const p = total > 0 ? scrolled / total : 0;
-        lineFill.style.transform = `scaleY(${p.toFixed(3)})`;
+  // ---------- Filterable Portfolio ----------
+  function filterBuilds(category) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    const cards = document.querySelectorAll('.build-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
       }
-      ticking = false;
-    }
-    function onScroll(){ if (!ticking) { requestAnimationFrame(updateScrollFX); ticking = true; } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    updateScrollFX();
+    });
   }
 
-  // ---------- 3D hero scene: particle network + rotating wireframe shapes ----------
-  (function initHero3D(){
+  // ---------- 3D Hero Canvas Animation (Neural Logo Network) ----------
+  (function init3DHero() {
     try {
-      if (reduceMotion || typeof THREE === 'undefined') return;
       const canvas = document.getElementById('hero-canvas');
-      const heroEl = document.querySelector('.hero');
-      let width = heroEl.clientWidth, height = heroEl.clientHeight;
+      const hero = document.querySelector('.hero');
+      if (!canvas || !hero || typeof THREE === 'undefined') return;
 
+      let width = hero.clientWidth, height = hero.clientHeight;
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-      camera.position.z = 62;
+      camera.position.z = 55;
 
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -502,70 +709,72 @@
       const group = new THREE.Group();
       scene.add(group);
 
-      const palette = [[0.31,0.91,0.83],[1.0,0.48,0.43],[1.0,0.82,0.4]];
-      const COUNT = width < 640 ? 46 : 76;
+      // Create Copper/Gold Neural Network Cloud matching MFA Logo
+      const COUNT = width < 640 ? 50 : 90;
       const nodes = [], positions = [], colors = [];
+      const copperPalette = [[0.91, 0.66, 0.51], [0.78, 0.51, 0.35], [1.0, 0.82, 0.4]];
+
       for (let i = 0; i < COUNT; i++) {
-        const x = (Math.random() - 0.5) * 92, y = (Math.random() - 0.5) * 56, z = (Math.random() - 0.5) * 60;
+        const x = (Math.random() - 0.5) * 85;
+        const y = (Math.random() - 0.5) * 55;
+        const z = (Math.random() - 0.5) * 55;
         nodes.push(new THREE.Vector3(x, y, z));
         positions.push(x, y, z);
-        const c = palette[Math.floor(Math.random() * palette.length)];
-        colors.push(c[0], c[1], c[2]);
+        const col = copperPalette[Math.floor(Math.random() * copperPalette.length)];
+        colors.push(col[0], col[1], col[2]);
       }
-      const ptGeo = new THREE.BufferGeometry();
-      ptGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-      ptGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-      const ptMat = new THREE.PointsMaterial({ size: 1.9, vertexColors: true, transparent: true, opacity: 0.95 });
-      group.add(new THREE.Points(ptGeo, ptMat));
 
-      const linePositions = []; const MAXD = 19;
+      const pointsGeo = new THREE.BufferGeometry();
+      pointsGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      pointsGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+      const pointsMat = new THREE.PointsMaterial({ size: 2.2, vertexColors: true, transparent: true, opacity: 0.9 });
+      group.add(new THREE.Points(pointsGeo, pointsMat));
+
+      // Network Lines
+      const linePositions = [];
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          if (nodes[i].distanceTo(nodes[j]) < MAXD) linePositions.push(nodes[i].x, nodes[i].y, nodes[i].z, nodes[j].x, nodes[j].y, nodes[j].z);
+          if (nodes[i].distanceTo(nodes[j]) < 18) {
+            linePositions.push(
+              nodes[i].x, nodes[i].y, nodes[i].z,
+              nodes[j].x, nodes[j].y, nodes[j].z
+            );
+          }
         }
       }
       const lineGeo = new THREE.BufferGeometry();
       lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-      const lineMat = new THREE.LineBasicMaterial({ color: 0xFF7A6E, transparent: true, opacity: 0.16 });
+      const lineMat = new THREE.LineBasicMaterial({ color: 0xE5A982, transparent: true, opacity: 0.22 });
       group.add(new THREE.LineSegments(lineGeo, lineMat));
 
-      const shapeSpecs = [
-        { geo: new THREE.IcosahedronGeometry(9, 0), color: 0x4FE8D3, pos: [-30, 14, -14] },
-        { geo: new THREE.TorusGeometry(6.5, 2, 8, 24), color: 0xFF7A6E, pos: [28, -10, -6] },
-        { geo: new THREE.OctahedronGeometry(7, 0), color: 0xFFD166, pos: [4, 18, -20] }
-      ];
-      const shapes = shapeSpecs.map((s, i) => {
-        const mesh = new THREE.Mesh(s.geo, new THREE.MeshBasicMaterial({ color: s.color, wireframe: true, transparent: true, opacity: 0.55 }));
-        mesh.position.set(...s.pos);
-        group.add(mesh);
-        return mesh;
+      // Central Wireframe Geometry (Representing Brain / Cloud Node)
+      const brainGeo = new THREE.IcosahedronGeometry(12, 1);
+      const brainMat = new THREE.MeshBasicMaterial({ color: 0xC8835A, wireframe: true, transparent: true, opacity: 0.35 });
+      const brainMesh = new THREE.Mesh(brainGeo, brainMat);
+      group.add(brainMesh);
+
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) - 0.5;
+        mouseY = (e.clientY / window.innerHeight) - 0.5;
       });
 
-      let targetX = 0, targetY = 0, curX = 0, curY = 0, t = 0;
-      const onMove = (cx, cy) => { targetX = (cx / window.innerWidth) - 0.5; targetY = (cy / window.innerHeight) - 0.5; };
-      window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
-      window.addEventListener('touchmove', (e) => { if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
       window.addEventListener('resize', () => {
-        width = heroEl.clientWidth; height = heroEl.clientHeight;
+        width = hero.clientWidth; height = hero.clientHeight;
         camera.aspect = width / height; camera.updateProjectionMatrix();
         renderer.setSize(width, height);
       });
 
-      function animate(){
+      function animate() {
         requestAnimationFrame(animate);
-        t += 0.012;
-        curX += (targetX - curX) * 0.04;
-        curY += (targetY - curY) * 0.04;
-        group.rotation.y += 0.0026 + curX * 0.0012;
-        group.rotation.x = curY * 0.28;
-        const breathe = 1 + Math.sin(t) * 0.035;
-        group.scale.set(breathe, breathe, breathe);
-        shapes.forEach((s, i) => { s.rotation.x += 0.004 + i * 0.0012; s.rotation.y += 0.005 + i * 0.0009; });
+        group.rotation.y += 0.003 + mouseX * 0.01;
+        group.rotation.x += mouseY * 0.005;
+        brainMesh.rotation.z += 0.002;
         renderer.render(scene, camera);
       }
       animate();
-    } catch (err) {
-      console.warn('3D hero unavailable, page still works without it:', err);
+    } catch(err) {
+      console.warn("3D Canvas error:", err);
     }
   })();
 </script>
