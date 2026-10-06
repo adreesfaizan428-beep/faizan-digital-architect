@@ -1,247 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MFA Remote Office | Software, SaaS &amp; AI Voice Agents</title>
-<meta name="description" content="Custom software, SaaS products, AI voice calling agents, automation and e-commerce. MFA Remote Office, led by Faizan Adrees.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MFA Remote Office — Tech &amp; AI Solutions | Led by Faizan Adrees</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F4F6FA;--ink:#0A0F1F;--mut:#59617A;--line:#DDE2EE;--blue:#2F3DFF;--mint:#12D6A0;--w:#fff}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{font:400 17px/1.6 'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.02;letter-spacing:-.03em}
-.w{max-width:1200px;margin:0 auto;padding:0 24px}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
-#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--blue);z-index:99}
+  :root {
+    --void-950: #08070D;
+    --void-900: #100E1A;
+    --void-800: #1A172B;
+    --void-700: #292442;
+    
+    --copper-500: #C8835A;
+    --copper-400: #E5A982;
+    --copper-300: #F3C5A5;
+    --copper-glow: rgba(200, 131, 90, 0.35);
+    
+    --gold-400: #FFD166;
+    --cyan-400: #00F5D4;
+    --purple-400: #9D4EDD;
+    
+    --paper-050: #F6F4FE;
+    --paper-100: #EAE5F8;
+    
+    --ink-main: #F6F4FE;
+    --ink-sub: #A39BCE;
+    
+    --card-bg: rgba(26, 23, 43, 0.7);
+    --border-glow: linear-gradient(135deg, rgba(229, 169, 130, 0.4), rgba(0, 245, 212, 0.15));
+    --shadow-heavy: 0 30px 80px rgba(0, 0, 0, 0.6);
+  }
 
-.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:700;font-size:15px;border:1.5px solid var(--ink);transition:transform .25s,background .25s,color .25s}
-.btn.p{background:var(--ink);color:#fff}.btn.p:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-3px)}
-.btn.o:hover{background:var(--ink);color:#fff;transform:translateY(-3px)}
-.btn.b{background:var(--blue);border-color:var(--blue);color:#fff}.btn.b:hover{background:#fff;color:var(--ink);transform:translateY(-3px)}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--ink-main);
+    background-color: var(--void-950);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    font-weight: 400;
+  }
 
-header{position:sticky;top:0;z-index:50;background:rgba(244,246,250,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-header .w{display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{font:800 20px 'Bricolage Grotesque';letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
-.logo i{width:30px;height:30px;border-radius:9px;background:var(--blue);display:grid;place-items:center;color:#fff;font:800 12px 'DM Sans';font-style:normal}
-nav{display:none;gap:34px;font-weight:500;font-size:15px}
-nav a{color:var(--mut);transition:color .2s}nav a:hover{color:var(--ink)}
-.hc{display:none;padding:11px 22px}
-.bg{border:1px solid var(--line);background:#fff;border-radius:10px;width:42px;height:42px;font-size:18px;cursor:pointer}
-#mn{display:none;flex-direction:column;padding:8px 24px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
-#mn.open{display:flex}#mn a{padding:14px 0;border-bottom:1px solid var(--line);font-weight:500}
-@media(min-width:900px){nav{display:flex}.hc{display:inline-flex}.bg,#mn{display:none!important}}
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
 
-/* hero */
-.hero{padding:80px 0 60px}
-.hero .w{display:grid;gap:56px;align-items:center}
-@media(min-width:960px){.hero .w{grid-template-columns:1.2fr .8fr}}
-.pill{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border:1px solid var(--line);background:#fff;border-radius:999px;font-size:14px;font-weight:500;margin-bottom:28px}
-.pill b{width:8px;height:8px;border-radius:50%;background:var(--mint);animation:ping 2s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(18,214,160,.6)}100%{box-shadow:0 0 0 10px transparent}}
-h1{font-size:clamp(2.8rem,7.4vw,6rem);font-weight:800;margin-bottom:26px}
-h1 .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em}
-h1 .wd span{display:inline-block;transform:translateY(110%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.09s)}
-@keyframes up{to{transform:none}}
-h1 em{font-style:normal;color:var(--blue)}
-.sub{color:var(--mut);font-size:19px;max-width:520px;margin-bottom:34px}
-.ctas{display:flex;flex-wrap:wrap;gap:12px}
+  /* Interactive Spotlight Cursor */
+  #cursor-glow {
+    position: fixed; width: 450px; height: 450px; border-radius: 50%;
+    pointer-events: none; z-index: 3;
+    background: radial-gradient(circle, rgba(229, 169, 130, 0.15), rgba(0, 245, 212, 0.08) 45%, transparent 70%);
+    transform: translate(-50%, -50%); left: -500px; top: -500px;
+    transition: transform 0.05s ease-out;
+  }
 
-.call{background:var(--ink);color:#fff;border-radius:28px;padding:22px;box-shadow:0 40px 80px -30px rgba(10,15,31,.55);transform:rotate(1.5deg);transition:transform .5s}
-.call:hover{transform:rotate(0)}
-.ct{display:flex;justify-content:space-between;font-size:13px;color:#9AA3C0;margin-bottom:18px}
-.ct span:first-child::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);margin-right:8px;animation:bl 1.4s infinite}
-@keyframes bl{50%{opacity:.25}}
-.wave{display:flex;align-items:center;gap:3px;height:44px;margin-bottom:18px}
-.wave i{flex:1;background:var(--mint);border-radius:3px;height:15%;animation:bar 1s ease-in-out infinite}
-@keyframes bar{50%{height:100%}}
-#msgs{display:flex;flex-direction:column;gap:10px;min-height:200px}
-.m{max-width:88%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.45;opacity:0;transform:translateY(8px);animation:pop .45s forwards}
-.m.a{background:#1B2340;align-self:flex-start;border-bottom-left-radius:4px}
-.m.u{background:var(--blue);align-self:flex-end;border-bottom-right-radius:4px}
-@keyframes pop{to{opacity:1;transform:none}}
+  /* Luxury Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px; font-weight: 700; font-size: 14.5px;
+    border-radius: 100px; transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    white-space: nowrap; border: 1px solid transparent; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .btn--copper {
+    background: linear-gradient(135deg, var(--copper-400), var(--copper-500));
+    color: var(--void-950);
+    box-shadow: 0 12px 35px var(--copper-glow);
+  }
+  .btn--copper:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 18px 45px rgba(229, 169, 130, 0.5);
+    background: linear-gradient(135deg, var(--copper-300), var(--copper-400));
+  }
+  .btn--glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(229, 169, 130, 0.3);
+    color: var(--paper-050);
+    backdrop-filter: blur(12px);
+  }
+  .btn--glass:hover {
+    background: rgba(229, 169, 130, 0.15);
+    border-color: var(--copper-400);
+    transform: translateY(-3px);
+  }
 
-/* numbers */
-.nums{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:70px;border-top:1px solid var(--line)}
-@media(min-width:800px){.nums{grid-template-columns:repeat(5,1fr)}}
-.nums div{padding:28px 0 8px;border-right:1px solid var(--line);padding-left:22px}
-.nums div:first-child{padding-left:0}.nums div:last-child{border:0}
-.nums b{display:block;font:800 clamp(2rem,4vw,3rem) 'Bricolage Grotesque';letter-spacing:-.03em}
-.nums span{font-size:14px;color:var(--mut)}
+  /* Site Header */
+  .site-header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8, 7, 13, 0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(229, 169, 130, 0.12);
+  }
+  .site-header .container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+  
+  .brand-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--copper-400), var(--copper-500));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px var(--copper-glow); font-family: 'Unbounded', sans-serif;
+    font-weight: 900; color: var(--void-950); font-size: 18px;
+  }
+  .brand-text-title { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 16px; color: var(--paper-050); letter-spacing: -0.02em; }
+  .brand-text-sub { font-size: 10px; font-family: 'Space Mono', monospace; color: var(--copper-400); letter-spacing: 0.12em; text-transform: uppercase; }
 
-/* marquee */
-.mq{overflow:hidden;border-block:1px solid var(--line);background:#fff;padding:20px 0}
-.mq div{display:flex;width:max-content;animation:mq 30s linear infinite}
-.mq:hover div{animation-play-state:paused}
-.mq span{font:700 22px 'Bricolage Grotesque';padding:0 34px;color:var(--mut);white-space:nowrap}
-.mq span:nth-child(even){color:var(--blue)}
-@keyframes mq{to{transform:translateX(-50%)}}
+  .nav-links { display: none; gap: 32px; font-size: 13.5px; font-weight: 600; letter-spacing: 0.04em; }
+  .nav-links a { color: var(--ink-sub); transition: color 0.25s ease; text-transform: uppercase; }
+  .nav-links a:hover { color: var(--copper-400); }
+  @media(min-width: 960px) { .nav-links { display: flex; } }
 
-.sec{padding:110px 0}
-.hd{display:grid;gap:18px;margin-bottom:56px}
-@media(min-width:900px){.hd{grid-template-columns:1fr 1fr;align-items:end}}
-.hd h2{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800}
-.hd p{color:var(--mut);max-width:480px}
+  /* Hero Section */
+  .hero {
+    position: relative; padding: 110px 24px 90px; text-align: center; overflow: hidden;
+    background: radial-gradient(circle at 50% -20%, var(--void-800) 0%, var(--void-950) 70%);
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px;
+    background: rgba(229, 169, 130, 0.08); border: 1px solid rgba(229, 169, 130, 0.25);
+    border-radius: 50px; color: var(--copper-300); font-size: 12px; margin-bottom: 24px;
+  }
+  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan-400); box-shadow: 0 0 10px var(--cyan-400); }
 
-/* service rows */
-.row{display:grid;gap:12px;padding:34px 0;border-top:1px solid var(--line);position:relative;transition:padding .35s}
-.row:last-child{border-bottom:1px solid var(--line)}
-.row::before{content:'';position:absolute;inset:0 -24px;background:var(--blue);transform:scaleY(0);transform-origin:bottom;transition:transform .4s cubic-bezier(.2,.8,.2,1);z-index:0;border-radius:0}
-.row>*{position:relative;z-index:1;transition:color .3s}
-.row h3{font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:700}
-.row p{color:var(--mut);max-width:520px}
-.row .ar{font-size:30px;transition:transform .35s}
-@media(min-width:900px){.row{grid-template-columns:1.1fr 1fr 40px;align-items:center;gap:40px}}
-.row:hover::before{transform:scaleY(1)}
-.row:hover h3,.row:hover p,.row:hover .ar{color:#fff}
-.row:hover .ar{transform:translate(6px,-6px)}
-.row:hover{padding-left:6px}
+  .hero h1 {
+    font-weight: 900; font-size: clamp(2.4rem, 6.5vw, 4.8rem); line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+    background: linear-gradient(135deg, #FFFFFF 30%, var(--copper-300) 70%, var(--copper-500) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lead {
+    font-size: clamp(1rem, 2.2vw, 1.25rem); color: var(--ink-sub); line-height: 1.7;
+    max-width: 760px; margin: 0 auto 38px; font-weight: 400;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 60px; }
 
-/* work */
-.dark{background:var(--ink);color:#fff}
-.dark .hd p{color:#9AA3C0}
-.pr{display:grid;gap:18px;padding:34px 0;border-top:1px solid rgba(255,255,255,.14);align-items:center}
-.pr:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
-@media(min-width:900px){.pr{grid-template-columns:260px 1fr auto;gap:44px}}
-.th{height:150px;border-radius:18px;display:grid;place-items:center;font:800 24px 'Bricolage Grotesque';letter-spacing:-.02em;text-align:center;padding:12px;background:linear-gradient(135deg,#1B2340,#0F1530);border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden;transition:transform .4s,background .4s}
-.pr:hover .th{transform:scale(1.04) rotate(-1deg);background:var(--blue)}
-.pr h3{font-size:1.7rem;font-weight:700;margin-bottom:8px}
-.pr p{color:#9AA3C0;max-width:520px}
-.tg{display:inline-block;font-size:13px;color:var(--mint);margin-bottom:10px;font-weight:700}
-.pr .btn{border-color:rgba(255,255,255,.4);color:#fff;padding:13px 22px;font-size:14px}
-.pr .btn:hover{background:#fff;color:var(--ink)}
+  /* Stats Showcase Grid */
+  .hero-stats-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    max-width: 1100px; margin: 0 auto; padding-top: 30px;
+    border-top: 1px solid rgba(229, 169, 130, 0.15);
+  }
+  @media(min-width: 768px) { .hero-stats-grid { grid-template-columns: repeat(5, 1fr); } }
 
-/* process */
-.st{display:grid;gap:28px}
-@media(min-width:900px){.st{grid-template-columns:repeat(3,1fr)}}
-.s{background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px;transition:transform .35s,box-shadow .35s}
-.s:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(47,61,255,.35)}
-.s b{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;margin-bottom:60px;font-family:'Bricolage Grotesque'}
-.s h3{font-size:1.6rem;margin-bottom:12px;font-weight:700}.s p{color:var(--mut)}
+  .stat-card {
+    background: rgba(26, 23, 43, 0.5); border: 1px solid rgba(229, 169, 130, 0.15);
+    border-radius: 16px; padding: 22px 14px; text-align: center; backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .stat-card:hover { transform: translateY(-5px); border-color: var(--copper-400); background: rgba(35, 30, 58, 0.7); }
+  .stat-number { font-family: 'Unbounded', sans-serif; font-size: clamp(1.4rem, 2.8vw, 2.1rem); font-weight: 800; color: var(--copper-300); margin-bottom: 6px; }
+  .stat-label { font-size: 11px; font-family: 'Space Mono', monospace; text-transform: uppercase; color: var(--ink-sub); letter-spacing: 0.08em; }
 
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:70px}
-.chips span{padding:10px 20px;border:1px solid var(--line);background:#fff;border-radius:999px;font-weight:500;font-size:15px;transition:.25s}
-.chips span:hover{background:var(--ink);color:#fff;transform:translateY(-3px)}
+  /* Double Marquee */
+  .marquee-wrap {
+    overflow: hidden; background: linear-gradient(90deg, var(--copper-500), #965633, var(--copper-400));
+    padding: 16px 0; transform: rotate(-1deg); margin: 30px -20px 60px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5); position: relative; z-index: 10;
+  }
+  .marquee-track { display: flex; width: max-content; animation: marquee 25s linear infinite; }
+  .marquee-track span {
+    font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 14px;
+    color: var(--void-950); padding: 0 24px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .marquee-track .sep { color: #FFF; font-weight: 400; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* cta */
-.cta{background:var(--blue);color:#fff;padding:120px 0;text-align:left;position:relative;overflow:hidden}
-.cta h2{font-size:clamp(2.8rem,8vw,7rem);font-weight:800;max-width:1000px;margin-bottom:36px}
-.cta p{max-width:520px;margin-bottom:34px;color:#DCE0FF;font-size:19px}
-footer{padding:36px 0;font-size:14px;color:var(--mut)}
-footer .w{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+  /* Shared Headings */
+  .section-head { text-align: center; margin-bottom: 60px; position: relative; z-index: 2; }
+  .section-head .eyebrow { color: var(--copper-400); margin-bottom: 12px; display: block; }
+  .section-head h2 { font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); color: var(--paper-050); letter-spacing: -0.01em; }
 
-.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
-.rv.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}h1 .wd span{transform:none}}
+  /* Services Grid Section */
+  .services-section { position: relative; padding: 40px 24px 100px; background: var(--void-950); }
+  .services-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; }
+  @media(min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 1080px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .service-card {
+    background: var(--card-bg); border: 1px solid rgba(229, 169, 130, 0.15);
+    border-radius: 20px; padding: 32px 26px; position: relative; overflow: hidden;
+    backdrop-filter: blur(12px); transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .service-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at top right, rgba(229, 169, 130, 0.12), transparent 60%);
+    opacity: 0; transition: opacity 0.4s ease;
+  }
+  .service-card:hover { transform: translateY(-8px); border-color: var(--copper-400); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .service-card:hover::before { opacity: 1; }
+  
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px; margin-bottom: 22px;
+    background: linear-gradient(135deg, rgba(229, 169, 130, 0.2), rgba(0, 245, 212, 0.1));
+    border: 1px solid rgba(229, 169, 130, 0.3);
+    display: flex; align-items: center; justify-content: center; color: var(--copper-300);
+  }
+  .service-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .service-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--paper-050); margin-bottom: 12px; }
+  .service-card p { font-size: 13.5px; line-height: 1.65; color: var(--ink-sub); }
+
+  /* Real Builds Showcase */
+  .builds-section { background: var(--void-900); padding: 90px 24px 100px; border-top: 1px solid rgba(229, 169, 130, 0.1); }
+  
+  .filter-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 45px; }
+  .tab-btn {
+    padding: 10px 20px; border-radius: 50px; font-size: 12.5px; font-family: 'Space Mono', monospace;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(229, 169, 130, 0.15); color: var(--ink-sub);
+    cursor: pointer; transition: all 0.25s ease; text-transform: uppercase;
+  }
+  .tab-btn.active, .tab-btn:hover { background: var(--copper-400); color: var(--void-950); border-color: var(--copper-400); font-weight: 700; }
+
+  .build-grid { display: grid; grid-template-columns: 1fr; gap: 28px; max-width: 1200px; margin: 0 auto; }
+  @media(min-width: 768px) { .build-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 1080px) { .build-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .build-card {
+    border-radius: 20px; overflow: hidden; background: var(--void-800);
+    border: 1px solid rgba(229, 169, 130, 0.15); box-shadow: var(--shadow-heavy);
+    transition: all 0.4s ease; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .build-card:hover { transform: translateY(-8px) scale(1.01); border-color: var(--copper-400); }
+  .build-chrome { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(0,0,0,0.4); }
+  .build-chrome-left { display: flex; align-items: center; gap: 6px; }
+  .build-chrome .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .build-chrome .url { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--copper-300); margin-left: 8px; }
+  .build-preview {
+    height: 150px; display: flex; align-items: center; justify-content: center; position: relative;
+    background: linear-gradient(135deg, rgba(200, 131, 90, 0.15), rgba(16, 14, 26, 0.9));
+    border-bottom: 1px solid rgba(229, 169, 130, 0.1);
+  }
+  .build-preview .brandmark { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem; color: #FFF; text-shadow: 0 4px 12px rgba(0,0,0,0.5); text-align: center; padding: 0 15px; }
+  .build-body { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .build-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--paper-050); margin-bottom: 8px; }
+  .build-body p { font-size: 13px; color: var(--ink-sub); margin-bottom: 20px; line-height: 1.6; }
+  .build-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+  .build-status { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+  .build-status--live { background: rgba(0, 245, 212, 0.15); color: var(--cyan-400); }
+  .build-link { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--copper-300); display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+  .build-link:hover { color: var(--copper-400); text-decoration: underline; }
+
+  /* Enterprise Methodology / Process */
+  .process-section { padding: 90px 24px; background: var(--void-950); }
+  .process-timeline { max-width: 860px; margin: 0 auto; position: relative; }
+  .process-step { display: flex; gap: 28px; padding: 32px 0; border-bottom: 1px solid rgba(229, 169, 130, 0.12); }
+  .process-num { font-family: 'Unbounded', sans-serif; font-size: 2rem; font-weight: 900; color: var(--copper-400); opacity: 0.8; }
+  .process-step h3 { font-size: 1.2rem; font-weight: 700; color: var(--paper-050); margin-bottom: 8px; }
+  .process-step p { font-size: 14px; color: var(--ink-sub); line-height: 1.65; }
+
+  /* Company / Leadership Section */
+  .company-section { padding: 90px 24px; background: radial-gradient(circle at 50% 50%, var(--void-800) 0%, var(--void-950) 80%); text-align: center; }
+  .company-inner { max-width: 800px; margin: 0 auto; background: rgba(26, 23, 43, 0.6); border: 1px solid rgba(229, 169, 130, 0.2); padding: 50px 36px; border-radius: 24px; backdrop-filter: blur(16px); }
+  .company-inner p { font-size: 16.5px; line-height: 1.8; color: var(--ink-main); margin-bottom: 20px; }
+
+  /* Contact CTA */
+  .contact-section { padding: 100px 24px; background: var(--void-950); text-align: center; border-top: 1px solid rgba(229, 169, 130, 0.15); }
+  .contact-section h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 18px; color: var(--paper-050); }
+  .contact-section p { font-size: 16px; color: var(--ink-sub); max-width: 580px; margin: 0 auto 40px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 36px 0; font-size: 12px; color: var(--ink-sub); font-family: 'Space Mono', monospace; }
+  .site-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+
+  /* Reveal Animations */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
-<div id="bar"></div>
-<header>
-  <div class="w">
-    <a href="#" class="logo"><i>MFA</i>Remote Office</a>
-    <nav><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
-    <a class="btn p hc" href="https://wa.me/923319695250" target="_blank" rel="noopener">Start a project</a>
-    <button class="bg" id="bg" aria-label="Menu">☰</button>
+
+<div id="cursor-glow"></div>
+
+<!-- Site Header -->
+<header class="site-header">
+  <div class="container">
+    <a href="#" class="brand-logo">
+      <div class="brand-logo-icon">MFA</div>
+      <div>
+        <div class="brand-text-title">MFA Remote Office</div>
+        <div class="brand-text-sub">Tech &amp; AI Solutions</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#stats">Track Record</a>
+      <a href="#builds">Portfolio</a>
+      <a href="#process">Process</a>
+      <a href="#company">About</a>
+    </nav>
+    <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">Contact Office</a>
   </div>
-  <div id="mn"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a></div>
 </header>
 
+<!-- Hero Section -->
 <section class="hero">
-  <div class="w">
-    <div>
-      <div class="pill"><b></b>Taking new projects</div>
-      <h1 id="h1">Software and AI that <em>runs your business.</em></h1>
-      <p class="sub">We design and build web apps, SaaS products, AI voice agents and online stores for growing companies.</p>
-      <div class="ctas">
-        <a class="btn p" href="https://wa.me/923319695250" target="_blank" rel="noopener">Start a project</a>
-        <a class="btn o" href="#work">See our work</a>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span> MFA REMOTE OFFICE — POWERED BY FAIZAN ADREES
+    </div>
+    <h1>Architecting Next-Gen Software, SaaS &amp; Autonomous AI Systems</h1>
+    <p class="lead">
+      We engineer high-performance web applications, SaaS tools, automated AI voice agents, and scalable e-commerce infrastructure for enterprises and growing businesses globally.
+    </p>
+
+    <div class="hero-ctas">
+      <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">
+        Start A Project
+      </a>
+      <a class="btn btn--glass" href="#builds">
+        View Enterprise Builds
+      </a>
+    </div>
+
+    <!-- Verified Company Performance Stats -->
+    <div class="hero-stats-grid" id="stats">
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="600" data-suffix="+">0</div>
+        <div class="stat-label">Mobile &amp; Web Apps</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="9654" data-suffix="+">0</div>
+        <div class="stat-label">Websites Deployed</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="400" data-suffix="+">0</div>
+        <div class="stat-label">Shopify Platforms</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="670" data-suffix="+">0</div>
+        <div class="stat-label">WooCommerce Stores</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-target="340" data-suffix="+">0</div>
+        <div class="stat-label">SaaS &amp; Custom Software</div>
       </div>
     </div>
-    <div class="call" aria-label="Example AI voice agent call">
-      <div class="ct"><span>AI voice agent, live call</span><span id="tm">00:00</span></div>
-      <div class="wave" id="wv" aria-hidden="true"></div>
-      <div id="msgs"></div>
+  </div>
+</section>
+
+<!-- Animated Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>SOFTWARE &amp; SAAS TOOLS</span><span class="sep">✦</span>
+    <span>AI VOICE CALLING AGENTS</span><span class="sep">✦</span>
+    <span>WORKFLOW AUTOMATION (n8n)</span><span class="sep">✦</span>
+    <span>FULL-STACK DEVELOPMENT</span><span class="sep">✦</span>
+    <span>SHOPIFY &amp; WOOCOMMERCE</span><span class="sep">✦</span>
+    <span>WORDPRESS ECOSYSTEMS</span><span class="sep">✦</span>
+    <span>GROWTH SEO &amp; BRANDING</span><span class="sep">✦</span>
+    <span>SOFTWARE &amp; SAAS TOOLS</span><span class="sep">✦</span>
+    <span>AI VOICE CALLING AGENTS</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- Core Capabilities / Services -->
+<section class="services-section" id="services">
+  <div class="section-head">
+    <span class="eyebrow">Enterprise Capabilities</span>
+    <h2>Solutions We Engineer</h2>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+      </div>
+      <h3>Software &amp; SaaS Tools</h3>
+      <p>Custom cloud-native SaaS architectures, microservices, internal dashboards, and enterprise tools designed for high performance and seamless scale.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3>AI Voice Calling Agents</h3>
+      <p>24/7 autonomous AI voice agents for inbound support, outbound lead qualification, appointment booking, and automated phone workflows.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Workflow &amp; AI Automation</h3>
+      <p>Complex n8n and API integration pipelines connecting CRMs, databases, LLMs, and enterprise tools into seamless zero-touch workflows.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Full-Stack Development</h3>
+      <p>Hand-crafted web applications built using Next.js, React, Node.js, WebGL, and custom Python backend microservices.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Portfolio / Real Builds Showcase Section -->
+<section class="builds-section" id="builds">
+  <div class="section-head">
+    <span class="eyebrow">Verified Portfolio</span>
+    <h2>Live Client Websites &amp; Builds</h2>
+  </div>
+
+  <!-- Filter Category Tabs -->
+  <div class="filter-tabs">
+    <button class="tab-btn active" onclick="filterBuilds('all')">All Builds</button>
+    <button class="tab-btn" onclick="filterBuilds('healthcare')">Healthcare &amp; Dental</button>
+    <button class="tab-btn" onclick="filterBuilds('fashion')">Fashion &amp; Retail</button>
+  </div>
+
+  <div class="build-grid">
+
+    <!-- Build Card 1: Sams Family Dental Care -->
+    <div class="build-card reveal" data-category="healthcare">
+      <div>
+        <div class="build-chrome">
+          <div class="build-chrome-left">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">samsfamilydental.com</span>
+        </div>
+        <div class="build-preview">
+          <div class="brandmark">Sams Family Dental Care</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div>
+          <h3>Sams Family Dental Care</h3>
+          <p>Modern clinical healthcare platform featuring online appointment booking, dynamic patient portal, and responsive medical layout.</p>
+        </div>
+        <div class="build-footer">
+          <span class="build-status build-status--live">LIVE WEBSITE</span>
+          <a class="build-link" href="https://samsfamilydental.com" target="_blank" rel="noopener">Visit Site &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Card 2: TruYou Dental -->
+    <div class="build-card reveal" data-category="healthcare">
+      <div>
+        <div class="build-chrome">
+          <div class="build-chrome-left">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">truyoudental.com</span>
+        </div>
+        <div class="build-preview">
+          <div class="brandmark">TruYou Dental</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div>
+          <h3>TruYou Dental — Great Neck</h3>
+          <p>High-converting dental practice website engineered with fast page speeds, location-based SEO, and lead generation booking tools.</p>
+        </div>
+        <div class="build-footer">
+          <span class="build-status build-status--live">LIVE WEBSITE</span>
+          <a class="build-link" href="https://truyoudental.com" target="_blank" rel="noopener">Visit Site &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Card 3: Dr. Mohindru’s Medical & Dental Care -->
+    <div class="build-card reveal" data-category="healthcare">
+      <div>
+        <div class="build-chrome">
+          <div class="build-chrome-left">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">drmohindrusdental.com</span>
+        </div>
+        <div class="build-preview">
+          <div class="brandmark">Dr. Mohindru’s Care</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div>
+          <h3>Dr. Mohindru’s Medical &amp; Dental Care</h3>
+          <p>Comprehensive medical center portal offering interactive service listings, direct inquiry integration, and optimized user experience.</p>
+        </div>
+        <div class="build-footer">
+          <span class="build-status build-status--live">LIVE WEBSITE</span>
+          <a class="build-link" href="http://www.drmohindrusdental.com" target="_blank" rel="noopener">Visit Site &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Card 4: Asifa & Nabeel -->
+    <div class="build-card reveal" data-category="fashion">
+      <div>
+        <div class="build-chrome">
+          <div class="build-chrome-left">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">asifaandnabeel.pk</span>
+        </div>
+        <div class="build-preview">
+          <div class="brandmark">Asifa &amp; Nabeel</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div>
+          <h3>Asifa &amp; Nabeel Luxury Couture</h3>
+          <p>High-end e-commerce fashion store designed for global checkout, luxury visual identity, and high-volume order management.</p>
+        </div>
+        <div class="build-footer">
+          <span class="build-status build-status--live">LIVE WEBSITE</span>
+          <a class="build-link" href="https://asifaandnabeel.pk" target="_blank" rel="noopener">Visit Store &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Card 5: Pink Stories -->
+    <div class="build-card reveal" data-category="fashion">
+      <div>
+        <div class="build-chrome">
+          <div class="build-chrome-left">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">pinkstories.ae</span>
+        </div>
+        <div class="build-preview">
+          <div class="brandmark">Pink Stories UAE</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div>
+          <h3>Pink Stories UAE</h3>
+          <p>Middle Eastern boutique retail platform with multi-currency payment options, slick product filtering, and fast mobile storefront.</p>
+        </div>
+        <div class="build-footer">
+          <span class="build-status build-status--live">LIVE WEBSITE</span>
+          <a class="build-link" href="https://www.pinkstories.ae" target="_blank" rel="noopener">Visit Store &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Card 6: Beginning Boutique -->
+    <div class="build-card reveal" data-category="fashion">
+      <div>
+        <div class="build-chrome">
+          <div class="build-chrome-left">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">beginningboutique.com</span>
+        </div>
+        <div class="build-preview">
+          <div class="brandmark">Beginning Boutique</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div>
+          <h3>Beginning Boutique San Diego US</h3>
+          <p>Ultra-scalable international fashion brand storefront featuring smart recommendations, cart recovery, and lightning-fast loading.</p>
+        </div>
+        <div class="build-footer">
+          <span class="build-status build-status--live">LIVE WEBSITE</span>
+          <a class="build-link" href="https://beginningboutique.com" target="_blank" rel="noopener">Visit Store &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Enterprise Methodology / Process -->
+<section class="process-section" id="process">
+  <div class="section-head">
+    <span class="eyebrow">Development Blueprint</span>
+    <h2>How We Build &amp; Deploy</h2>
+  </div>
+  <div class="process-timeline">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <div>
+        <h3>Architectural Discovery &amp; Scope</h3>
+        <p>We analyze technical requirements, define database schemas, choose software stacks, and map out AI automation workflows tailored to business goals.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">02</div>
+      <div>
+        <h3>Rapid Prototyping &amp; Interface Design</h3>
+        <p>Custom UI/UX component design with dark high-tech visuals, mobile-first layouts, and interactive design systems.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">03</div>
+      <div>
+        <h3>Engineering &amp; System Integration</h3>
+        <p>Full-stack development incorporating modern frameworks, API connections, database architecture, and autonomous AI agents.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">04</div>
+      <div>
+        <h3>Deployment, Testing &amp; Scale</h3>
+        <p>End-to-end testing, security optimization, global CDN hosting deployment, and ongoing server monitoring.</p>
+      </div>
     </div>
   </div>
-  <div class="w">
-    <div class="nums">
-      <div><b data-n="600">0</b><span>Web &amp; mobile apps</span></div>
-      <div><b data-n="9654">0</b><span>Websites deployed</span></div>
-      <div><b data-n="400">0</b><span>Shopify stores</span></div>
-      <div><b data-n="670">0</b><span>WooCommerce stores</span></div>
-      <div><b data-n="340">0</b><span>SaaS &amp; custom software</span></div>
-    </div>
+</section>
+
+<!-- Leadership & Company Section -->
+<section class="company-section" id="company">
+  <div class="company-inner reveal">
+    <h2>MFA Remote Office</h2>
+    <p>
+      Led by <strong>Faizan Adrees</strong>, MFA Remote Office is a specialized tech agency delivering modern web apps, SaaS tools, automated AI phone agents, and enterprise e-commerce platforms for clients worldwide.
+    </p>
   </div>
 </section>
 
-<div class="mq" aria-hidden="true"><div>
-  <span>Next.js</span><span>React</span><span>Python</span><span>n8n</span><span>Shopify</span><span>WooCommerce</span><span>VICIdial</span><span>Vercel</span>
-  <span>Next.js</span><span>React</span><span>Python</span><span>n8n</span><span>Shopify</span><span>WooCommerce</span><span>VICIdial</span><span>Vercel</span>
-</div></div>
-
-<section class="sec" id="services">
-  <div class="w">
-    <div class="hd rv"><h2>What we build</h2><p>Four things we do well, from first prototype to production.</p></div>
-    <a class="row rv" href="https://wa.me/923319695250" target="_blank" rel="noopener"><h3>Software &amp; SaaS</h3><p>Web apps, dashboards and internal tools built to stay fast as your users grow.</p><span class="ar">↗</span></a>
-    <a class="row rv" href="https://wa.me/923319695250" target="_blank" rel="noopener"><h3>AI voice agents</h3><p>Phone agents that answer support calls, qualify leads and book appointments 24/7.</p><span class="ar">↗</span></a>
-    <a class="row rv" href="https://wa.me/923319695250" target="_blank" rel="noopener"><h3>Automation</h3><p>n8n and API workflows that connect your CRM, database and AI models.</p><span class="ar">↗</span></a>
-    <a class="row rv" href="https://wa.me/923319695250" target="_blank" rel="noopener"><h3>Websites &amp; stores</h3><p>Next.js, Shopify and WooCommerce sites built for speed, search and sales.</p><span class="ar">↗</span></a>
-  </div>
+<!-- Contact Section -->
+<section class="contact-section">
+  <h2>Ready to Launch Your Next System?</h2>
+  <p>Let's build high-performance software and AI workflows for your company.</p>
+  <a class="btn btn--copper" href="https://wa.me/923319695250" target="_blank" rel="noopener">Contact via WhatsApp</a>
 </section>
 
-<section class="sec dark" id="work">
-  <div class="w">
-    <div class="hd rv"><h2>Selected work</h2><p>A few recent projects across AI, web apps and e-commerce.</p></div>
-    <div class="pr rv"><div class="th">OmniVoice AI</div><div><span class="tg">AI &amp; automation</span><h3>Voice calling agents</h3><p>AI voice pipeline connected to VICIdial and LLMs for automated outbound lead qualification.</p></div><a class="btn" href="https://wa.me/923319695250" target="_blank" rel="noopener">Request a demo</a></div>
-    <div class="pr rv"><div class="th">PetVibe</div><div><span class="tg">Web app</span><h3>Pet care booking platform</h3><p>Full-stack app for pet care businesses with booking management and a responsive interface.</p></div><a class="btn" href="https://petvibe-platform.netlify.app" target="_blank" rel="noopener">View site</a></div>
-    <div class="pr rv"><div class="th">FaizanStickers</div><div><span class="tg">E-commerce</span><h3>Sticker &amp; merch store</h3><p>Storefront with 50+ die-cut designs, with SEO-optimised titles and tags.</p></div><a class="btn" href="https://faizanstickers.redbubble.com" target="_blank" rel="noopener">Visit store</a></div>
+<!-- Site Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div>&copy; 2026 MFA Remote Office. Engineered by Faizan Adrees. All Rights Reserved.</div>
+    <div>Tech &amp; Autonomous AI Solutions</div>
   </div>
-</section>
-
-<section class="sec" id="process">
-  <div class="w">
-    <div class="hd rv"><h2>How we work</h2><p>A simple three-step process with clear scope, regular updates and no surprises.</p></div>
-    <div class="st">
-      <div class="s rv"><b>1</b><h3>Plan</h3><p>We agree on goals, scope, timeline and architecture before any code is written.</p></div>
-      <div class="s rv"><b>2</b><h3>Build</h3><p>We ship in short cycles so you see working progress every week.</p></div>
-      <div class="s rv"><b>3</b><h3>Launch</h3><p>We test speed and security, deploy, and stay available after launch.</p></div>
-    </div>
-    <div class="chips rv"><span>Next.js</span><span>React</span><span>Tailwind</span><span>Node.js</span><span>Python</span><span>n8n</span><span>OpenAI &amp; LLM APIs</span><span>Shopify</span><span>WooCommerce</span></div>
-  </div>
-</section>
-
-<section class="cta" id="contact">
-  <div class="w rv">
-    <h2>Have a project in mind? Let's talk.</h2>
-    <p>Tell Faizan what you need. You'll get a clear plan, timeline and quote.</p>
-    <a class="btn b" href="https://wa.me/923319695250" target="_blank" rel="noopener">Message on WhatsApp</a>
-  </div>
-</section>
-<footer><div class="w"><span>© 2026 MFA Remote Office</span><span>Led by Faizan Adrees</span></div></footer>
+</footer>
 
 <script>
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],rd=matchMedia('(prefers-reduced-motion:reduce)').matches;
-// split headline into animated words
-(function(){const h=$('#h1');let i=0;const f=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const fr=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t.trim()){fr.append(t);return}const w=document.createElement('span');w.className='wd';w.innerHTML='<span style="--i:'+(i++)+'">'+t+'</span>';fr.append(w)});c.replaceWith(fr)}else f(c)})};f(h)})();
-addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+'%'},{passive:true});
-$('#bg').onclick=()=>{const o=$('#mn').classList.toggle('open');$('#bg').textContent=o?'✕':'☰'};
-$$('#mn a').forEach(a=>a.onclick=()=>{$('#mn').classList.remove('open');$('#bg').textContent='☰'});
-const nf=new Intl.NumberFormat('en-US');
-function count(el){const n=+el.dataset.n;if(rd){el.textContent=nf.format(n)+'+';return}const t0=performance.now();(function f(t){const k=Math.min((t-t0)/1800,1);el.textContent=nf.format(Math.round(n*(1-Math.pow(1-k,4))))+(k<1?'':'+');k<1&&requestAnimationFrame(f)})(t0)}
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
-$$('.rv').forEach(e=>io.observe(e));
-const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);io2.unobserve(e.target)}}));
-$$('[data-n]').forEach(e=>io2.observe(e));
-// call demo
-for(let i=0;i<30;i++){const s=document.createElement('i');s.style.animationDelay=i*.06+'s';s.style.animationDuration=.6+Math.random()*.8+'s';$('#wv').append(s)}
-const sc=[['a','Hi, this is Maya from MFA Remote Office. Do you have a minute?'],['u','Sure, what is this about?'],['a','You asked about automating lead follow-ups. Can I book you a demo?'],['u','Yes, tomorrow at 3 PM.'],['a','Booked. A confirmation is on its way to your WhatsApp.']];
-let si=0,sec=0;setInterval(()=>{sec++;$('#tm').textContent='00:'+String(sec%60).padStart(2,'0')},1000);
-(function say(){const b=$('#msgs');if(si>=sc.length){setTimeout(()=>{b.innerHTML='';si=0;sec=0;say()},3500);return}const[w,t]=sc[si++],m=document.createElement('div');m.className='m '+w;m.textContent=t;b.append(m);setTimeout(say,rd?400:2200)})();
+  // Cursor Spotlight Glow Effect
+  const cursorGlow = document.getElementById('cursor-glow');
+  document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.display = 'block';
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+  });
+
+  // Animated Counter for Hero Stats
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let started = false;
+
+  function startCounters() {
+    statNumbers.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const suffix = counter.getAttribute('data-suffix') || '';
+      let count = 0;
+      const speed = Math.ceil(target / 60);
+
+      const updateCount = () => {
+        count += speed;
+        if (count < target) {
+          counter.innerText = count.toLocaleString() + suffix;
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target.toLocaleString() + suffix;
+        }
+      };
+      updateCount();
+    });
+  }
+
+  // Scroll Reveal Animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        if (!started && entry.target.classList.contains('stat-card')) {
+          startCounters();
+          started = true;
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Category Filter Functionality
+  function filterBuilds(category) {
+    const cards = document.querySelectorAll('.build-card');
+    const buttons = document.querySelectorAll('.tab-btn');
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    cards.forEach(card => {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
 </script>
+
 </body>
 </html>
+Ye Mera html code ha details sari Meri rahe no Baki animation wagera style wagera Baki same wesi website me convert krdo
