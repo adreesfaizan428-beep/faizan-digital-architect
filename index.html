@@ -528,8 +528,14 @@ ENxH1FdXVnfZoj0V13ekZLGhrR3u5woOBXV1ULB07gDC8KOBUUMe9uT1rq6p7IEzttAjWmA7fDjNdXUS
 var S=["WordPress Websites","Error Fixing","Shopify Stores","WooCommerce","Mobile Apps","SaaS Software","AI Voice Agents","n8n Automation","UI/UX Design"];
 document.getElementById('mq').innerHTML=S.concat(S).map(function(x){return '<span>✦ '+x+'</span>'}).join('');
 /* Portfolio samples: edit this list with real names/links */
-var P=[["Healthcare","Healthcare Website","Clinic site with online appointments."],["Dental","Dental Clinic Website","Modern dental practice website."],["Fashion","Fashion Store","Online fashion store with checkout."],["WooCommerce","WooCommerce Store","Full store with payments and shipping."],["Shopify","Shopify Store","Branded Shopify store, fast and mobile ready."],["SaaS / AI","SaaS & AI Project","Dashboard and automation tools."]];
-document.getElementById('pf').innerHTML=P.map(function(x){return '<div class="c rv"><div class="pv">'+x[1]+'</div><span class="k">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><a class="g" style="font-weight:700" href="#contact">Ask for live link →</a></div>'}).join('');
+var P=[
+["Fashion","Pink Stories UAE","Shopify store for ethnic and designer wear.","https://www.pinkstories.ae"],
+["Fashion","Beginning Boutique","Online boutique fashion website.","https://beginningboutique.com"],
+["Fashion","Asifa & Nabeel","Fashion brand website.","https://asifaandnabeel.pk"],
+["Dental","Dr. Mohindru's Dental","Dental clinic website.","http://www.drmohindrusdental.com"],
+["Dental","TruYou Dental","Dental practice website.","https://truyoudental.com"],
+["Dental","Sam's Family Dental","Family dental practice website.","https://samsfamilydental.com"]];
+document.getElementById('pf').innerHTML=P.map(function(x){return '<a class="c rv" style="display:block" href="'+x[3]+'" target="_blank" rel="noopener"><div class="pv">'+x[1]+'</div><span class="k">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><span class="g" style="font-weight:700">View live site →</span></a>'}).join('');
 var io=new IntersectionObserver(function(e){e.forEach(function(i){if(i.isIntersecting){i.target.classList.add('in');
 var b=i.target.querySelector('[data-t]');if(b&&!b.d){b.d=1;
 var t=+b.dataset.t,s=0,k=Math.ceil(t/60),v=setInterval(function(){s=Math.min(t,s+k);b.textContent=s.toLocaleString()+'+';if(s>=t)clearInterval(v)},22)}io.unobserve(i.target)}})},{threshold:.15});
